@@ -39,6 +39,11 @@
 									href="{{urls.contacts}}"><span class="menu-item-inner"><span
 											class="menu-item-text-container" itemprop="name">Contact</span></span></a>
 							</li>
+							{{#each alternates}}{{#if current}}{{else}}
+							<li class="menu-item menu-item-lang"><a href="{{href}}" hreflang="{{codigo}}" lang="{{codigo}}"><span
+										class="menu-item-inner"><span class="menu-item-text-container"
+											itemprop="name">{{nome}}</span></span></a></li>
+							{{/if}}{{/each}}
 						</ul>
 					</div>
 				</div>
@@ -101,6 +106,13 @@
 															class="menu-item-inner"><span
 																class="menu-item-text-container"
 																itemprop="name">Contact</span></span></a></li>
+												{{#each alternates}}{{#if current}}{{else}}
+												<li class="menu-item menu-item-lang"><a class="menu-link" href="{{href}}"
+														hreflang="{{codigo}}" lang="{{codigo}}" itemprop="url"><span
+															class="menu-item-inner"><span
+																class="menu-item-text-container"
+																itemprop="name">{{nome}}</span></span></a></li>
+												{{/if}}{{/each}}
 											</ul>
 										</div>
 									</nav>
