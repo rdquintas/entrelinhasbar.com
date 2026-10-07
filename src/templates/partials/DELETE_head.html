@@ -1,0 +1,34 @@
+<!-- 
+   Hi, you're looking at a web page built with love by:
+   
+   Ricardo
+
+  /$$$$$$            /$$             /$$                        
+ /$$__  $$          |__/            | $$                        
+| $$  \ $$ /$$   /$$ /$$ /$$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$$
+| $$  | $$| $$  | $$| $$| $$__  $$|_  $$_/   |____  $$ /$$_____/
+| $$  | $$| $$  | $$| $$| $$  \ $$  | $$      /$$$$$$$|  $$$$$$ 
+| $$/$$ $$| $$  | $$| $$| $$  | $$  | $$ /$$ /$$__  $$ \____  $$
+|  $$$$$$/|  $$$$$$/| $$| $$  | $$  |  $$$$/|  $$$$$$$ /$$$$$$$/
+ \____ $$$ \______/ |__/|__/  |__/   \___/   \_______/|_______/ 
+      \__/                                                                      
+   http://www.ricardoquintas.com
+   
+   October/2026
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{seo_title}}</title>
+{{#if seo_description}}<meta name="description" content="{{seo_description}}">{{/if}}
+{{#if noindex}}<meta name="robots" content="noindex">{{/if}}
+{{#if canonical}}<link rel="canonical" href="{{canonical}}">{{/if}}
+{{#each alternates}}<link rel="alternate" hreflang="{{codigo}}" href="{{abs_href}}">
+{{/each}}{{#if x_default}}<link rel="alternate" hreflang="x-default" href="{{x_default}}">{{/if}}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{seo_title}}">
+{{#if seo_description}}<meta property="og:description" content="{{seo_description}}">{{/if}}
+{{#if canonical}}<meta property="og:url" content="{{canonical}}">{{/if}}
+{{#if og_image}}<meta property="og:image" content="{{og_image}}">{{/if}}
+<meta property="og:locale" content="{{locale_og}}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{css_href}}">

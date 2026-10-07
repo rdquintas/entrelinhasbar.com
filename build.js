@@ -15,7 +15,7 @@ const {
 } = require('./lib/util');
 const content = require('./lib/content');
 const { prepareEvents, formatDate } = require('./lib/events');
-const { createImages } = require('./lib/images');
+const { createImages, convertDirToAvif } = require('./lib/images');
 const { createEngine } = require('./lib/template');
 
 const ROOT = __dirname;
@@ -26,11 +26,21 @@ const DIR = {
   js: path.join(ROOT, 'src/js/main.js'),
   masonry: path.join(ROOT, 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'),
   static: path.join(ROOT, 'src/static'),
+  theme: ['css', 'js', 'fonts'].map((d) => path.join(ROOT, 'src', d)),
   images: path.join(ROOT, 'src/images'),
   dist: path.join(ROOT, 'dist'),
   cache: path.join(ROOT, '.cache/images'),
 };
 const MAX_SLIDES = 5;
+/** Páginas do tema sem YAML próprio (src/templates/<nome>.html) e o respetivo título. */
+const THEME_PAGES = {
+  programming: 'Programming',
+  event: 'Velvet Pulse + Guests',
+  venue: 'Venue',
+  aboutus: 'About Us',
+  contacts: 'Contact Us',
+};
+const NAV_PAGES = ['index', ...Object.keys(THEME_PAGES)];
 const cleanImage = content.cleanImage;
 
 const write = (rel, data) => {
@@ -51,6 +61,39 @@ function copyDir(from, to) {
   }
 }
 
+/** Ficheiros de texto em /dist onde se procuram referências a imagens. */
+const TEXT_EXT = new Set(['.html', '.css', '.js', '.json', '.xml', '.webmanifest', '.svg']);
+function* textFiles(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const f = path.join(dir, entry.name);
+    if (entry.isDirectory()) yield* textFiles(f);
+    else if (TEXT_EXT.has(path.extname(entry.name).toLowerCase())) yield f;
+  }
+}
+
+/** Troca, em todo o /dist, "images/foto.jpg" por "images/foto.avif" (renames: Map original -> avif). */
+function rewriteImageRefs(renames) {
+  if (!renames.size) return;
+  const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const names = [...renames.keys()].sort((a, b) => b.length - a.length).map(esc).join('|');
+  const re = new RegExp(`(images/)(${names})(?![\\w.-])`, 'g');
+  for (const f of textFiles(DIR.dist)) {
+    const before = fs.readFileSync(f, 'utf8');
+    const after = before.replace(re, (_, pre, name) => pre + renames.get(name));
+    if (after !== before) fs.writeFileSync(f, after);
+  }
+}
+
+/** Lista referências a imagens de /images/ que não sejam AVIF (devia ficar vazia). */
+function findNonAvifRefs() {
+  const re = /images\/[\w.%-]+?\.(?:jpe?g|png|gif|webp|svg|tiff?)(?![\w.-])/gi;
+  const found = new Set();
+  for (const f of textFiles(DIR.dist)) {
+    for (const m of fs.readFileSync(f, 'utf8').match(re) || []) found.add(`${path.relative(DIR.dist, f)}: ${m}`);
+  }
+  return [...found];
+}
+
 /** Copia para /dist/assets com hash do conteúdo no nome (cache longa e segura). */
 function hashedAsset(file, base, ext) {
   let buf;
@@ -62,10 +105,6 @@ function hashedAsset(file, base, ext) {
   write(`assets/${name}`, buf);
   return `/assets/${name}`;
 }
-
-/** JSON seguro para dentro de <script type="application/json">. */
-const safeJson = (obj) => JSON.stringify(obj)
-  .replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
 async function main() {
   const t0 = Date.now();
@@ -80,10 +119,10 @@ async function main() {
 
   const { langs, defaultLang, langCodes } = env;
   // Páginas extra não podem ter o nome de um idioma nem de uma pasta gerada (colidiriam na raiz).
-  const reserved = new Set([...langCodes, 'event', 'assets', 'images']);
+  const reserved = new Set([...langCodes, ...NAV_PAGES, 'assets', 'images', 'css', 'js', 'fonts']);
   const clash = Object.keys(raw.extras).find((n) => reserved.has(n));
   if (clash) {
-    throw new BuildError(`content/${clash}.yaml: o nome "${clash}" está reservado (idiomas, event, assets, images). Mudar o nome do ficheiro.`);
+    throw new BuildError(`content/${clash}.yaml: o nome "${clash}" está reservado (idiomas, páginas do tema, assets, images, css, js, fonts). Mudar o nome do ficheiro.`);
   }
   const site = { ...raw.site, logo: cleanImage(raw.site.logo), og_imagem: cleanImage(raw.site.og_imagem) };
   const siteUrl = String(raw.site.url_base || '').replace(/\/+$/, '');
@@ -112,7 +151,7 @@ async function main() {
     ? fs.readdirSync(DIR.images).filter((f) => !f.startsWith('.') && !allRefs.has(f))
     : [];
   if (orphans.length) {
-    report.warn(`${orphans.length} imagem(ns) em src/images/ não estão referenciadas em nenhum YAML (ignoradas): ${orphans.slice(0, 8).join(', ')}${orphans.length > 8 ? ', …' : ''}`);
+    report.warn(`${orphans.length} imagem(ns) em src/images/ não estão referenciadas em nenhum YAML (convertidas para AVIF no tamanho original, sem versões responsivas):${orphans.slice(0, 8).join(', ')}${orphans.length > 8 ? ', …' : ''}`);
   }
 
   /* ---------- 3. Assets ---------- */
@@ -120,6 +159,10 @@ async function main() {
   const jsHref = hashedAsset(DIR.js, 'main', 'js');
   const masonryHref = hashedAsset(DIR.masonry, 'masonry', 'js');
   copyDir(DIR.static, DIR.dist);
+  // CSS/JS/fontes/imagens do tema, referenciados diretamente pelos templates (/css/…, /js/…, /images/…)
+  DIR.theme.forEach((d) => copyDir(d, path.join(DIR.dist, path.basename(d))));
+  // Imagens usadas diretamente pelos templates/CSS: convertidas para /images/<nome>.avif
+  const avifRenames = await convertDirToAvif({ srcDir: DIR.images, outDir: path.join(DIR.dist, 'images'), cacheDir: DIR.cache });
 
   /* ---------- 4. Templates ---------- */
   const imgOf = (v) => (cleanImage(v) ? imageName(v.ficheiro) : null);
@@ -190,6 +233,8 @@ async function main() {
       mural_url: pageUrl('mural', lang),
       contactos_url: pageUrl('contactos', lang),
       menu: raw.site.menu.map((m) => ({ label: m.label, url: pageUrl(m.pagina, lang), current: m.pagina === pageKey })),
+      urls: Object.fromEntries(NAV_PAGES.map((k) => [k, pageUrl(k, lang)])),
+      nav: pageKey ? { [pageKey]: true } : {},
       alternates: pathFor ? langs.map((l) => ({
         codigo: l.codigo, nome: l.nome, href: pathFor(l.codigo), abs_href: abs(pathFor(l.codigo)), current: l.codigo === lang,
       })) : [],
@@ -238,51 +283,9 @@ async function main() {
       }));
     }
 
-    /* agenda */
-    emit('agenda', 'agenda', makeCtx({
-      pageKey: 'agenda', pathFor: (l) => pageUrl('agenda', l), ...seoOf('agenda'),
-      extra: { ...pageData('agenda'), eventos: localized },
-    }));
-
-    /* mural */
-    {
-      const items = [];
-      const noscript = [];
-      (Array.isArray(raw.mural.itens) ? raw.mural.itens : []).forEach((it) => {
-        const legenda = it.legenda ? T(it.legenda, 'mural.yaml › legenda') : '';
-        const im = cleanImage(it.imagem);
-        if (im) {
-          const alt = T(im.alt, 'mural.yaml › alt') || legenda;
-          const html = images.render(imageName(im.ficheiro), { alt, preset: 'mural' });
-          items.push({ k: 'img', html, legenda });
-          noscript.push({ html });
-        } else if (parseYoutubeId(it.youtube)) {
-          const id = parseYoutubeId(it.youtube);
-          items.push({ k: 'yt', id, legenda });
-          noscript.push({ html: `<a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer">${escapeHtml(legenda || 'YouTube')}</a>` });
-        }
-      });
-      emit('mural', 'mural', makeCtx({
-        pageKey: 'mural', pathFor: (l) => pageUrl('mural', l), ...seoOf('mural'),
-        extra: { ...pageData('mural'), mural_json: safeJson(items), mural_noscript: noscript, mural_total: items.length },
-      }));
-    }
-
-    /* contactos */
-    {
-      const c = raw.contactos;
-      const redes = raw.site.redes || {};
-      const redesLista = [['Facebook', redes.facebook], ['Instagram', redes.instagram], ['Newsletter', redes.newsletter]]
-        .filter(([, url]) => url).map(([nome, url]) => ({ nome, url }));
-      emit('contactos', 'contactos', makeCtx({
-        pageKey: 'contactos', pathFor: (l) => pageUrl('contactos', l), ...seoOf('contactos'),
-        extra: {
-          ...pageData('contactos'),
-          telefone_href: c.telefone ? `tel:${String(c.telefone).replace(/[^\d+]/g, '')}` : '',
-          redes_lista: redesLista,
-          faq: (Array.isArray(c.faq) ? c.faq : []).filter((q) => q && (q.pergunta || q.resposta)),
-        },
-      }));
+    /* páginas do tema (sem YAML) */
+    for (const [name, title] of Object.entries(THEME_PAGES)) {
+      emit(name, name, makeCtx({ pageKey: name, pathFor: (l) => pageUrl(name, l), title }));
     }
 
     /* páginas extra (content/<nome>.yaml + src/templates/<nome>.html) */
@@ -297,7 +300,7 @@ async function main() {
     for (const e of localized) {
       const title = T(e.titulo, `evento "${e.slug}" › titulo`);
       const ctx = makeCtx({
-        pageKey: 'agenda', pathFor: (l) => eventUrl(e.slug, l), title,
+        pageKey: 'event', pathFor: (l) => eventUrl(e.slug, l), title,
         description: T(e.resumo, `evento "${e.slug}" › resumo`),
         ogName: imageName(e.imagem_horizontal.ficheiro),
         extra: { ...e },
@@ -320,7 +323,7 @@ async function main() {
   if (siteUrl) {
     const urls = [];
     const add = (pathFor) => urls.push(pathFor);
-    for (const key of [...content.PAGES, ...extraNames]) add((l) => pageUrl(key, l));
+    for (const key of [...NAV_PAGES, ...extraNames]) add((l) => pageUrl(key, l));
     for (const e of events) add((l) => eventUrl(e.slug, l));
     const xml = urls.flatMap((pathFor) => langs.map((l) => {
       const alts = langs.map((x) => `    <xhtml:link rel="alternate" hreflang="${x.codigo}" href="${escapeHtml(abs(pathFor(x.codigo)))}"/>`).join('\n');
@@ -329,6 +332,13 @@ async function main() {
     write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${xml}\n</urlset>\n`);
   }
   write('robots.txt', `User-agent: *\nAllow: /\n${siteUrl ? `\nSitemap: ${siteUrl}/sitemap.xml\n` : ''}`);
+
+  /* ---------- 6. Referências a imagens -> AVIF ---------- */
+  rewriteImageRefs(avifRenames);
+  const nonAvif = findNonAvifRefs();
+  if (nonAvif.length) {
+    report.warn(`${nonAvif.length} referência(s) a imagens que não são AVIF em /dist (ficheiro inexistente em src/images/?): ${nonAvif.slice(0, 8).join(', ')}${nonAvif.length > 8 ? ', …' : ''}`);
+  }
 
   /* ---------- Resumo ---------- */
   report.flush(); // imprime avisos acumulados durante a renderização

@@ -1,0 +1,23 @@
+<header class="site-header">
+  <a class="skip-link" href="#conteudo">{{ui.ir_conteudo}}</a>
+  <a class="site-header__brand" href="{{home_url}}">
+    {{#if site.logo}}{{img site.logo preset=logo eager=true class=site-header__logo}}{{/if}}
+    <span class="site-header__name">{{site_name}}</span>
+  </a>
+  <nav class="site-nav" aria-label="{{ui.menu_principal}}">
+    <ul class="site-nav__list">
+      {{#each menu}}
+      <li><a href="{{url}}"{{#if current}} aria-current="page"{{/if}}>{{label}}</a></li>
+      {{/each}}
+    </ul>
+  </nav>
+  {{#if alternates}}
+  <nav class="lang-switcher" aria-label="{{ui.idioma}}">
+    <ul class="lang-switcher__list">
+      {{#each alternates}}
+      <li><a href="{{href}}" hreflang="{{codigo}}" lang="{{codigo}}"{{#if current}} aria-current="true"{{/if}}>{{nome}}</a></li>
+      {{/each}}
+    </ul>
+  </nav>
+  {{/if}}
+</header>

@@ -1,33 +1,196 @@
 <!DOCTYPE html>
-<html lang="{{lang}}">
+<html class="wolf-core-no-touch no-touch" data-scroll-orientation="vertical" lang="en-US">
+
 <head>
-{{> head}}
+	{{> head}}
 </head>
-<body class="page-event">
-{{> header}}
-<main id="conteudo">
-  {{#if cancelado}}<div class="cancelado-faixa cancelado-faixa--pagina" role="status">{{ui.cancelado}}</div>{{/if}}
-  <h1>{{titulo}}</h1>
-  {{hero imagem_horizontal imagem_vertical}}
-  <p class="evento-meta"><time datetime="{{datetime}}">{{data_fmt}}, {{hora}}</time> · {{tipo_label}}</p>
-  <div class="evento-descricao">
-    {{para descritivo}}
-  </div>
-  {{#if youtube_embed}}
-  <section class="video">
-    <iframe class="video__frame" src="{{youtube_embed}}" title="{{ui.video_titulo}}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  </section>
-  {{/if}}
-  {{#if links}}
-  <ul class="evento-links">
-    {{#each links}}
-    <li><a href="{{url}}" target="_blank" rel="noopener noreferrer">{{nome}}</a></li>
-    {{/each}}
-  </ul>
-  {{/if}}
-  <p class="evento-voltar"><a href="{{agenda_url}}">{{ui.voltar_agenda}}</a></p>
-</main>
-{{> footer}}
-<script src="{{js_href}}" defer></script>
+
+<body
+	class="wp-singular event-template-default single single-event postid-3156 wp-theme-poize theme-poize woocommerce-js wolf poize not-edge loading-animation-type-none site-layout-wide button-style-square global-skin-light skin-light wolf-core-yes menu-layout-top-justify menu-style-solid menu-skin-light menu-width-wide mega-menu-width-fullwidth menu-hover-style- menu-sticky-hard submenu-bg-light accent-color-dark accent-color-is-black menu-items-visibility- side-panel-position-right side-panel-bg-light no-hero hero-font-dark body-font-neue-haas-grotesk-text heading-font-neue-haas-grotesk-display menu-font-neue-haas-grotesk-text submenu-font-default transition-animation-type- has-text-logo logo-visibility-always has-wvc hero-layout-none post-is-title-text post-is-hero footer-type-hidden footer-skin-dark footer-widgets-layout-none footer-layout-boxed bottom-bar-layout-centered bottom-bar-visible has-404-plugin desktop wolf-core wolf-core-body wolf-events wolf-popup-time-delayed-mobile-disabled wolf-popup-exit-intent-mobile-disabled elementor-default elementor-kit-38 not-mobile no-secondary"
+	data-elementor-device-mode="desktop" data-hero-font-tone="dark" data-post-id="3156">
+	{{> header}}
+						<div class="elementor elementor-249" data-elementor-id="249" data-elementor-type="wp-post">
+							<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-926685f e-flex e-con-boxed e-con e-parent e-lazyloaded section-appeared-once section-appeared"
+								data-color-tone="" data-e-type="container" data-element_type="container"
+								data-font-skin="" data-id="926685f" data-scroll-class="locoscroll-animate"
+								data-scroll-css-progress="" data-scroll-custom-duration="" data-scroll-custom-offset=""
+								data-scroll-entrance-animation="">
+								<div class="e-con-inner">
+									<div class="elementor-element elementor-element-449faa7 elementor-widget elementor-widget-breadcrumb"
+										data-e-type="widget" data-element_type="widget" data-id="449faa7"
+										data-widget_type="breadcrumb.default">
+										<div class="elementor-widget-container">
+											<div class="wolf-core-breadcrumb wolf-core-element" style="">
+												<ol class="wolf-core-breadcrumb-list" itemscope=""
+													itemtype="https://schema.org/BreadcrumbList">
+													<li itemprop="itemListElement" itemscope=""
+														itemtype="https://schema.org/ListItem"><a class="internal-link"
+															href="{{urls.index}}" itemprop="item"><span
+																itemprop="name">Home</span></a>
+														<meta content="1" itemprop="position" />
+													</li><span class="wolf-core-breadcrumb-delimiter">/</span>
+													<li itemprop="itemListElement" itemscope=""
+														itemtype="https://schema.org/ListItem"><a
+															href="{{urls.programming}}" itemprop="item"><span
+																itemprop="name">Events</span></a>
+														<meta content="2" itemprop="position" />
+													</li>
+													<li><span class="wolf-core-breadcrumb-delimiter">/</span></li>
+													<li itemprop="itemListElement" itemscope=""
+														itemtype="https://schema.org/ListItem"><span
+															itemprop="name">Velvet Pulse + Guests</span>
+														<meta content="3" itemprop="position" />
+													</li>
+												</ol>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="content-inner section wvc-row wolf-core-row">
+							<div class="content-wrapper">
+								<div class="content-area" id="primary">
+									<main class="site-content clearfix" id="content" role="main">
+										<article
+											class="post-3156 event type-event status-publish has-post-thumbnail hentry entry clearfix entry-single entry-single-event"
+											data-post-id="3156" data-thumbnail-color-tone="dark" id="post-3156"
+											itemscope="" itemtype="https://schema.org/MusicEvent">
+											<div class="event-thumbnail">
+												<a class="lightbox no-link-style"
+													href="/images/contemplative-muse-in-futuristic-attire-scaled.jpg">
+													<img alt="Contemplative Muse in Futuristic Attire"
+														class="resized-thumbnail" height="500" loading="lazy"
+														src="/images/contemplative-muse-in-futuristic-attire-scaled-1400x500.jpg"
+														title="Contemplative Muse in Futuristic Attire" width="1400" />
+												</a>
+											</div>
+											<meta content="Velvet Pulse + Guests" itemprop="name" />
+
+											<meta
+												content="Experience an unforgettable night of music and energy at [Event Name], where creativity meets passion on stage. Join us as we bring together a lineup of renowned artists, immersive performances, and an electric atmosphere that will leave you wanting more. Prepare to be transported into a world of sound, light, and emotions, crafted with the..."
+												itemprop="description" />
+											<span itemprop="location" itemscope=""
+												itemtype="https://schema.org/MusicVenue">
+												<span itemprop="address" itemscope=""
+													itemtype="https://schema.org/PostalAddress">
+													<meta content="Toronto" itemprop="addressLocality" />
+												</span>
+												<meta content="Phoenix Concert Theatre" itemprop="name" />
+											</span>
+											<span itemprop="offers" itemscope="" itemtype="https://schema.org/Offer">
+
+												<meta content="40" itemprop="price" />
+											</span>
+											<div class="row">
+												<div class="col col-3 event-meta-container">
+													<div class="event-info">
+														<div class="event-artist-meta event-meta">
+															<h4>Velvet Pulse</h4>
+														</div>
+														<div class="event-date event-meta">
+															<span class="start-date" itemprop="startDate">
+																November 7, 2028
+															</span>
+														</div>
+														<a class="single-event-button theme-button-primary wolf-core-button-size-lg internal-link"
+															href="#">
+															<span>Tickets $40</span>
+														</a>
+														<div class="event-location event-meta">
+															<h5 class="event-meta-label">Location</h5>
+															<a href="https://maps.app.goo.gl/76HghM1ER1KWY5Nu7"
+																target="_blank">
+																Toronto </a>
+														</div>
+														<div class="event-venue event-meta">
+															<h5 class="event-meta-label">Venue</h5>
+															Phoenix Concert Theatre
+
+														</div>
+														<div class="event-opening-hours event-meta">
+															<h5 class="event-meta-label">Time</h5>
+															09:00 PM<br />
+															Door: 08:00PM
+														</div>
+														<div class="event-opening-hours event-meta">
+															<h5 class="event-meta-label">Price</h5>
+															Online Price: $40<br />
+															Retailers: $45<br />
+															On Site: $47
+														</div>
+														<ul>
+															<li class="event-meta event-partners">
+																<h5 class="event-meta-label">Partners</h5>
+																<span class="event-meta-separator"></span>
+																<span class="event-meta-value">EchoWave, SonicForge,
+																	RhythmPulse</span>
+															</li>
+														</ul>
+													</div>
+												</div>
+												<div class="col col-9 event-container">
+													<header class="entry-content-header">
+														<div class="event-title">
+															<h2 class="entry-title" itemprop="name">Velvet Pulse +
+																Guests</h2>
+														</div>
+														<div class="envent-types">
+														</div>
+													</header>
+													<p>Experience an unforgettable night of music and energy at [Event
+														Name], where creativity meets passion on stage. Join us as we
+														bring together a lineup of renowned artists, immersive
+														performances, and an electric atmosphere that will leave you
+														wanting more. Prepare to be transported into a world of sound,
+														light, and emotions, crafted with the sole purpose of making
+														this event a standout in your memory.</p>
+													<p>Whether you’re here for the music, the community, or simply to
+														enjoy an incredible night out, [Event Name] promises to deliver
+														an experience like no other. From high-energy beats to intimate
+														acoustic sessions, this event caters to all music lovers. Expect
+														an unparalleled lineup of talent, breathtaking visuals, and a
+														night filled with unforgettable moments. Secure your tickets
+														now, and be part of a night that will resonate long after the
+														final encore.</p>
+
+												</div>
+											</div>
+										</article>
+									</main>
+								</div>
+							</div>
+						</div>
+						{{> footer}}
+	<svg class="e-font-icon-svg-symbols" style="display: none;"></svg>
+
+	<script src="/js/config/config-event.js"></script>
+	<script src="/js/vendor/wp-hooks.js"></script>
+	<script src="/js/vendor/wp-i18n.js"></script>
+	<script src="/js/vendor/inview.js"></script>
+	<script src="/js/vendor/countdown.js"></script>
+	<script src="/js/theme/wolf-core-countdown.js"></script>
+	<script src="/js/vendor/lazyloadxt.js"></script>
+	<script src="/js/theme/wolf-core.js"></script>
+	<script src="/js/vendor/js-cookie.js"></script>
+	<script src="/js/vendor/fancybox.js"></script>
+	<script src="/js/vendor/sticky-kit.js"></script>
+	<script src="/js/theme/poize-theme.js"></script>
+	<script src="/js/vendor/tooltipsy.js"></script>
+	<script src="/js/vendor/jarallax.js"></script>
+	<script src="/js/vendor/react.js"></script>
+	<script src="/js/vendor/react-dom.js"></script>
+	<script src="/js/vendor/wp-escape-html.js"></script>
+	<script src="/js/vendor/wp-element.js"></script>
+	<script src="/js/theme/poize-app.js"></script>
+	<script src="/js/theme/wolf-core-youtube-video-bg.js"></script>
+	<script src="/js/vendor/elementor-webpack-runtime.js"></script>
+	<script src="/js/vendor/elementor-frontend-modules.js"></script>
+	<script src="/js/vendor/jquery-ui-core.js"></script>
+	<script src="/js/vendor/elementor-frontend.js"></script>
+	<script src="/js/theme/dialog.min.js"></script>
+	<script src="/js/theme/share-link.min.js"></script>
+	<script src="/js/theme/elementor-lazyload.js"></script>
 </body>
+
 </html>

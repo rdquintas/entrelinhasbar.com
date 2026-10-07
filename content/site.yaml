@@ -1,8 +1,8 @@
 # Conteúdo partilhado por todas as páginas.
 # Para adicionar um idioma: acrescentar em "idiomas" e preencher a nova chave em TODOS os textos.
 nome:
-  pt: "Nome do Site"
-  en: "Site Name"
+  pt: "Entrelinhas Bistro Bar"
+  en: "Entrelinhas Bistro Bar"
 
 # Endereço público do site, sem barra final (usado em canonical, sitemap e og:image).
 url_base: "https://exemplo.netlify.app"

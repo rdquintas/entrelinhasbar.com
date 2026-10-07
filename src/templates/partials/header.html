@@ -1,23 +1,412 @@
-<header class="site-header">
-  <a class="skip-link" href="#conteudo">{{ui.ir_conteudo}}</a>
-  <a class="site-header__brand" href="{{home_url}}">
-    {{#if site.logo}}{{img site.logo preset=logo eager=true class=site-header__logo}}{{/if}}
-    <span class="site-header__name">{{site_name}}</span>
-  </a>
-  <nav class="site-nav" aria-label="{{ui.menu_principal}}">
-    <ul class="site-nav__list">
-      {{#each menu}}
-      <li><a href="{{url}}"{{#if current}} aria-current="page"{{/if}}>{{label}}</a></li>
-      {{/each}}
-    </ul>
-  </nav>
-  {{#if alternates}}
-  <nav class="lang-switcher" aria-label="{{ui.idioma}}">
-    <ul class="lang-switcher__list">
-      {{#each alternates}}
-      <li><a href="{{href}}" hreflang="{{codigo}}" lang="{{codigo}}"{{#if current}} aria-current="true"{{/if}}>{{nome}}</a></li>
-      {{/each}}
-    </ul>
-  </nav>
-  {{/if}}
-</header>
+<div id="w-offcanvas">
+		<div data-scroll-custom-duration="2000" id="top"></div>
+		<div class="nav-search-form-container">
+			<div class="nav-search-form live-search-form">
+				<div class="live-search-results">
+					<ul></ul>
+				</div><span class="nav-search-loader"></span><button class="unbutton nav-search-close">X</button>
+			</div>
+		</div>
+		<div class="cart-side-panel cart-empty" data-lenis-prevent="true"><button
+				class="cross-button unbutton cart-btn-close"><a class="close-panel-button" href="#"
+					id="close-mobile-menu-icon">X</a></button>
+			<div class="cart-panel-inner">
+				<div class="cart-panel-message">
+					<div class="cart-panel-message-description">Your cart is currently empty!</div>
+					<div><a class="button" href="#"><span>Start Shopping</span></a></div>
+				</div>
+			</div>
+		</div>
+		<div class="login-modal-container">
+			<div class="login-modal-inner">
+				<div class="login-modal-content"><button class="unbutton login-modal-close-button">X</button>
+					<div class="login-form login-form-container">
+						<div class="login-form-inner">
+							<div class="login-form-title-container">
+								<h3 class="login-form-title">Login</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><a class="scroll-to" href="#top" id="back-to-top-link">
+		<svg height="40" viewbox="0 0 11.063 11.079" width="40" xmlns="http://www.w3.org/2000/svg">
+			<g transform="translate(-1069.812 -681.873)">
+				<path d="M-747.763,1804.468l-10.061,10.1" fill="none" stroke="#1d1d1f" stroke-width="0.5"
+					transform="translate(1828 -1122)"></path>
+				<path d="M-772.188,1804.373h10.563v10.579" fill="none" stroke="#1d1d1f" stroke-width="0.5"
+					transform="translate(1842 -1122)"></path>
+			</g>
+		</svg>
+	</a>
+	<div class="panel-font-dark" id="mobile-menu-panel">
+		<a class="close-panel-button toggle-mobile-menu" href="#" id="close-mobile-menu-icon">X</a>
+		<div id="mobile-menu-panel--inner">
+			<div id="vertical-menu-container">
+				<div id="mobile-menu-container">
+					<div class="menu-primary-menu-container">
+						<ul class="nav-menu nav-menu-mobile" id="site-navigation-mobile-mobile">
+							<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.index}} current-menu-item{{/if}}"><a
+									href="{{urls.index}}"><span class="menu-item-inner"><span
+											class="menu-item-text-container" itemprop="name">Home</span></span></a></li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.programming}} current-menu-item{{/if}}"><a
+									href="{{urls.programming}}"><span class="menu-item-inner"><span
+											class="menu-item-text-container"
+											itemprop="name">Programming</span></span></a></li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.event}} current-menu-item{{/if}}"><a
+									href="{{urls.event}}"><span class="menu-item-inner"><span
+											class="menu-item-text-container" itemprop="name">Event</span></span></a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.venue}} current-menu-item{{/if}}"><a
+									href="{{urls.venue}}"><span class="menu-item-inner"><span
+											class="menu-item-text-container" itemprop="name">Venue</span></span></a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.aboutus}} current-menu-item{{/if}}"><a
+									href="{{urls.aboutus}}"><span class="menu-item-inner"><span
+											class="menu-item-text-container" itemprop="name">About Us</span></span></a>
+							</li>
+							<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.contacts}} current-menu-item{{/if}}"><a
+									href="{{urls.contacts}}"><span class="menu-item-inner"><span
+											class="menu-item-text-container" itemprop="name">Contact</span></span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="sidebar-widget-area sidebar-side-panel">
+			</div>
+			<div class="side-panel-footer">
+				<a class="no-link-style" href="#" title="account">
+					<img alt="account" loading="lazy" src="/images/account.svg" />
+					My Account </a>
+			</div>
+		</div>
+	</div>
+
+	<div class="site-container">
+		<div class="hfeed site" id="page">
+			<div id="page-content" style="margin-bottom: 0px;">
+				<header class="site-header clearfix" id="masthead" itemscope="" itemtype="http://schema.org/WPHeader">
+					<p class="site-name" itemprop="headline">Poize</p>
+					<p class="site-description" itemprop="description">Music Event WordPress Theme</p>
+					<div id="header-content">
+						<div class="panel-font-dark" id="custom-menu-panel">
+							<div id="custom-menu-panel--inner">
+								<div class="elementor elementor-535" data-elementor-id="535"
+									data-elementor-type="wp-post">
+									<div class="wolf-core-elementor-row wolf-core-font-dark elementor-element elementor-element-4a700b2 e-con-full e-flex e-con e-parent e-lazyloaded section-appeared-once section-appeared"
+										data-color-tone="" data-e-type="container" data-element_type="container"
+										data-font-skin="dark" data-id="4a700b2" data-scroll-class="locoscroll-animate"
+										data-scroll-css-progress="" data-scroll-custom-duration=""
+										data-scroll-custom-offset="" data-scroll-entrance-animation="">
+										<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-deb4c30 e-con-full e-flex e-con e-child e-lazyloaded"
+											data-color-tone="" data-e-type="container" data-element_type="container"
+											data-font-skin="" data-id="deb4c30" data-scroll-class="locoscroll-animate"
+											data-scroll-css-progress="" data-scroll-custom-duration=""
+											data-scroll-custom-offset="" data-scroll-entrance-animation="">
+											<div class="elementor-element elementor-element-ab3217f poize-interactive-links-in-menu elementor-widget elementor-widget-interactive-links"
+												data-e-type="widget" data-element_type="widget" data-id="ab3217f"
+												data-widget_type="interactive-links.default">
+												<div class="elementor-widget-container">
+													<div class="wolf-core-interactive-links wolf-core-interactive-links-container"
+														style="">
+														<div class="wolf-core-interactive-links-bg-holder"><div class="wolf-core-interactive-link-bg"
+																id="wolf-core-interactive-link-bg-1">
+																<div class="wolf-core-img-bg"
+																	style="background-color:#5d5548;"><img alt=""
+																		class="wolf-core-img-cover" loading="lazy"
+																		src="/images/cheerful-bearded-man-with-sunglasses-at-outdoor-event-450x500.jpg"
+																		style="object-position:50% 50%;" />
+																	<div class="wolf-core-img-bg-overlay"></div>
+																</div>
+															</div>
+															<div class="wolf-core-interactive-link-bg"
+																id="wolf-core-interactive-link-bg-2">
+																<div class="wolf-core-img-bg"
+																	style="background-color:#1c4249;">
+																	<div class="wolf-core-img-bg-overlay"></div>
+																</div>
+															</div>
+															<div class="wolf-core-interactive-link-bg"
+																id="wolf-core-interactive-link-bg-3">
+																<div class="wolf-core-img-bg"
+																	style="background-color:#834132;">
+																	<div class="wolf-core-img-bg-overlay"></div>
+																</div>
+															</div>
+															<div class="wolf-core-interactive-link-bg"
+																id="wolf-core-interactive-link-bg-4">
+																<div class="wolf-core-img-bg"
+																	style="background-color:#4a5250;">
+																	<div class="wolf-core-img-bg-overlay"></div>
+																</div>
+															</div>
+															<div class="wolf-core-interactive-link-bg"
+																id="wolf-core-interactive-link-bg-5">
+																<div class="wolf-core-img-bg"
+																	style="background-color:#9f8877;"><img alt=""
+																		class="wolf-core-img-cover" loading="lazy"
+																		src="/images/joyful-young-woman-at-music-festival-scaled-450x500.jpg"
+																		style="object-position:50% 50%;" />
+																	<div class="wolf-core-img-bg-overlay"></div>
+																</div>
+															</div>
+															<div class="wolf-core-interactive-link-bg"
+																id="wolf-core-interactive-link-bg-6">
+																<div class="wolf-core-img-bg"
+																	style="background-color:#5d5548;"><img alt=""
+																		class="wolf-core-img-cover" loading="lazy"
+																		src="/images/cheerful-bearded-man-with-sunglasses-at-outdoor-event-450x500.jpg"
+																		style="object-position:50% 50%;" />
+																	<div class="wolf-core-img-bg-overlay"></div>
+																</div>
+															</div>
+														</div>
+														<div class="wolf-core-interactive-links-inner">
+															<ul class="wolf-core-interactive-links-list">
+																<li class="wolf-core-interactive-link-item"
+																	id="wolf-core-interactive-link-item-1"><a
+																		class="wolf-core-interactive-link"
+																		data-panel-index="1" href="{{urls.index}}"
+																		title=""><span
+																			class="wolf-core-interactive-link-text">Home</span></a>
+																</li>
+																<li class="wolf-core-interactive-link-item"
+																	id="wolf-core-interactive-link-item-2"><a
+																		class="wolf-core-interactive-link"
+																		data-panel-index="2" href="{{urls.programming}}"
+																		title=""><span
+																			class="wolf-core-interactive-link-text">Programming</span></a>
+																</li>
+																<li class="wolf-core-interactive-link-item"
+																	id="wolf-core-interactive-link-item-3"><a
+																		class="wolf-core-interactive-link"
+																		data-panel-index="3" href="{{urls.event}}"
+																		title=""><span
+																			class="wolf-core-interactive-link-text">Event</span></a>
+																</li>
+																<li class="wolf-core-interactive-link-item"
+																	id="wolf-core-interactive-link-item-4"><a
+																		class="wolf-core-interactive-link"
+																		data-panel-index="4" href="{{urls.venue}}"
+																		title=""><span
+																			class="wolf-core-interactive-link-text">Venue</span></a>
+																</li>
+																<li class="wolf-core-interactive-link-item"
+																	id="wolf-core-interactive-link-item-5"><a
+																		class="wolf-core-interactive-link"
+																		data-panel-index="5" href="{{urls.aboutus}}"
+																		title=""><span
+																			class="wolf-core-interactive-link-text">About
+																			Us</span></a></li>
+																<li class="wolf-core-interactive-link-item"
+																	id="wolf-core-interactive-link-item-6"><a
+																		class="wolf-core-interactive-link"
+																		data-panel-index="6" href="{{urls.contacts}}"
+																		title=""><span
+																			class="wolf-core-interactive-link-text">Contact</span></a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-63c2bde e-con-full e-flex e-con e-child e-lazyloaded"
+											data-color-tone="" data-e-type="container" data-element_type="container"
+											data-font-skin="" data-id="63c2bde" data-scroll-class="locoscroll-animate"
+											data-scroll-css-progress="" data-scroll-custom-duration=""
+											data-scroll-custom-offset="" data-scroll-entrance-animation="">
+											<div class="elementor-element elementor-element-a170d31 elementor-widget elementor-widget-heading"
+												data-e-type="widget" data-element_type="widget" data-id="a170d31"
+												data-widget_type="heading.default">
+												<div class="elementor-widget-container">
+													<h5 class="elementor-heading-title elementor-size-default">Connect
+													</h5>
+												</div>
+											</div>
+											<div class="elementor-element elementor-element-6e7f12b elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
+												data-e-type="widget" data-element_type="widget" data-id="6e7f12b"
+												data-widget_type="icon-list.default">
+												<div class="elementor-widget-container">
+													<ul class="elementor-icon-list-items">
+														<li class="elementor-icon-list-item">
+															<a class="internal-link" href="#">
+																<span class="elementor-icon-list-text">Subscribe</span>
+															</a>
+														</li>
+														<li class="elementor-icon-list-item">
+															<a href="{{urls.index}}">
+																<span class="elementor-icon-list-text">Playlists</span>
+															</a>
+														</li>
+														<li class="elementor-icon-list-item">
+															<a class="internal-link" href="{{urls.contacts}}">
+																<span class="elementor-icon-list-text">Contact Us</span>
+															</a>
+														</li>
+														<li class="elementor-icon-list-item">
+															<a class="internal-link" href="#">
+																<span class="elementor-icon-list-text">Careers</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-970f385 e-con-full e-flex e-con e-child e-lazyloaded"
+											data-color-tone="" data-e-type="container" data-element_type="container"
+											data-font-skin="" data-id="970f385" data-scroll-class="locoscroll-animate"
+											data-scroll-css-progress="" data-scroll-custom-duration=""
+											data-scroll-custom-offset="" data-scroll-entrance-animation="">
+											<div class="elementor-element elementor-element-ba4803a elementor-widget elementor-widget-heading"
+												data-e-type="widget" data-element_type="widget" data-id="ba4803a"
+												data-widget_type="heading.default">
+												<div class="elementor-widget-container">
+													<h5 class="elementor-heading-title elementor-size-default">Socialize
+													</h5>
+												</div>
+											</div>
+											<div class="elementor-element elementor-element-34130bf elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
+												data-e-type="widget" data-element_type="widget" data-id="34130bf"
+												data-widget_type="icon-list.default">
+												<div class="elementor-widget-container">
+													<ul class="elementor-icon-list-items">
+														<li class="elementor-icon-list-item">
+															<a href="#">
+																<span class="elementor-icon-list-text">Instagram</span>
+															</a>
+														</li>
+														<li class="elementor-icon-list-item">
+															<a href="#">
+																<span class="elementor-icon-list-text">Facebook</span>
+															</a>
+														</li>
+														<li class="elementor-icon-list-item">
+															<a href="#">
+																<span class="elementor-icon-list-text">YouTube</span>
+															</a>
+														</li>
+														<li class="elementor-icon-list-item">
+															<a href="#">
+																<span class="elementor-icon-list-text">Spotify</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-7272c10 e-con-full e-flex e-con e-child e-lazyloaded"
+											data-color-tone="" data-e-type="container" data-element_type="container"
+											data-font-skin="" data-id="7272c10" data-scroll-class="locoscroll-animate"
+											data-scroll-css-progress="" data-scroll-custom-duration=""
+											data-scroll-custom-offset="" data-scroll-entrance-animation=""
+											data-settings='{"background_background":"classic"}' id="menu-bg-holder">
+											<div class="elementor-element elementor-element-6fbc015 elementor-widget elementor-widget-heading"
+												data-e-type="widget" data-element_type="widget" data-id="6fbc015"
+												data-widget_type="heading.default">
+												<div class="elementor-widget-container">
+													<h3 class="elementor-heading-title elementor-size-default">Tune Into
+														Creativity​</h3>
+												</div>
+											</div>
+											<div class="elementor-element elementor-element-6799df6 elementor-widget elementor-widget-text-editor"
+												data-e-type="widget" data-element_type="widget" data-id="6799df6"
+												data-widget_type="text-editor.default">
+												<div class="elementor-widget-container">
+													<p>The Ultimate Theme for Music Events</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix site--nav site--nav-color-set" id="desktop-navigation">
+							<div class="nav-bar" data-menu-layout="{{#if nav.venue}}grid{{else}}top-justify{{#if nav.index}}-left{{/if}}{{/if}}" id="nav-bar">
+								<div class="flex-wrap">
+									<div class="logo-container">
+										<div class="logo logo-is-text"><a class="logo-text logo-link" href="{{urls.index}}"
+												rel="home">Poize</a></div>
+									</div>
+									<nav class="menu-container" itemscope="itemscope"
+										itemtype="https://schema.org/SiteNavigationElement">
+										<div class="menu-{{#if nav.venue}}minimal{{else}}primary{{/if}}-menu-container">
+											<ul class="nav-menu nav-menu-desktop" id="site-navigation-primary-desktop">
+												<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.index}} current-menu-item{{/if}}"><a
+														class="menu-link" href="{{urls.index}}" itemprop="url"><span
+															class="menu-item-inner"><span
+																class="menu-item-text-container"
+																itemprop="name">Home</span></span></a></li>
+												<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.programming}} current-menu-item{{/if}}"><a
+														class="menu-link" href="{{urls.programming}}" itemprop="url"><span
+															class="menu-item-inner"><span
+																class="menu-item-text-container"
+																itemprop="name">Programming</span></span></a></li>
+												<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.event}} current-menu-item{{/if}}"><a
+														class="menu-link" href="{{urls.event}}" itemprop="url"><span
+															class="menu-item-inner"><span
+																class="menu-item-text-container"
+																itemprop="name">Event</span></span></a></li>
+												<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.venue}} current-menu-item{{/if}}"><a
+														class="menu-link" href="{{urls.venue}}" itemprop="url"><span
+															class="menu-item-inner"><span
+																class="menu-item-text-container"
+																itemprop="name">Venue</span></span></a></li>
+												<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.aboutus}} current-menu-item{{/if}}"><a
+														class="menu-link" href="{{urls.aboutus}}" itemprop="url"><span
+															class="menu-item-inner"><span
+																class="menu-item-text-container" itemprop="name">About
+																Us</span></span></a></li>
+												<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.contacts}} current-menu-item{{/if}}"><a
+														class="menu-link" href="{{urls.contacts}}" itemprop="url"><span
+															class="menu-item-inner"><span
+																class="menu-item-text-container"
+																itemprop="name">Contact</span></span></a></li>
+											</ul>
+										</div>
+									</nav>
+
+									<div class="cta-container">
+										<button class="hamburger-link toggle-mobile-menu unbutton">
+											<span class="hamburger-btn__hamburger">
+												<span class="hamburger-btn__span hbgl--1"></span>
+												<span class="hamburger-btn__span hbgl--3"></span>
+											</span>
+										</button>
+										<button class="hamburger-link toggle-custom-menu unbutton">
+											<span class="hamburger-btn__hamburger">
+												<span class="hamburger-btn__span hbgl--1"></span>
+												<span class="hamburger-btn__span hbgl--3"></span>
+											</span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="site--nav site--nav-color-set" id="mobile-navigation">
+							<div class="nav-bar" id="mobile-bar">
+								<div class="flex-mobile-wrap">
+									<div class="logo-container">
+										<div class="logo logo-is-text"><a class="logo-text logo-link" href="{{urls.index}}"
+												rel="home">Poize</a></div>
+									</div>
+
+									<div class="hamburger-container">
+										<button class="hamburger-link toggle-mobile-menu unbutton side-panel-hamburger">
+											<span class="hamburger-btn__hamburger">
+												<span class="hamburger-btn__span hbgl--1"></span>
+
+												<span class="hamburger-btn__span hbgl--3"></span>
+											</span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="site-main clearfix" id="main">
+					<div class="panel-closer-overlay toggle-side-panel toggle-cart" id="panel-closer-overlay"></div>
+					<div class="site-content">
