@@ -57,3 +57,10 @@
   .footer-logo{order:-1}
   .footer-spacer{display:none}
 }
+
+/* Agenda: "Upcoming Events" section copied from the homepage. Its Elementor rules are scoped to .elementor-2 (homepage), so repeat them for .elementor-3366 (agenda) */
+.elementor-3366 .elementor-element.elementor-element-e94778d{--display:flex;--padding-top:100px;--padding-bottom:100px;--padding-left:10px;--padding-right:10px;}
+.elementor-3366 .elementor-element.elementor-element-2605d55{text-align:start;}
+.elementor-3366 .elementor-element.elementor-element-814a331 .bg-overlay{opacity:0.4!important;}
+.e-con>.e-con-inner.agenda-events-inner{padding-inline-start:100px;padding-inline-end:100px}
+@media (max-width:767px){.e-con>.e-con-inner.agenda-events-inner{padding-inline-start:0;padding-inline-end:0}}
