@@ -25,9 +25,17 @@
 .hero-dot{width:12px;height:12px;padding:0;border:2px solid #fff;border-radius:50%;background:transparent;cursor:pointer;opacity:.7;transition:background-color .3s,opacity .3s}
 .hero-dot:hover{opacity:1}
 .hero-dot.is-active{background:#fff;opacity:1}
+/* Hero title: undo the theme's slabText (fixed lines, nowrap, per-line font size) so the title
+   wraps between words, with a fluid size and balanced lines (mainly for mobile). */
+.elementor-2 .hero-slide .elementor-element.elementor-element-b460e3f .elementor-heading-title{font-size:clamp(2.5rem,10vw,7.8rem);line-height:.95;white-space:normal;word-break:normal;overflow-wrap:normal;hyphens:none;text-wrap:balance}
+.hero-slide .elementor-heading-title .slabtext{display:inline!important;font-size:1em!important;white-space:normal!important;word-spacing:inherit!important;letter-spacing:inherit!important}
 @media (prefers-reduced-motion:reduce){.hero-slides-bg .hero-bg,.hero-slide,.hero-slide.is-active{transition:none}}
 
 /* "Juno" headings and logo (Anton, see fonts.css). Juno has capitals only, hence the uppercase;
    the brushed texture is recreated with a small tiled mask,
    sized in em so it scales with the text. */
 .logo-text,.poize-big-text-yes .elementor-heading-title{-webkit-mask-image:url(../images/grunge-mask.png);mask-image:url(../images/grunge-mask.png);-webkit-mask-size:5em auto;mask-size:5em auto;text-transform:uppercase}
+
+/* Header logo (site.yaml › logo) in place of the theme's text logo */
+.logo-link img.logo-brand{display:block;width:auto;height:70px;max-width:none}
+@media (max-width:1024px){.logo-link img.logo-brand{height:48px}}

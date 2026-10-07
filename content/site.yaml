@@ -27,7 +27,7 @@ menu:
     label: { pt: "Contactos", en: "Contact" }
 
 logo:
-  ficheiro: logo.svg
+  ficheiro: logo.png
   alt:
     pt: "Logótipo"
     en: "Logo"
