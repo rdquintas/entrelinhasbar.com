@@ -1,0 +1,514 @@
+# =============================================================================
+# Configuração do Pages CMS (https://pagescms.org)
+# - Cada ficheiro YAML de /content aparece como um formulário.
+# - O CMS reescreve os YAML ao gravar: comentários e ordem das chaves podem perder-se.
+#   (O site NÃO depende disso; a documentação dos campos está nas "description" abaixo.)
+# - As chaves (name) têm de coincidir com as dos YAML. Idiomas: se adicionares um
+#   idioma em content/site.yaml, acrescenta também o campo nos blocos "texto" abaixo.
+# =============================================================================
+
+media:
+  input: src/images
+  output: /images
+  categories: [image]
+  rename: safe
+
+components:
+  # Texto curto com versões por idioma
+  texto:
+    type: object
+    fields:
+      - name: pt
+        label: Português
+        type: string
+      - name: en
+        label: English
+        type: string
+
+  # Texto longo (várias linhas; linha em branco = novo parágrafo)
+  texto_longo:
+    type: object
+    fields:
+      - name: pt
+        label: Português
+        type: text
+      - name: en
+        label: English
+        type: text
+
+  # Imagem obrigatória + descrição (alt) por idioma
+  imagem:
+    type: object
+    fields:
+      - name: ficheiro
+        label: Imagem
+        type: image
+        required: true
+      - name: alt
+        label: Descrição da imagem (acessibilidade)
+        description: Descreve a imagem em poucas palavras, para quem não a consegue ver.
+        type: object
+        fields:
+          - name: pt
+            label: Português
+            type: string
+          - name: en
+            label: English
+            type: string
+
+  # Imagem opcional (deixar vazio para não usar)
+  imagem_opcional:
+    type: object
+    fields:
+      - name: ficheiro
+        label: Imagem
+        type: image
+      - name: alt
+        label: Descrição da imagem (acessibilidade)
+        type: object
+        fields:
+          - name: pt
+            label: Português
+            type: string
+          - name: en
+            label: English
+            type: string
+
+  # Imagem principal da página: horizontal (desktop) e vertical (telemóvel)
+  hero:
+    type: object
+    label: Imagem principal (hero)
+    description: A horizontal aparece em computador/tablet; a vertical aparece em telemóvel. Se não houver vertical, usa-se a horizontal.
+    fields:
+      - name: horizontal
+        label: Horizontal (obrigatória)
+        type: object
+        fields:
+          - name: ficheiro
+            label: Imagem
+            type: image
+            required: true
+          - name: alt
+            label: Descrição da imagem (acessibilidade)
+            type: object
+            fields:
+              - name: pt
+                label: Português
+                type: string
+              - name: en
+                label: English
+                type: string
+      - name: vertical
+        label: Vertical (opcional)
+        type: object
+        fields:
+          - name: ficheiro
+            label: Imagem
+            type: image
+
+  seo:
+    type: object
+    label: Descrição para motores de pesquisa (opcional)
+    fields:
+      - name: descricao
+        label: Descrição curta
+        type: object
+        fields:
+          - name: pt
+            label: Português
+            type: string
+          - name: en
+            label: English
+            type: string
+
+content:
+
+  - name: index
+    label: Página inicial
+    type: file
+    path: content/index.yaml
+    description: Hero por defeito, galeria de imagens e vídeo. Os eventos marcados como destaque (em Agenda) substituem o hero.
+    fields:
+      - name: titulo
+        label: Título da página
+        component: texto
+      - name: seo
+        component: seo
+      - name: hero
+        component: hero
+      - name: imagens
+        label: Galeria (até 10 imagens)
+        type: object
+        list:
+          max: 10
+          collapsible:
+            collapsed: true
+            summary: "Imagem {index}"
+        fields:
+          - name: ficheiro
+            label: Imagem
+            type: image
+          - name: alt
+            label: Descrição da imagem (acessibilidade)
+            type: object
+            fields:
+              - name: pt
+                label: Português
+                type: string
+              - name: en
+                label: English
+                type: string
+      - name: video_youtube
+        label: Vídeo do YouTube (opcional)
+        description: Colar o endereço do vídeo (youtube.com/watch?v=... ou youtu.be/...). Deixar vazio para não mostrar vídeo.
+        type: string
+
+  - name: agenda
+    label: Agenda e eventos
+    type: file
+    path: content/agenda.yaml
+    description: Os eventos podem estar por qualquer ordem; o site ordena-os por data e hora.
+    fields:
+      - name: titulo
+        label: Título da página
+        component: texto
+      - name: seo
+        component: seo
+      - name: hero
+        component: hero
+      - name: eventos
+        label: Eventos
+        description: >-
+          Apagar um evento desta lista remove-o do site e também apaga as suas imagens do repositório.
+          Para apenas esconder um evento (sem apagar nada), desmarcar "Ativo".
+          O endereço da página do evento é criado automaticamente a partir do título.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{data} {hora}"
+        fields:
+          - name: ativo
+            label: Ativo
+            description: Desmarcar para esconder o evento em todo o site (sem o apagar).
+            type: boolean
+            default: true
+          - name: titulo
+            label: Título
+            component: texto
+          - name: tipo
+            label: Tipo
+            type: select
+            required: true
+            options:
+              values:
+                - name: concerto
+                  label: Concerto
+                - name: workshop
+                  label: Workshop
+                - name: outro
+                  label: Outro
+          - name: data
+            label: Data
+            type: date
+            required: true
+            default: ""
+            options:
+              format: yyyy-MM-dd
+          - name: hora
+            label: Hora
+            description: "Formato 24 horas HH:MM (ex.: 21:30)."
+            type: string
+            required: true
+            pattern:
+              regex: "^([01]\\d|2[0-3]):[0-5]\\d$"
+              message: "Usar o formato HH:MM, por exemplo 21:30"
+          - name: destaque
+            label: Destaque
+            description: Os eventos em destaque aparecem num carrossel no topo da página inicial, no lugar da imagem principal.
+            type: boolean
+            default: false
+          - name: cancelado
+            label: Cancelado
+            description: Mostra uma faixa vermelha "CANCELADO" no evento.
+            type: boolean
+            default: false
+          - name: imagem_horizontal
+            label: Imagem horizontal (obrigatória)
+            component: imagem
+          - name: imagem_vertical
+            label: Imagem vertical (opcional, para telemóvel)
+            component: imagem_opcional
+          - name: resumo
+            label: Resumo curto (opcional)
+            description: Texto curto que aparece no carrossel de destaques. Se ficar vazio, usa-se o início do descritivo.
+            component: texto_longo
+          - name: descritivo
+            label: Descritivo
+            component: texto_longo
+          - name: youtube
+            label: Vídeo do YouTube (opcional)
+            type: string
+          - name: slug
+            label: Endereço personalizado (opcional)
+            description: Normalmente deixar vazio. Só preencher para fixar o endereço do evento (minúsculas, números e hífens) se mudares o título depois de o partilhar.
+            type: string
+            pattern:
+              regex: "^[a-z0-9]+(-[a-z0-9]+)*$"
+              message: "Usar só minúsculas, números e hífens"
+          - name: links
+            label: Links (até 5)
+            type: object
+            list:
+              max: 5
+              collapsible:
+                collapsed: true
+                summary: "Link {index}"
+            fields:
+              - name: nome
+                label: Nome do link
+                component: texto
+              - name: url
+                label: Endereço (URL)
+                type: string
+                pattern:
+                  regex: "^(https?://|mailto:|tel:)"
+                  message: "Deve começar por https://"
+
+  - name: mural
+    label: Mural
+    type: file
+    path: content/mural.yaml
+    description: Sem limite de itens. Cada item é uma imagem OU um vídeo do YouTube. No site a ordem é aleatória.
+    fields:
+      - name: titulo
+        label: Título da página
+        component: texto
+      - name: seo
+        component: seo
+      - name: hero
+        component: hero
+      - name: itens
+        label: Itens do mural
+        description: Preencher só "Imagem" OU só "Vídeo do YouTube" em cada item.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "Item {index}"
+        fields:
+          - name: imagem
+            label: Imagem
+            component: imagem_opcional
+          - name: youtube
+            label: Vídeo do YouTube
+            type: string
+          - name: legenda
+            label: Legenda (opcional)
+            component: texto
+
+  - name: contactos
+    label: Contactos
+    type: file
+    path: content/contactos.yaml
+    description: Detalhes de contacto e perguntas frequentes. O logótipo e as redes sociais estão em "Definições do site".
+    fields:
+      - name: titulo
+        label: Título da página
+        component: texto
+      - name: seo
+        component: seo
+      - name: hero
+        component: hero
+      - name: telefone
+        label: Telefone
+        type: string
+      - name: email
+        label: Email
+        type: string
+      - name: morada
+        label: Morada
+        type: text
+      - name: horario
+        label: Horário
+        component: texto_longo
+      - name: link_google_maps
+        label: Link do Google Maps
+        description: Só o link (não é incorporado nenhum mapa).
+        type: string
+      - name: faq
+        label: Perguntas frequentes
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "Pergunta {index}"
+        fields:
+          - name: pergunta
+            label: Pergunta
+            component: texto
+          - name: resposta
+            label: Resposta
+            component: texto_longo
+
+  - name: site
+    label: Definições do site
+    type: file
+    path: content/site.yaml
+    description: Nome, idiomas, menu, logótipo, redes sociais e textos de botões/etiquetas. Mexer com cuidado.
+    fields:
+      - name: nome
+        label: Nome do site
+        component: texto
+      - name: url_base
+        label: Endereço público do site (sem barra no fim)
+        description: "Ex.: https://meusite.netlify.app. Usado para partilha nas redes e motores de pesquisa."
+        type: string
+      - name: idiomas
+        label: Idiomas
+        description: Só alterar se for para acrescentar/remover um idioma (requer também alterar os textos em todo o site).
+        type: object
+        list: true
+        fields:
+          - name: codigo
+            label: "Código (ex.: pt, en)"
+            type: string
+          - name: nome
+            label: "Nome (ex.: Português)"
+            type: string
+          - name: locale
+            label: "Locale (ex.: pt-PT, en-GB)"
+            type: string
+      - name: idioma_padrao
+        label: Idioma por defeito (código)
+        type: string
+      - name: menu
+        label: Menu
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{pagina}"
+        fields:
+          - name: pagina
+            label: Página
+            description: "index, agenda, mural, contactos (ou o nome de uma página extra)."
+            type: string
+          - name: label
+            label: Texto no menu
+            component: texto
+      - name: logo
+        label: Logótipo
+        component: imagem_opcional
+      - name: og_imagem
+        label: Imagem de partilha nas redes (opcional)
+        description: Se ficar vazia usa-se a imagem principal da página inicial.
+        component: imagem_opcional
+      - name: redes
+        label: Redes sociais
+        type: object
+        fields:
+          - name: facebook
+            label: Facebook (URL)
+            type: string
+          - name: instagram
+            label: Instagram (URL)
+            type: string
+          - name: newsletter
+            label: Newsletter (URL)
+            type: string
+      - name: ui
+        label: Textos de botões e etiquetas
+        type: object
+        fields:
+          - name: menu_principal
+            label: Nome do menu (leitores de ecrã)
+            component: texto
+          - name: idioma
+            label: Seletor de idioma (leitores de ecrã)
+            component: texto
+          - name: ir_conteudo
+            label: Link "saltar para o conteúdo"
+            component: texto
+          - name: contactos
+            label: Link "Contactos" (rodapé)
+            component: texto
+          - name: saber_mais
+            label: Botão "Saber mais"
+            component: texto
+          - name: cancelado
+            label: Etiqueta "CANCELADO"
+            component: texto
+          - name: voltar_agenda
+            label: Link "Voltar à agenda"
+            component: texto
+          - name: sem_eventos
+            label: Mensagem "sem eventos"
+            component: texto
+          - name: galeria
+            label: Galeria (leitores de ecrã)
+            component: texto
+          - name: video_titulo
+            label: Título do vídeo
+            component: texto
+          - name: destaques
+            label: Carrossel de destaques (leitores de ecrã)
+            component: texto
+          - name: slide
+            label: Bullet do carrossel (leitores de ecrã)
+            component: texto
+          - name: ampliar
+            label: Ampliar imagem
+            component: texto
+          - name: reproduzir
+            label: Reproduzir vídeo
+            component: texto
+          - name: fechar
+            label: Fechar
+            component: texto
+          - name: telefone
+            label: Rótulo "Telefone"
+            component: texto
+          - name: email
+            label: Rótulo "Email"
+            component: texto
+          - name: morada
+            label: Rótulo "Morada"
+            component: texto
+          - name: horario
+            label: Rótulo "Horário"
+            component: texto
+          - name: mapa
+            label: Rótulo "Mapa"
+            component: texto
+          - name: ver_no_maps
+            label: Link "Ver no Google Maps"
+            component: texto
+          - name: faq
+            label: Título das perguntas frequentes
+            component: texto
+          - name: redes
+            label: Redes sociais (leitores de ecrã)
+            component: texto
+          - name: pagina_nao_encontrada
+            label: Título da página 404
+            component: texto
+          - name: voltar_inicio
+            label: Link "Voltar ao início"
+            component: texto
+          - name: mural_sem_js
+            label: Aviso do mural sem JavaScript
+            component: texto
+          - name: tipos
+            label: Nomes dos tipos de evento
+            type: object
+            fields:
+              - name: concerto
+                label: Concerto
+                component: texto
+              - name: workshop
+                label: Workshop
+                component: texto
+              - name: outro
+                label: Outro
+                component: texto

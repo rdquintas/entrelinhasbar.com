@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+{{> head}}
+</head>
+<body class="page-mural">
+{{> header}}
+<main id="conteudo">
+  <h1>{{titulo}}</h1>
+  {{hero}}
+  <section class="mural" data-mural data-batch="12" data-label-ampliar="{{ui.ampliar}}" data-label-reproduzir="{{ui.reproduzir}}" data-label-video="{{ui.video_titulo}}">
+    <div class="mural__grid" data-mural-grid></div>
+    <div class="mural__sentinel" data-mural-sentinel></div>
+    <noscript>
+      <p>{{ui.mural_sem_js}}</p>
+      <ul class="mural__noscript">
+        {{#each mural_noscript}}
+        <li>{{{html}}}</li>
+        {{/each}}
+      </ul>
+    </noscript>
+  </section>
+  <script type="application/json" id="mural-data">{{{mural_json}}}</script>
+  <dialog class="lightbox" data-lightbox aria-label="{{ui.ampliar}}">
+    <button type="button" class="lightbox__fechar" data-lightbox-close aria-label="{{ui.fechar}}">×</button>
+    <div class="lightbox__conteudo" data-lightbox-content></div>
+  </dialog>
+</main>
+{{> footer}}
+<script src="{{masonry_href}}" defer></script>
+<script src="{{js_href}}" defer></script>
+</body>
+</html>

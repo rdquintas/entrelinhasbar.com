@@ -1,0 +1,49 @@
+name: Limpar imagens de eventos apagados
+
+# Corre quando o conteúdo muda na branch principal (ex.: gravação no Pages CMS).
+# Remove de src/images/ as imagens de eventos que foram apagados do agenda.yaml.
+# Se a tua branch principal não se chama "main", altera abaixo.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: limpar-imagens
+  cancel-in-progress: false
+
+jobs:
+  limpar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      # O script só precisa do js-yaml; evitar binários opcionais (sharp) acelera o job.
+      - run: npm ci --ignore-scripts --omit=optional
+
+      - name: Remover imagens de eventos apagados
+        run: node scripts/clean-images.js --before "${{ github.event.before }}"
+
+      - name: Commit das remoções
+        run: |
+          if [ -n "$(git status --porcelain -- src/images)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A src/images
+            git commit -m "chore: remove imagens de eventos apagados [skip ci]"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          else
+            echo "Nada a remover."
+          fi

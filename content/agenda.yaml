@@ -1,0 +1,124 @@
+titulo:
+  pt: "Agenda"
+  en: "Events"
+seo:
+  descricao:
+    pt: "Próximos eventos."
+    en: "Upcoming events."
+hero:
+  horizontal:
+    ficheiro: hero-agenda-h.png
+    alt: { pt: "Agenda", en: "Events" }
+  vertical:
+    ficheiro: hero-agenda-v.png
+
+# Os eventos podem estar por qualquer ordem: o site ordena-os por data e hora.
+# ativo: false -> esconde o evento em todo o site (continua aqui e as imagens mantêm-se).
+# Apagar o evento desta lista remove-o e remove também as suas imagens do repositório.
+# O endereço da página do evento (ex.: /pt/event/tuba-ao-vivo/) é gerado a partir do título.
+eventos:
+  - titulo: { pt: "Roda de Samba de Primavera", en: "Spring Samba Circle" }
+    descritivo:
+      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n\nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n\nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    tipo: concerto
+    data: "2027-03-20"
+    hora: "18:00"
+    imagem_horizontal: { ficheiro: evento-3-h.png, alt: { pt: "Roda de samba", en: "Samba circle" } }
+    imagem_vertical: { ficheiro: evento-3-v.png }
+    destaque: false
+    cancelado: false
+    ativo: true
+    youtube: ""
+    links:
+      - nome: { pt: "Bilhetes", en: "Tickets" }
+        url: "https://exemplo.com/bilhetes"
+      - nome: { pt: "Como chegar", en: "Getting there" }
+        url: "https://exemplo.com/mapa"
+
+  - titulo: { pt: "Tuba ao Vivo", en: "Tuba Live" }
+    resumo:
+      pt: "Uma noite com tuba, convidados especiais e muito groove."
+      en: "A night of tuba, special guests and plenty of groove."
+    descritivo:
+      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    tipo: concerto
+    data: "2026-11-14"
+    hora: "21:30"
+    imagem_horizontal: { ficheiro: evento-1-h.png, alt: { pt: "Tuba ao vivo", en: "Tuba live" } }
+    imagem_vertical: { ficheiro: evento-1-v.png }
+    destaque: true
+    cancelado: false
+    ativo: true
+    youtube: "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+    links:
+      - nome: { pt: "Bilhetes", en: "Tickets" }
+        url: "https://exemplo.com/bilhetes"
+      - nome: { pt: "Facebook", en: "Facebook" }
+        url: "https://www.facebook.com/"
+      - nome: { pt: "Instagram", en: "Instagram" }
+        url: "https://www.instagram.com/"
+      - nome: { pt: "Programa completo", en: "Full programme" }
+        url: "https://exemplo.com/programa"
+      - nome: { pt: "Parcerias", en: "Partners" }
+        url: "https://exemplo.com/parcerias"
+
+  - titulo: { pt: "Workshop de Cozinha com José Barman", en: "Cooking Workshop with José Barman" }
+    descritivo:
+      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    tipo: workshop
+    data: "2026-10-24"
+    hora: "15:00"
+    imagem_horizontal: { ficheiro: evento-2-h.png, alt: { pt: "Workshop de cozinha", en: "Cooking workshop" } }
+    imagem_vertical: { ficheiro: evento-2-v.png }
+    destaque: true
+    cancelado: true
+    ativo: true
+    youtube: ""
+    links: []
+
+  - titulo: { pt: "Noite de Fados", en: "Fado Night" }
+    descritivo:
+      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+    tipo: concerto
+    data: "2026-12-12"
+    hora: "22:00"
+    imagem_horizontal: { ficheiro: evento-5-h.png, alt: { pt: "Noite de fados", en: "Fado night" } }
+    destaque: false
+    cancelado: false
+    ativo: true
+    links: []
+
+  - titulo: { pt: "Ensaio Aberto (rascunho)", en: "Open Rehearsal (draft)" }
+    descritivo:
+      pt: "Evento escondido: continua no YAML mas não aparece em lado nenhum."
+      en: "Hidden event: stays in the YAML but does not appear anywhere."
+    tipo: outro
+    data: "2026-12-01"
+    hora: "19:00"
+    imagem_horizontal: { ficheiro: evento-4-h.png }
+    imagem_vertical: { ficheiro: evento-4-v.png }
+    destaque: false
+    cancelado: false
+    ativo: false
+
+  - titulo: { pt: "Masterclass de Percussão", en: "Percussion Masterclass" }
+    descritivo:
+      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis nostrud exercitation ullamco laboris nisi ut aliquip."
+      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis nostrud exercitation ullamco laboris nisi ut aliquip."
+    tipo: workshop
+    data: "2026-11-02"
+    hora: "10:00"
+    imagem_horizontal: { ficheiro: evento-6-h.png, alt: { pt: "Masterclass", en: "Masterclass" } }
+    imagem_vertical: { ficheiro: evento-6-v.png }
+    destaque: false
+    cancelado: false
+    ativo: true
+    links:
+      - nome: { pt: "Inscrições", en: "Sign up" }
+        url: "https://exemplo.com/inscricoes"
+      - nome: { pt: "Regulamento", en: "Rules" }
+        url: "https://exemplo.com/regulamento"

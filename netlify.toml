@@ -1,0 +1,40 @@
+# Netlify: faz `npm run build` e publica a pasta dist/.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"   # igual ao .nvmrc; compatível com o sharp
+
+# Preserva a cache de imagens entre builds (só acelera; sem isto o build reprocessa tudo,
+# fica mais lento mas continua correto). O plugin também está em devDependencies.
+[[plugins]]
+  package = "netlify-plugin-cache"
+  [plugins.inputs]
+    paths = [".cache"]
+
+# Cabeçalhos de segurança. A CSP não permite scripts/estilos inline: o site não usa nenhum.
+# Exceções: miniaturas do YouTube (i.ytimg.com) e vídeos incorporados (youtube-nocookie.com).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://i.ytimg.com; script-src 'self'; style-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
+# Imagens e CSS/JS têm hash no nome: cache longa e imutável.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML: o Netlify já serve por defeito "public, max-age=0, must-revalidate"
+# (o browser revalida sempre), por isso não é preciso definir aqui.
+# A raiz (/) -> idioma por defeito é gerada pelo build em dist/_redirects (a partir de site.yaml).

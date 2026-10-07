@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+{{> head}}
+</head>
+<body class="page-contactos">
+{{> header}}
+<main id="conteudo">
+  <h1>{{titulo}}</h1>
+  {{hero}}
+  <section class="contactos">
+    <dl class="contactos__lista">
+      {{#if telefone}}<dt>{{ui.telefone}}</dt><dd><a href="{{telefone_href}}">{{telefone}}</a></dd>{{/if}}
+      {{#if email}}<dt>{{ui.email}}</dt><dd><a href="mailto:{{email}}">{{email}}</a></dd>{{/if}}
+      {{#if morada}}<dt>{{ui.morada}}</dt><dd>{{para morada}}</dd>{{/if}}
+      {{#if horario}}<dt>{{ui.horario}}</dt><dd>{{para horario}}</dd>{{/if}}
+      {{#if link_google_maps}}<dt>{{ui.mapa}}</dt><dd><a href="{{link_google_maps}}" target="_blank" rel="noopener noreferrer">{{ui.ver_no_maps}}</a></dd>{{/if}}
+    </dl>
+    {{#if redes_lista}}
+    <ul class="contactos__redes" aria-label="{{ui.redes}}">
+      {{#each redes_lista}}
+      <li><a href="{{url}}" target="_blank" rel="noopener noreferrer">{{nome}}</a></li>
+      {{/each}}
+    </ul>
+    {{/if}}
+  </section>
+  {{#if faq}}
+  <section class="faq">
+    <h2>{{ui.faq}}</h2>
+    {{#each faq}}
+    <details class="faq__item">
+      <summary class="faq__pergunta">{{pergunta}}</summary>
+      <div class="faq__resposta">{{para resposta}}</div>
+    </details>
+    {{/each}}
+  </section>
+  {{/if}}
+</main>
+{{> footer}}
+<script src="{{js_href}}" defer></script>
+</body>
+</html>

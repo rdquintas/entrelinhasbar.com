@@ -1,0 +1,39 @@
+titulo:
+  pt: "Contactos"
+  en: "Contact"
+seo:
+  descricao:
+    pt: "Como falar connosco."
+    en: "How to reach us."
+hero:
+  horizontal:
+    ficheiro: hero-contactos-h.png
+    alt: { pt: "Contactos", en: "Contact" }
+  vertical:
+    ficheiro: hero-contactos-v.png
+
+telefone: "+351 912 345 678"
+email: "geral@exemplo.com"
+morada: "Rua de Exemplo, 123\n1000-001 Lisboa"
+horario:
+  pt: "Segunda a sexta: 10h–18h\nSábado: 10h–14h"
+  en: "Monday to Friday: 10am–6pm\nSaturday: 10am–2pm"
+link_google_maps: "https://maps.google.com/"
+
+faq:
+  - pergunta: { pt: "Lorem ipsum dolor sit amet?", en: "Lorem ipsum dolor sit amet?" }
+    resposta:
+      pt: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+      en: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+  - pergunta: { pt: "Ut enim ad minim veniam?", en: "Ut enim ad minim veniam?" }
+    resposta:
+      pt: "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.\n\nDuis aute irure dolor in reprehenderit."
+      en: "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.\n\nDuis aute irure dolor in reprehenderit."
+  - pergunta: { pt: "Duis aute irure dolor?", en: "Duis aute irure dolor?" }
+    resposta:
+      pt: "Excepteur sint occaecat cupidatat non proident."
+      en: "Excepteur sint occaecat cupidatat non proident."
+  - pergunta: { pt: "Sed ut perspiciatis unde omnis?", en: "Sed ut perspiciatis unde omnis?" }
+    resposta:
+      pt: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."
+      en: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."

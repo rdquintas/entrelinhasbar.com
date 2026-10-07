@@ -1,0 +1,339 @@
+'use strict';
+/**
+ * build.js — orquestrador. Lê content/*.yaml e src/templates, gera /dist.
+ *   1. carrega e valida o conteúdo (falha com mensagens claras)
+ *   2. prepara eventos e otimiza as imagens referenciadas
+ *   3. copia CSS/JS (com hash no nome) e ficheiros estáticos
+ *   4. renderiza cada página em cada idioma + uma página por evento ativo
+ *   5. gera _redirects, sitemap.xml, robots.txt e 404.html
+ */
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const {
+  Report, BuildError, escapeHtml, imageName, paragraphs, parseYoutubeId, formatBytes,
+} = require('./lib/util');
+const content = require('./lib/content');
+const { prepareEvents, formatDate } = require('./lib/events');
+const { createImages } = require('./lib/images');
+const { createEngine } = require('./lib/template');
+
+const ROOT = __dirname;
+const DIR = {
+  content: path.join(ROOT, 'content'),
+  templates: path.join(ROOT, 'src/templates'),
+  css: path.join(ROOT, 'src/css/style.css'),
+  js: path.join(ROOT, 'src/js/main.js'),
+  masonry: path.join(ROOT, 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'),
+  static: path.join(ROOT, 'src/static'),
+  images: path.join(ROOT, 'src/images'),
+  dist: path.join(ROOT, 'dist'),
+  cache: path.join(ROOT, '.cache/images'),
+};
+const MAX_SLIDES = 5;
+const cleanImage = content.cleanImage;
+
+const write = (rel, data) => {
+  const file = path.join(DIR.dist, rel);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, data);
+};
+
+function copyDir(from, to) {
+  if (!fs.existsSync(from)) return;
+  fs.mkdirSync(to, { recursive: true });
+  for (const entry of fs.readdirSync(from, { withFileTypes: true })) {
+    if (entry.name.startsWith('.')) continue;
+    const a = path.join(from, entry.name);
+    const b = path.join(to, entry.name);
+    if (entry.isDirectory()) copyDir(a, b);
+    else fs.copyFileSync(a, b);
+  }
+}
+
+/** Copia para /dist/assets com hash do conteúdo no nome (cache longa e segura). */
+function hashedAsset(file, base, ext) {
+  let buf;
+  try { buf = fs.readFileSync(file); } catch {
+    throw new BuildError(`Ficheiro em falta: ${path.relative(ROOT, file)}${base === 'masonry' ? ' (correr "npm install")' : ''}`);
+  }
+  const hash = crypto.createHash('sha256').update(buf).digest('hex').slice(0, 8);
+  const name = `${base}.${hash}.${ext}`;
+  write(`assets/${name}`, buf);
+  return `/assets/${name}`;
+}
+
+/** JSON seguro para dentro de <script type="application/json">. */
+const safeJson = (obj) => JSON.stringify(obj)
+  .replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+
+async function main() {
+  const t0 = Date.now();
+  const report = new Report();
+  fs.rmSync(DIR.dist, { recursive: true, force: true });
+  fs.mkdirSync(DIR.dist, { recursive: true });
+
+  /* ---------- 1. Conteúdo ---------- */
+  const raw = content.loadAll(DIR.content);
+  const env = content.validateAll(raw, report, { imagesDir: DIR.images });
+  report.flush();
+
+  const { langs, defaultLang, langCodes } = env;
+  const site = { ...raw.site, logo: cleanImage(raw.site.logo), og_imagem: cleanImage(raw.site.og_imagem) };
+  const siteUrl = String(raw.site.url_base || '').replace(/\/+$/, '');
+  const abs = (p) => (siteUrl ? siteUrl + p : p);
+
+  const events = prepareEvents(raw.agenda.eventos, { langs, defaultLang, ui: raw.site.ui, report });
+
+  /* ---------- 2. Imagens ---------- */
+  const extraNames = Object.keys(raw.extras);
+  const dataOf = (key) => raw[key] || raw.extras[key];
+  const allContent = [raw.site, ...content.PAGES.map((k) => raw[k]), ...Object.values(raw.extras)];
+  const refs = new Set();
+  allContent.forEach((d) => content.collectImageNames(d).forEach((n) => refs.add(n)));
+  const allRefs = new Set();
+  allContent.forEach((d) => content.collectImageNames(d, { includeInactive: true }).forEach((n) => allRefs.add(n)));
+
+  const ogNames = new Set();
+  const siteOg = site.og_imagem || cleanImage(raw.index.hero && raw.index.hero.horizontal);
+  if (siteOg) ogNames.add(imageName(siteOg.ficheiro));
+  events.forEach((e) => ogNames.add(imageName(e.imagem_horizontal.ficheiro)));
+
+  const images = createImages({ srcDir: DIR.images, outDir: path.join(DIR.dist, 'images'), cacheDir: DIR.cache });
+  await images.prepare(refs, ogNames);
+
+  const orphans = fs.existsSync(DIR.images)
+    ? fs.readdirSync(DIR.images).filter((f) => !f.startsWith('.') && !allRefs.has(f))
+    : [];
+  if (orphans.length) {
+    report.warn(`${orphans.length} imagem(ns) em src/images/ não estão referenciadas em nenhum YAML (ignoradas): ${orphans.slice(0, 8).join(', ')}${orphans.length > 8 ? ', …' : ''}`);
+  }
+
+  /* ---------- 3. Assets ---------- */
+  const cssHref = hashedAsset(DIR.css, 'style', 'css');
+  const jsHref = hashedAsset(DIR.js, 'main', 'js');
+  const masonryHref = hashedAsset(DIR.masonry, 'masonry', 'js');
+  copyDir(DIR.static, DIR.dist);
+
+  /* ---------- 4. Templates ---------- */
+  const imgOf = (v) => (cleanImage(v) ? imageName(v.ficheiro) : null);
+  const helpers = {
+    img(e, h) {
+      const v = h.get(e.pos[0]);
+      const name = imgOf(v);
+      if (!name) return '';
+      return images.render(name, {
+        alt: h.text(v.alt, `${e.pos[0]}.alt`),
+        preset: e.opts.preset || 'card',
+        eager: e.opts.eager === 'true',
+        cls: e.opts.class || '',
+      });
+    },
+    hero(e, h) {
+      const hp = e.pos[0] || 'hero.horizontal';
+      const vp = e.pos.length ? e.pos[1] : 'hero.vertical';
+      const hv = h.get(hp);
+      const hn = imgOf(hv);
+      if (!hn) throw h.fail(`imagem "${hp}" em falta para o hero.`);
+      const vn = vp ? imgOf(h.get(vp)) : null;
+      return images.renderHero(hn, vn, {
+        alt: h.text(hv.alt, `${hp}.alt`),
+        eager: e.opts.eager !== 'false',
+        cls: e.opts.class || 'hero',
+        preset: e.opts.preset || 'hero',
+      });
+    },
+    para(e, h) {
+      return paragraphs(h.text(h.get(e.pos[0]), e.pos[0]));
+    },
+  };
+  const engine = createEngine({ templatesDir: DIR.templates, helpers, report });
+
+  const pageUrl = (key, l) => (key === 'index' ? `/${l}/` : `/${l}/${key}/`);
+  const eventUrl = (slug, l) => `/${l}/event/${slug}/`;
+  const sitemap = []; // [{ paths: {pt, en} }]
+  const counts = { pages: 0, events: 0 };
+
+  const ogFor = (name) => {
+    const f = name && images.ogFile(name);
+    return f && siteUrl ? `${siteUrl}/images/${f}` : '';
+  };
+
+  for (const L of langs) {
+    const lang = L.codigo;
+    const T = (val, label) => content.resolveText(val, { lang, defaultLang, report, label });
+    const siteName = T(raw.site.nome, 'site.yaml › nome');
+
+    /** Contexto comum a todas as páginas deste idioma. */
+    const makeCtx = ({ pageKey, pathFor, title, description, ogName, noindex = false, extra = {} }) => ({
+      lang,
+      locale: L.locale,
+      locale_og: L.locale.replace('-', '_'),
+      site,
+      ui: raw.site.ui,
+      site_name: siteName,
+      year: new Date().getFullYear(),
+      css_href: cssHref,
+      js_href: jsHref,
+      masonry_href: masonryHref,
+      home_url: pageUrl('index', lang),
+      agenda_url: pageUrl('agenda', lang),
+      mural_url: pageUrl('mural', lang),
+      contactos_url: pageUrl('contactos', lang),
+      menu: raw.site.menu.map((m) => ({ label: m.label, url: pageUrl(m.pagina, lang), current: m.pagina === pageKey })),
+      alternates: pathFor ? langs.map((l) => ({
+        codigo: l.codigo, nome: l.nome, href: pathFor(l.codigo), abs_href: abs(pathFor(l.codigo)), current: l.codigo === lang,
+      })) : [],
+      x_default: pathFor ? abs(pathFor(defaultLang)) : '',
+      canonical: pathFor && siteUrl ? abs(pathFor(lang)) : '',
+      seo_title: title && title !== siteName ? `${title} — ${siteName}` : siteName,
+      seo_description: description || '',
+      og_image: ogFor(ogName || (siteOg && imageName(siteOg.ficheiro))),
+      noindex,
+      ...extra,
+    });
+
+    const pageData = (key) => {
+      const d = dataOf(key);
+      return {
+        ...d,
+        hero: { horizontal: cleanImage(d.hero && d.hero.horizontal), vertical: cleanImage(d.hero && d.hero.vertical) },
+      };
+    };
+    const seoOf = (key) => ({
+      title: T(dataOf(key).titulo, `${key}.yaml › titulo`),
+      description: T(dataOf(key).seo && dataOf(key).seo.descricao, `${key}.yaml › seo.descricao`),
+    });
+
+    const localized = events.map((e) => ({ ...e, url: eventUrl(e.slug, lang), data_fmt: formatDate(e.data, L.locale) }));
+
+    const render = (tpl, ctx) => engine.render(tpl, ctx, { lang, defaultLang, langCodes });
+    const emit = (relDir, tpl, ctx) => {
+      write(path.posix.join(lang, relDir, 'index.html'), render(tpl, ctx));
+      counts.pages++;
+    };
+
+    /* index */
+    {
+      const destaques = localized.filter((e) => e.destaque).slice(0, MAX_SLIDES);
+      const ytId = parseYoutubeId(raw.index.video_youtube);
+      emit('', 'index', makeCtx({
+        pageKey: 'index', pathFor: (l) => pageUrl('index', l), ...seoOf('index'),
+        extra: {
+          ...pageData('index'),
+          imagens: (Array.isArray(raw.index.imagens) ? raw.index.imagens : []).filter(cleanImage),
+          video_embed: ytId ? `https://www.youtube-nocookie.com/embed/${ytId}` : '',
+          destaques,
+          destaques_multiplos: destaques.length > 1,
+        },
+      }));
+    }
+
+    /* agenda */
+    emit('agenda', 'agenda', makeCtx({
+      pageKey: 'agenda', pathFor: (l) => pageUrl('agenda', l), ...seoOf('agenda'),
+      extra: { ...pageData('agenda'), eventos: localized },
+    }));
+
+    /* mural */
+    {
+      const items = [];
+      const noscript = [];
+      (Array.isArray(raw.mural.itens) ? raw.mural.itens : []).forEach((it) => {
+        const legenda = it.legenda ? T(it.legenda, 'mural.yaml › legenda') : '';
+        const im = cleanImage(it.imagem);
+        if (im) {
+          const alt = T(im.alt, 'mural.yaml › alt') || legenda;
+          const html = images.render(imageName(im.ficheiro), { alt, preset: 'mural' });
+          items.push({ k: 'img', html, legenda });
+          noscript.push({ html });
+        } else if (parseYoutubeId(it.youtube)) {
+          const id = parseYoutubeId(it.youtube);
+          items.push({ k: 'yt', id, legenda });
+          noscript.push({ html: `<a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer">${escapeHtml(legenda || 'YouTube')}</a>` });
+        }
+      });
+      emit('mural', 'mural', makeCtx({
+        pageKey: 'mural', pathFor: (l) => pageUrl('mural', l), ...seoOf('mural'),
+        extra: { ...pageData('mural'), mural_json: safeJson(items), mural_noscript: noscript, mural_total: items.length },
+      }));
+    }
+
+    /* contactos */
+    {
+      const c = raw.contactos;
+      const redes = raw.site.redes || {};
+      const redesLista = [['Facebook', redes.facebook], ['Instagram', redes.instagram], ['Newsletter', redes.newsletter]]
+        .filter(([, url]) => url).map(([nome, url]) => ({ nome, url }));
+      emit('contactos', 'contactos', makeCtx({
+        pageKey: 'contactos', pathFor: (l) => pageUrl('contactos', l), ...seoOf('contactos'),
+        extra: {
+          ...pageData('contactos'),
+          telefone_href: c.telefone ? `tel:${String(c.telefone).replace(/[^\d+]/g, '')}` : '',
+          redes_lista: redesLista,
+          faq: (Array.isArray(c.faq) ? c.faq : []).filter((q) => q && (q.pergunta || q.resposta)),
+        },
+      }));
+    }
+
+    /* páginas extra (content/<nome>.yaml + src/templates/<nome>.html) */
+    for (const name of extraNames) {
+      emit(name, name, makeCtx({
+        pageKey: name, pathFor: (l) => pageUrl(name, l), ...seoOf(name),
+        extra: { ...pageData(name) },
+      }));
+    }
+
+    /* uma página por evento ativo, a partir de um único template */
+    for (const e of localized) {
+      const title = T(e.titulo, `evento "${e.slug}" › titulo`);
+      const ctx = makeCtx({
+        pageKey: 'agenda', pathFor: (l) => eventUrl(e.slug, l), title,
+        description: T(e.resumo, `evento "${e.slug}" › resumo`),
+        ogName: imageName(e.imagem_horizontal.ficheiro),
+        extra: { ...e },
+      });
+      emit(path.posix.join('event', e.slug), 'event', ctx);
+      counts.events++;
+    }
+
+    /* 404 (só no idioma por defeito, na raiz) */
+    if (lang === defaultLang) {
+      const ctx = makeCtx({ pageKey: null, pathFor: null, title: T(raw.site.ui.pagina_nao_encontrada, 'ui.pagina_nao_encontrada'), noindex: true });
+      write('404.html', render('404', ctx));
+    }
+  }
+
+  /* ---------- 5. Ficheiros gerados ---------- */
+  write('_redirects', `/  /${defaultLang}/  302\n`);
+
+  if (siteUrl) {
+    const urls = [];
+    const add = (pathFor) => urls.push(pathFor);
+    for (const key of [...content.PAGES, ...extraNames]) add((l) => pageUrl(key, l));
+    for (const e of events) add((l) => eventUrl(e.slug, l));
+    const xml = urls.flatMap((pathFor) => langs.map((l) => {
+      const alts = langs.map((x) => `    <xhtml:link rel="alternate" hreflang="${x.codigo}" href="${escapeHtml(abs(pathFor(x.codigo)))}"/>`).join('\n');
+      return `  <url>\n    <loc>${escapeHtml(abs(pathFor(l.codigo)))}</loc>\n${alts}\n    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeHtml(abs(pathFor(defaultLang)))}"/>\n  </url>`;
+    })).join('\n');
+    write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${xml}\n</urlset>\n`);
+  }
+  write('robots.txt', `User-agent: *\nAllow: /\n${siteUrl ? `\nSitemap: ${siteUrl}/sitemap.xml\n` : ''}`);
+
+  /* ---------- Resumo ---------- */
+  report.flush(); // imprime avisos acumulados durante a renderização
+  const s = images.summary();
+  const saved = s.before ? Math.round((1 - s.after / s.before) * 100) : 0;
+  console.log('\n✔ Build concluído');
+  console.log(`  Páginas: ${counts.pages} (${langs.length} idiomas) · eventos ativos: ${events.length}`);
+  if (events.length) console.log(`  URLs dos eventos: ${events.map((e) => e.slug).join(', ')}`);
+  console.log(`  Imagens: ${s.processed} processadas, ${s.cached} vindas da cache`);
+  console.log(`  Tamanho: ${formatBytes(s.before)} (originais) → ${formatBytes(s.after)} (maior versão AVIF de cada) · poupança ${saved}%`);
+  console.log(`  Tempo: ${((Date.now() - t0) / 1000).toFixed(1)} s`);
+}
+
+main().catch((e) => {
+  if (e instanceof BuildError) console.error(e.message);
+  else console.error(e);
+  process.exit(1);
+});

@@ -1,0 +1,23 @@
+{
+  "name": "site-institucional",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site estático bilingue (pt/en) para Netlify, com conteúdo em YAML.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "dev": "npm run build && npx serve dist",
+    "placeholders": "node scripts/fetch-placeholders.js",
+    "clean-images": "node scripts/clean-images.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "masonry-layout": "^4.2.2",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "netlify-plugin-cache": "^1.0.3"
+  }
+}

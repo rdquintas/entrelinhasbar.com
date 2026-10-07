@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+{{> head}}
+</head>
+<body class="page-agenda">
+{{> header}}
+<main id="conteudo">
+  <h1>{{titulo}}</h1>
+  {{hero}}
+  <section class="agenda">
+    {{#if eventos}}
+    <ul class="agenda__grelha">
+      {{#each eventos}}
+      <li class="evento-card">
+        <a class="evento-card__link" href="{{url}}">
+          <div class="evento-card__media">
+            {{img imagem_horizontal preset=card}}
+            {{#if cancelado}}<div class="cancelado-faixa">{{ui.cancelado}}</div>{{/if}}
+          </div>
+          <h2 class="evento-card__titulo">{{titulo}}</h2>
+          <p class="evento-card__meta"><time datetime="{{datetime}}">{{data_fmt}}, {{hora}}</time> · {{tipo_label}}</p>
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+    {{else}}
+    <p>{{ui.sem_eventos}}</p>
+    {{/if}}
+  </section>
+</main>
+{{> footer}}
+<script src="{{js_href}}" defer></script>
+</body>
+</html>
