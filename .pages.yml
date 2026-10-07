@@ -355,7 +355,7 @@ content:
     label: Definições do site
     type: file
     path: content/site.yaml
-    description: Nome, idiomas, menu, logótipo, redes sociais e textos de botões/etiquetas. Mexer com cuidado.
+    description: Nome, idiomas, redes sociais e textos de botões/etiquetas. Mexer com cuidado.
     fields:
       - name: nome
         label: Nome do site
@@ -382,21 +382,6 @@ content:
       - name: idioma_padrao
         label: Idioma por defeito (código)
         type: string
-      - name: menu
-        label: Menu
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{pagina}"
-        fields:
-          - name: pagina
-            label: Página
-            description: "index, agenda, mural, contactos (ou o nome de uma página extra)."
-            type: string
-          - name: label
-            label: Texto no menu
-            component: texto
       - name: og_imagem
         label: Imagem de partilha nas redes (opcional)
         description: Se ficar vazia usa-se a imagem principal da página inicial.
@@ -410,6 +395,9 @@ content:
             type: string
           - name: instagram
             label: Instagram (URL)
+            type: string
+          - name: youtube
+            label: YouTube (URL)
             type: string
           - name: newsletter
             label: Newsletter (URL)

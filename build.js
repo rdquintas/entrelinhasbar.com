@@ -232,7 +232,6 @@ async function main() {
       agenda_url: pageUrl('agenda', lang),
       mural_url: pageUrl('mural', lang),
       contactos_url: pageUrl('contactos', lang),
-      menu: raw.site.menu.map((m) => ({ label: m.label, url: pageUrl(m.pagina, lang), current: m.pagina === pageKey })),
       urls: Object.fromEntries(NAV_PAGES.map((k) => [k, pageUrl(k, lang)])),
       nav: pageKey ? { [pageKey]: true } : {},
       alternates: pathFor ? langs.map((l) => ({

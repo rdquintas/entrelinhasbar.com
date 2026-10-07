@@ -22,26 +22,27 @@
 											data-widget_type="icon-list.default">
 											<div class="elementor-widget-container">
 												<ul class="elementor-icon-list-items">
+													{{#if site.redes.instagram}}
 													<li class="elementor-icon-list-item">
-														<a href="#">
+														<a href="{{site.redes.instagram}}" target="_blank" rel="noopener noreferrer">
 															<span class="elementor-icon-list-text">Instagram</span>
 														</a>
 													</li>
+													{{/if}}
+													{{#if site.redes.facebook}}
 													<li class="elementor-icon-list-item">
-														<a href="#">
+														<a href="{{site.redes.facebook}}" target="_blank" rel="noopener noreferrer">
 															<span class="elementor-icon-list-text">Facebook</span>
 														</a>
 													</li>
+													{{/if}}
+													{{#if site.redes.youtube}}
 													<li class="elementor-icon-list-item">
-														<a href="#">
+														<a href="{{site.redes.youtube}}" target="_blank" rel="noopener noreferrer">
 															<span class="elementor-icon-list-text">YouTube</span>
 														</a>
 													</li>
-													<li class="elementor-icon-list-item">
-														<a href="#">
-															<span class="elementor-icon-list-text">Tiktok</span>
-														</a>
-													</li>
+													{{/if}}
 												</ul>
 											</div>
 										</div>

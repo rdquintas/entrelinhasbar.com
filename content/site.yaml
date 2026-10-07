@@ -16,24 +16,15 @@ idiomas:
     locale: "en-GB"
 idioma_padrao: pt
 
-menu:
-  - pagina: index
-    label: { pt: "Início", en: "Home" }
-  - pagina: agenda
-    label: { pt: "Agenda", en: "Events" }
-  - pagina: mural
-    label: { pt: "Mural", en: "Wall" }
-  - pagina: contactos
-    label: { pt: "Contactos", en: "Contact" }
-
 # Imagem usada ao partilhar o site nas redes (opcional; por defeito usa o hero da página inicial).
 og_imagem:
   ficheiro: ""
 
 redes:
-  facebook: "https://www.facebook.com/"
-  instagram: "https://www.instagram.com/"
-  newsletter: "https://exemplo.com/newsletter"
+  facebook: "https://www.facebook.com/EntreLinhasbistro2019"
+  instagram: "https://www.instagram.com/entrelinhas2019"
+  youtube: ""
+  newsletter: "" 
 
 # Textos de interface (botões, etiquetas, acessibilidade).
 ui:
