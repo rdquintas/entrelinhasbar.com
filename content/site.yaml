@@ -26,12 +26,6 @@ menu:
   - pagina: contactos
     label: { pt: "Contactos", en: "Contact" }
 
-logo:
-  ficheiro: logo.png
-  alt:
-    pt: "Logótipo"
-    en: "Logo"
-
 # Imagem usada ao partilhar o site nas redes (opcional; por defeito usa o hero da página inicial).
 og_imagem:
   ficheiro: ""

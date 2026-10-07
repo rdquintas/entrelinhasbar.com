@@ -397,9 +397,6 @@ content:
           - name: label
             label: Texto no menu
             component: texto
-      - name: logo
-        label: Logótipo
-        component: imagem_opcional
       - name: og_imagem
         label: Imagem de partilha nas redes (opcional)
         description: Se ficar vazia usa-se a imagem principal da página inicial.

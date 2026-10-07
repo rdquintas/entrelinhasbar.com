@@ -124,7 +124,7 @@ async function main() {
   if (clash) {
     throw new BuildError(`content/${clash}.yaml: o nome "${clash}" está reservado (idiomas, páginas do tema, assets, images, css, js, fonts). Mudar o nome do ficheiro.`);
   }
-  const site = { ...raw.site, logo: cleanImage(raw.site.logo), og_imagem: cleanImage(raw.site.og_imagem) };
+  const site = { ...raw.site, og_imagem: cleanImage(raw.site.og_imagem) };
   const siteUrl = String(raw.site.url_base || '').replace(/\/+$/, '');
   const abs = (p) => (siteUrl ? siteUrl + p : p);
 

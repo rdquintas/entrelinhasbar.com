@@ -36,6 +36,20 @@
    sized in em so it scales with the text. */
 .logo-text,.poize-big-text-yes .elementor-heading-title{-webkit-mask-image:url(../images/grunge-mask.png);mask-image:url(../images/grunge-mask.png);-webkit-mask-size:5em auto;mask-size:5em auto;text-transform:uppercase}
 
-/* Header logo (site.yaml › logo) in place of the theme's text logo */
+/* Header logo (src/images/logo.png) in place of the theme's text logo */
 .logo-link img.logo-brand{display:block;width:auto;height:70px;max-width:none}
 @media (max-width:1024px){.logo-link img.logo-brand{height:48px}}
+
+/* Footer: Social on the left, logo centred in the middle, empty column on the right for balance */
+.elementor-115 .elementor-element-74b303b>.e-con-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem}
+.elementor-115 .elementor-element-14cb72c{--width:auto}
+.footer-logo{display:flex;justify-content:center}
+.footer-logo-img{display:block;width:260px;max-width:100%;height:auto}
+/* Footer credit ("Designed by …") centred, full width */
+.elementor-115 .elementor-element.elementor-element-c64db47{--width:100%}
+.elementor-115 .elementor-element.elementor-element-53bad13{text-align:center}
+@media (max-width:767px){
+  .elementor-115 .elementor-element-74b303b>.e-con-inner{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .footer-logo{order:-1}
+  .footer-spacer{display:none}
+}
