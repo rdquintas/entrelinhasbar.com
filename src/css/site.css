@@ -12,6 +12,10 @@
 /* Disable the theme custom cursor (circle + hover labels like "Discover artist"); use the native pointer */
 .cursor,.cursor-text{display:none!important}
 
+/* Homepage "Meet Our Artists": the grid no longer uses Isotope (masonry-container removed in index.html);
+   the theme's fade-in-up uses "transition:all", so only animate the entrance properties */
+.artist-items.items-entrance-animation-fade-in-up .entry{transition-property:opacity,transform!important}
+
 /* Homepage hero carousel (js/hero-slider.js): stacked slides crossfade, dots at the bottom */
 .elementor-2 .elementor-element-80ea7dc{position:relative}
 .elementor-2 .elementor-element-80ea7dc>.e-con-inner{position:static}
