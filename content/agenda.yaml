@@ -15,7 +15,7 @@ hero:
 # Os eventos podem estar por qualquer ordem: o site ordena-os por data e hora.
 # ativo: false -> esconde o evento em todo o site (continua aqui e as imagens mantêm-se).
 # Apagar o evento desta lista remove-o e remove também as suas imagens do repositório.
-# O endereço da página do evento (ex.: /pt/event/tuba-ao-vivo/) é gerado a partir do título.
+# O endereço da página do evento (ex.: /event/tuba-ao-vivo/ ou /en/event/tuba-ao-vivo/) é gerado a partir do título.
 eventos:
   - titulo: { pt: "Roda de Samba de Primavera", en: "Spring Samba Circle" }
     descritivo:

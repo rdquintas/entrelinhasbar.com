@@ -1,4 +1,4 @@
-# Site institucional (estático, pt/en)
+# entrelinhasbar.com (estático, pt/en)
 
 Site estático alojado no **Netlify**. Todo o conteúdo vive em ficheiros **YAML** e em imagens no repositório Git; cada `commit` na branch principal dispara um deploy automático. Sem backend, sem base de dados, sem segredos.
 
@@ -48,7 +48,7 @@ Se faltar uma tradução, o site usa o idioma por defeito (pt) e o build mostra 
 - `cancelado: true` → faixa vermelha **CANCELADO** no evento, na agenda e no carrossel.
 - `ativo: false` → o evento **não aparece em lado nenhum** (nem tem página), mas continua no YAML e as suas imagens mantêm-se.
 - **Apagar** o evento do YAML remove-o do site **e** apaga as suas imagens do repositório (ver [Limpeza de imagens](#limpeza-de-imagens-de-eventos-apagados)).
-- O endereço do evento é gerado a partir do título: `Tuba ao Vivo` → `/pt/event/tuba-ao-vivo/`. Se mudares o título depois de partilhares o link, o endereço muda; para o fixar, preenche o campo opcional `slug`.
+- O endereço do evento é gerado a partir do título: `Tuba ao Vivo` → `/event/tuba-ao-vivo/` (em inglês: `/en/event/tuba-ao-vivo/`). Se mudares o título depois de partilhares o link, o endereço muda; para o fixar, preenche o campo opcional `slug`.
 - Cada evento tem uma imagem **horizontal** (obrigatória) e uma **vertical** (opcional, usada em telemóvel); até 5 `links`; `youtube` opcional (URL ou ID).
 
 ### Imagens
@@ -84,7 +84,7 @@ O build **falha** (com o nome do ficheiro) se uma imagem estiver corrompida, nã
 2. Acrescenta a nova chave (ex.: `es:`) em **todos** os textos dos YAML (incluindo `ui`, `menu` e eventos). O que faltar usa o idioma por defeito e o build avisa.
 3. Para o Pages CMS, acrescenta também o campo do novo idioma nos blocos `components` de `.pages.yml` (`texto`, `texto_longo`, `imagem`…).
 
-Os URLs, o seletor de idioma, o `hreflang` e o sitemap são gerados a partir da lista de idiomas.
+O idioma por defeito (`idioma_padrao`) fica na raiz (`/`, `/agenda/`…); os outros têm prefixo (`/en/`, `/en/agenda/`…). Os URLs, o seletor de idioma, o `hreflang` e o sitemap são gerados a partir da lista de idiomas.
 
 ## Adicionar uma página
 1. Cria `content/nova.yaml` (nome em minúsculas, sem acentos) com pelo menos `titulo` e `hero`:
@@ -97,7 +97,7 @@ Os URLs, o seletor de idioma, o `hreflang` e o sitemap são gerados a partir da 
 2. Cria `src/templates/nova.html` (copia `contactos.html` e simplifica; o texto multilinha usa `{{para texto}}`).
 3. Acrescenta `- pagina: nova` (com `label`) ao `menu` de `content/site.yaml`.
 
-A página fica em `/pt/nova/` e `/en/nova/`.
+A página fica em `/nova/` (idioma por defeito, na raiz) e `/en/nova/`.
 
 ### Sintaxe dos templates
 `{{campo}}` texto · `{{{html}}}` HTML gerado pelo build · `{{img campo preset=card}}` imagem · `{{hero}}` hero · `{{para campo}}` texto multilinha · `{{#each lista}}…{{/each}}` · `{{#if x}}…{{else}}…{{/if}}` · `{{> partial}}`. Se uma chave não existir no conteúdo, o build falha a indicar qual.
@@ -112,7 +112,7 @@ A página fica em `/pt/nova/` e `/en/nova/`.
 ```bash
 npm install
 npm run build        # gera dist/
-npx serve dist       # abre http://localhost:3000/pt/
+npx serve dist       # abre http://localhost:3000/
 ```
 (`netlify dev` também serve.) Para (re)gerar as imagens de teste: `npm run placeholders` (descarrega do placehold.co) ou `npm run placeholders -- --local` (gera sem rede).
 
@@ -121,7 +121,7 @@ npx serve dist       # abre http://localhost:3000/pt/
 2. Netlify → *Add new site* → *Import from Git* → escolhe o repositório. O `netlify.toml` já define o comando (`npm run build`), a pasta (`dist`) e o Node 22.
 3. Em `content/site.yaml`, define `url_base` com o endereço final (ex.: `https://meusite.netlify.app`) e faz push.
 4. **Ativa as notificações de deploy falhado** (Netlify → *Project configuration* → *Notifications* → *Deploy failed*): quem edita pelo CMS não vê o log do Netlify.
-5. A raiz (`/`) redireciona para o idioma por defeito (`dist/_redirects`, gerado a partir de `site.yaml`).
+5. O idioma por defeito é servido na raiz (`/`); os links antigos `/pt/...` redirecionam (301) para `/...` (`dist/_redirects`, gerado pelo build).
 
 ### Cache de imagens entre builds
 O build guarda os resultados em `.cache/images` (ignorado pelo Git; nomes com hash do conteúdo + definições). O `netlify.toml` usa o plugin `netlify-plugin-cache` para o Netlify preservar essa pasta entre builds. **Sem a cache** o build reprocessa todas as imagens: fica mais lento, mas continua correto. Se o plugin der problemas, podes removê-lo do `netlify.toml` sem perder funcionalidade.

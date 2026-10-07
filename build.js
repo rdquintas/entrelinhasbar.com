@@ -79,6 +79,12 @@ async function main() {
   report.flush();
 
   const { langs, defaultLang, langCodes } = env;
+  // Páginas extra não podem ter o nome de um idioma nem de uma pasta gerada (colidiriam na raiz).
+  const reserved = new Set([...langCodes, 'event', 'assets', 'images']);
+  const clash = Object.keys(raw.extras).find((n) => reserved.has(n));
+  if (clash) {
+    throw new BuildError(`content/${clash}.yaml: o nome "${clash}" está reservado (idiomas, event, assets, images). Mudar o nome do ficheiro.`);
+  }
   const site = { ...raw.site, logo: cleanImage(raw.site.logo), og_imagem: cleanImage(raw.site.og_imagem) };
   const siteUrl = String(raw.site.url_base || '').replace(/\/+$/, '');
   const abs = (p) => (siteUrl ? siteUrl + p : p);
@@ -149,8 +155,11 @@ async function main() {
   };
   const engine = createEngine({ templatesDir: DIR.templates, helpers, report });
 
-  const pageUrl = (key, l) => (key === 'index' ? `/${l}/` : `/${l}/${key}/`);
-  const eventUrl = (slug, l) => `/${l}/event/${slug}/`;
+  // O idioma por defeito vive na raiz (/agenda/); os restantes têm prefixo (/en/agenda/).
+  const langDir = (l) => (l === defaultLang ? '' : l);
+  const langPrefix = (l) => (langDir(l) ? `/${l}` : '');
+  const pageUrl = (key, l) => (key === 'index' ? `${langPrefix(l)}/` : `${langPrefix(l)}/${key}/`);
+  const eventUrl = (slug, l) => `${langPrefix(l)}/event/${slug}/`;
   const sitemap = []; // [{ paths: {pt, en} }]
   const counts = { pages: 0, events: 0 };
 
@@ -209,7 +218,7 @@ async function main() {
 
     const render = (tpl, ctx) => engine.render(tpl, ctx, { lang, defaultLang, langCodes });
     const emit = (relDir, tpl, ctx) => {
-      write(path.posix.join(lang, relDir, 'index.html'), render(tpl, ctx));
+      write(path.posix.join(langDir(lang), relDir, 'index.html'), render(tpl, ctx));
       counts.pages++;
     };
 
@@ -305,7 +314,8 @@ async function main() {
   }
 
   /* ---------- 5. Ficheiros gerados ---------- */
-  write('_redirects', `/  /${defaultLang}/  302\n`);
+  // Links antigos com o prefixo do idioma por defeito (/pt/...) passam para a raiz.
+  write('_redirects', `/${defaultLang}  /  301\n/${defaultLang}/*  /:splat  301\n`);
 
   if (siteUrl) {
     const urls = [];

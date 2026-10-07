@@ -37,4 +37,4 @@
 
 # HTML: o Netlify já serve por defeito "public, max-age=0, must-revalidate"
 # (o browser revalida sempre), por isso não é preciso definir aqui.
-# A raiz (/) -> idioma por defeito é gerada pelo build em dist/_redirects (a partir de site.yaml).
+# O idioma por defeito é servido na raiz; dist/_redirects (gerado pelo build) redireciona os links antigos /pt/... para /....
