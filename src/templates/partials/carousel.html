@@ -1,0 +1,94 @@
+												<div class="locoscroll-bg-animated wolf-core-elementor-row wolf-core-font-light elementor-element elementor-element-80ea7dc locoscroll-bg-zoomin e-flex e-con-boxed e-con e-parent e-lazyloaded locoscroll-bg-loaded locoscroll-animate section-appeared-once section-appeared"
+													data-bg-url="" data-bg-url-mobile="" data-bg-url-tablet=""
+													data-color-tone="dark" data-e-type="container"
+													data-element_type="container" data-font-skin="light"
+													data-id="80ea7dc" data-scroll=""
+													data-scroll-class="locoscroll-animate" data-scroll-css-progress=" "
+													data-scroll-custom-duration="" data-scroll-custom-offset=""
+													data-scroll-entrance-animation=""
+													data-settings='{"background_background":"classic"}'>
+													<div class="locoscroll-bg hero-slides-bg">
+														{{#each destaques}}
+														{{#if @first}}{{hero imagem_horizontal imagem_vertical class=hero-bg preset=slide}}{{else}}{{hero imagem_horizontal imagem_vertical class=hero-bg preset=slide eager=false}}{{/if}}
+														{{/each}}
+													</div>
+													<div class="e-con-inner">
+														<div class="hero-slider" aria-roledescription="carousel" aria-label="{{ui.destaques}}">
+															{{#each destaques}}
+															<div class="hero-slide{{#if @first}} is-active{{/if}}"
+																aria-roledescription="slide" aria-label="{{titulo}}"{{#if @first}}{{else}} aria-hidden="true"{{/if}}>
+																<div class="elementor-element elementor-element-b460e3f poize-big-text-yes elementor-widget elementor-widget-heading"
+																	data-e-type="widget" data-element_type="widget"
+																	data-id="b460e3f"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h1
+																			class="elementor-heading-title elementor-size-default">
+																			{{titulo}}</h1>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-5510bb0 animated-heading-yes elementor-widget elementor-widget-heading"
+																	data-e-type="widget" data-element_type="widget"
+																	data-id="5510bb0"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<h2
+																			class="elementor-heading-title elementor-size-default">
+																			{{#if cancelado}}{{ui.cancelado}} · {{/if}}{{data_fmt}} · {{hora}}</h2>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-7820833 animated-heading-yes elementor-widget elementor-widget-heading"
+																	data-e-type="widget" data-element_type="widget"
+																	data-id="7820833"
+																	data-widget_type="heading.default">
+																	<div class="elementor-widget-container">
+																		<div
+																			class="elementor-heading-title elementor-size-default">
+																			{{resumo}}</div>
+																	</div>
+																</div>
+																<div class="elementor-element elementor-element-6a7ec69 elementor-widget elementor-widget-spacer"
+																	data-e-type="widget" data-element_type="widget"
+																	data-id="6a7ec69" data-widget_type="spacer.default">
+																	<div class="elementor-widget-container">
+																		<div class="elementor-spacer">
+																			<div class="elementor-spacer-inner"></div>
+																		</div>
+																	</div>
+																</div>
+																<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-03216fe e-con-full locoscroll-yes e-flex e-con e-child e-lazyloaded"
+																	data-color-tone="" data-e-type="container"
+																	data-element_type="container" data-font-skin=""
+																	data-id="03216fe" data-scroll=""
+																	data-scroll-class="locoscroll-animate"
+																	data-scroll-css-progress=""
+																	data-scroll-custom-duration=""
+																	data-scroll-custom-offset=""
+																	data-scroll-entrance-animation="fade-in-up"
+																	data-scroll-speed="0">
+																	<div class="elementor-element elementor-element-2e6629d elementor-widget elementor-widget-button"
+																		data-e-type="widget" data-element_type="widget"
+																		data-id="2e6629d"
+																		data-widget_type="button.default">
+																		<div class="elementor-widget-container">
+																			<div
+																				class="wolf-core-button-container wolf-core-element">
+																				<a class="wolf-core-button wolf-core-button-size-xl theme-button-primary"
+																					href="{{url}}"><span
+																						class="wolf-core-button-text">{{ui.saber_mais}}</span></a></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															{{/each}}
+															{{#if destaques_multiplos}}
+															<div class="hero-dots" role="group" aria-label="{{ui.destaques}}">
+																{{#each destaques}}
+																<button type="button" class="hero-dot{{#if @first}} is-active{{/if}}"
+																	aria-label="{{ui.slide}} {{@number}}"{{#if @first}} aria-current="true"{{/if}}></button>
+																{{/each}}
+															</div>
+															{{/if}}
+														</div>
+													</div>
+												</div>

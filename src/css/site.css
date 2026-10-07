@@ -15,9 +15,9 @@
 /* Homepage hero carousel (js/hero-slider.js): stacked slides crossfade, dots at the bottom */
 .elementor-2 .elementor-element-80ea7dc{position:relative}
 .elementor-2 .elementor-element-80ea7dc>.e-con-inner{position:static}
-.hero-slides-bg img.hero-bg{opacity:0;z-index:0}
-.hero-slides-bg img.hero-bg.is-prev{opacity:1;z-index:1}
-.hero-slides-bg img.hero-bg.is-active{opacity:1;z-index:2;transition:opacity 1.2s ease}
+.hero-slides-bg .hero-bg{position:absolute;inset:0;opacity:0;z-index:0}
+.hero-slides-bg .hero-bg.is-prev{opacity:1;z-index:1}
+.hero-slides-bg .hero-bg.is-active{opacity:1;z-index:2;transition:opacity 1.2s ease}
 .hero-slider{display:grid;width:100%}
 .hero-slide{grid-area:1/1;align-self:end;display:flex;flex-direction:column;row-gap:var(--row-gap,20px);opacity:0;visibility:hidden;transition:opacity .5s ease,visibility 0s linear .5s}
 .hero-slide.is-active{opacity:1;visibility:visible;transition:opacity .8s ease .4s,visibility 0s}
@@ -25,7 +25,7 @@
 .hero-dot{width:12px;height:12px;padding:0;border:2px solid #fff;border-radius:50%;background:transparent;cursor:pointer;opacity:.7;transition:background-color .3s,opacity .3s}
 .hero-dot:hover{opacity:1}
 .hero-dot.is-active{background:#fff;opacity:1}
-@media (prefers-reduced-motion:reduce){.hero-slides-bg img.hero-bg,.hero-slide,.hero-slide.is-active{transition:none}}
+@media (prefers-reduced-motion:reduce){.hero-slides-bg .hero-bg,.hero-slide,.hero-slide.is-active{transition:none}}
 
 /* "Juno" headings and logo (Anton, see fonts.css). Juno has capitals only, hence the uppercase;
    the brushed texture is recreated with a small tiled mask,

@@ -26,7 +26,7 @@ eventos:
     hora: "18:00"
     imagem_horizontal: { ficheiro: evento-3-h.png, alt: { pt: "Roda de samba", en: "Samba circle" } }
     imagem_vertical: { ficheiro: evento-3-v.png }
-    destaque: false
+    destaque: true
     cancelado: false
     ativo: true
     youtube: ""

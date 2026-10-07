@@ -10,6 +10,9 @@
 	var current = 0;
 	var timer;
 
+	// Background images come from the build without state: activate the first one
+	if (bgs[0]) bgs[0].classList.add('is-active');
+
 	function show(index) {
 		index = (index + slides.length) % slides.length;
 		if (index === current) return;
