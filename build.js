@@ -34,7 +34,7 @@ const DIR = {
 const MAX_SLIDES = 5;
 /** Páginas do tema sem YAML próprio (src/templates/<nome>.html) e o respetivo título. */
 const THEME_PAGES = {
-  programming: 'Programming',
+  agenda: 'Calendário',
   event: 'Velvet Pulse + Guests',
   venue: 'Venue',
   aboutus: 'About Us',
@@ -317,7 +317,9 @@ async function main() {
 
   /* ---------- 5. Ficheiros gerados ---------- */
   // Links antigos com o prefixo do idioma por defeito (/pt/...) passam para a raiz.
-  write('_redirects', `/${defaultLang}  /  301\n/${defaultLang}/*  /:splat  301\n`);
+  // A antiga página /programming/ passou a /agenda/.
+  const oldPages = langs.map((l) => `${langPrefix(l.codigo)}/programming/*  ${pageUrl('agenda', l.codigo)}  301\n`).join('');
+  write('_redirects', `/${defaultLang}  /  301\n/${defaultLang}/*  /:splat  301\n${oldPages}`);
 
   if (siteUrl) {
     const urls = [];
