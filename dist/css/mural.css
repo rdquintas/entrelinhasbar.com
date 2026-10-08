@@ -1,0 +1,74 @@
+/* Mural — grelha Masonry fluida (inspirada em masonry.desandro.com, demo horizontalOrder).
+   Espaçamento igual ao "Meet Our Artists" do index (.grid-padding-yes): cada item tem
+   padding var(--grid-padding) e a grelha compensa com margem negativa. */
+
+/* Borda de tinta sobre o fundo do hero (como .elementor-element-e74f2bd no index). */
+.mural-hero-border { display: flex; margin-top: -94px; position: relative; pointer-events: none; }
+.mural-hero-border img { display: block; width: 100%; height: auto; }
+
+.mural {
+  --mural-cols: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 16px 80px;
+  /* Fundo a toda a largura do ecrã, mantendo o conteúdo limitado a 1400px. */
+  background: #f3f3f3;
+  box-shadow: 0 0 0 100vmax #f3f3f3;
+  clip-path: inset(0 -100vmax);
+}
+@media (min-width: 700px) { .mural { --mural-cols: 3; padding-left: 24px; padding-right: 24px; } }
+@media (min-width: 1100px) { .mural { --mural-cols: 4; } }
+
+.mural__grid { position: relative; margin: 0 calc(var(--grid-padding, 10px) * -1); }
+.mural__grid::after { content: ""; display: block; clear: both; }
+
+.mural__sizer,
+.mural__item { width: calc(100% / var(--mural-cols)); }
+.mural__sizer { height: 0; margin: 0; padding: 0; }
+.mural__item { float: left; margin: 0; padding: var(--grid-padding, 10px); }
+.mural__item img { display: block; width: 100%; height: auto; }
+
+/* Entrada "fade-in-up" como no index (.items-entrance-animation-fade-in-up), item a item ao fazer scroll. */
+.mural__item {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity .75s var(--ease), transform .75s var(--ease);
+}
+.mural__item.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .mural__item { opacity: 1; transform: none; transition: none; }
+}
+
+/* Cantos arredondados como nas imagens do index (tema: --theme-border-radius). */
+.mural__abrir,
+.mural__yt,
+.mural__iframe {
+  border-radius: var(--theme-border-radius);
+}
+.mural__abrir,
+.mural__yt {
+  display: block; width: 100%; padding: 0; border: 0; background: none;
+  cursor: zoom-in; position: relative; overflow: hidden;
+}
+.mural__abrir img { transition: transform .4s ease; }
+.mural__abrir:hover img,
+.mural__abrir:focus-visible img { transform: scale(1.03); }
+.mural__yt { cursor: pointer; aspect-ratio: 16 / 9; background: #000; }
+.mural__yt img { height: 100%; object-fit: cover; }
+.mural__play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 3.5rem; height: 3.5rem; border-radius: 50%; background: rgba(0, 0, 0, .65); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem; padding-left: .2rem;
+}
+.mural__iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.mural__sentinel { height: 1px; }
+.mural__noscript { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: .5rem; padding: 0; list-style: none; }
+.mural__noscript img { display: block; width: 100%; height: auto; }
+
+.mural-lightbox { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; overflow: visible; }
+.mural-lightbox::backdrop { background: rgba(0, 0, 0, .88); }
+.mural-lightbox__conteudo img { display: block; max-width: 96vw; max-height: 92vh; width: auto; height: auto; margin: 0 auto; }
+.mural-lightbox__fechar {
+  position: absolute; top: -2.5rem; right: 0; width: 2.25rem; height: 2.25rem; font-size: 1.5rem; line-height: 1;
+  background: #fff; color: #000; border: 0; border-radius: 50%; cursor: pointer; padding: 0;
+}

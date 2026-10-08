@@ -1,0 +1,15 @@
+
+.logo-text{
+	font-family:Juno;
+	font-weight:400;
+}
+
+.elementor embed, .elementor iframe, .elementor object, .elementor video{
+	object-fit:cover;
+}
+
+.menu-style-solid:not(.menu-layout-top-right-floating).breakpoint .site-header, 
+.menu-style-solid-light:not(.menu-layout-top-right-floating).breakpoint .site-header, 
+.menu-style-solid-dark:not(.menu-layout-top-right-floating).breakpoint .site-header{
+    height:var(--mobile-bar-height)
+}

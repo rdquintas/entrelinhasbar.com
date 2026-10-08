@@ -1,0 +1,87 @@
+/* Local additions for the static build. Theme CSS is left untouched; put changes here. */
+
+/* About page: static replacement for the captured Revolution Slider ("history" timeline) */
+.history-timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 3rem;color:var(--foreground-color,#151515)}
+.history-item{border-top:1px solid currentColor;padding:1.5rem 0 3rem}
+.history-year{display:block;font-family:"neue-haas-grotesk-display",sans-serif;font-weight:700;font-size:clamp(3rem,6vw,5.5rem);line-height:1;letter-spacing:-.02em;margin-bottom:1rem}
+.history-title{font-family:"neue-haas-grotesk-display",sans-serif;font-weight:500;font-size:1.5rem;margin:0 0 .75rem}
+.history-text{margin:0;max-width:34ch;line-height:1.5}
+@media (max-width:1024px){.history-timeline{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.history-timeline{grid-template-columns:1fr}}
+
+/* Disable the theme custom cursor (circle + hover labels like "Discover artist"); use the native pointer */
+.cursor,.cursor-text{display:none!important}
+
+/* Homepage "Meet Our Artists": the grid no longer uses Isotope (masonry-container removed in index.html);
+   the theme's fade-in-up uses "transition:all", so only animate the entrance properties */
+.artist-items.items-entrance-animation-fade-in-up .entry{transition-property:opacity,transform!important}
+
+/* Homepage hero carousel (js/hero-slider.js): stacked slides crossfade, dots at the bottom */
+.elementor-2 .elementor-element-80ea7dc{position:relative}
+.elementor-2 .elementor-element-80ea7dc>.e-con-inner{position:static}
+.hero-slides-bg .hero-bg{position:absolute;inset:0;opacity:0;z-index:0}
+.hero-slides-bg .hero-bg.is-prev{opacity:1;z-index:1}
+.hero-slides-bg .hero-bg.is-active{opacity:1;z-index:2;transition:opacity 1.2s ease}
+.hero-slider{display:grid;width:100%}
+.hero-slide{grid-area:1/1;align-self:end;display:flex;flex-direction:column;row-gap:var(--row-gap,20px);opacity:0;visibility:hidden;transition:opacity .5s ease,visibility 0s linear .5s}
+.hero-slide.is-active{opacity:1;visibility:visible;transition:opacity .8s ease .4s,visibility 0s}
+.hero-dots{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);display:flex;gap:12px;z-index:2}
+.hero-dot{width:12px;height:12px;padding:0;border:2px solid #fff;border-radius:50%;background:transparent;cursor:pointer;opacity:.7;transition:background-color .3s,opacity .3s}
+.hero-dot:hover{opacity:1}
+.hero-dot.is-active{background:#fff;opacity:1}
+/* The torn-paper edge below the hero overlaps it (negative margin): let clicks through to the dots */
+.elementor-2 .elementor-element.elementor-element-e74f2bd{pointer-events:none}
+/* Hero title: undo the theme's slabText (fixed lines, nowrap, per-line font size) so the title
+   wraps between words, with a fluid size and balanced lines (mainly for mobile). */
+.elementor-2 .hero-slide .elementor-element.elementor-element-b460e3f .elementor-heading-title{font-size:clamp(2.5rem,10vw,7.8rem);line-height:.95;white-space:normal;word-break:normal;overflow-wrap:normal;hyphens:none;text-wrap:balance}
+.hero-slide .elementor-heading-title .slabtext{display:inline!important;font-size:1em!important;white-space:normal!important;word-spacing:inherit!important;letter-spacing:inherit!important}
+@media (prefers-reduced-motion:reduce){.hero-slides-bg .hero-bg,.hero-slide,.hero-slide.is-active{transition:none}}
+
+/* "Juno" headings and logo (Anton, see fonts.css). Juno has capitals only, hence the uppercase;
+   the brushed texture is recreated with a small tiled mask,
+   sized in em so it scales with the text. */
+.logo-text,.poize-big-text-yes .elementor-heading-title{-webkit-mask-image:url(../images/grunge-mask.avif);mask-image:url(../images/grunge-mask.avif);-webkit-mask-size:5em auto;mask-size:5em auto;text-transform:uppercase}
+
+/* Header logo (src/images/logo.avif) in place of the theme's text logo */
+.logo-link img.logo-brand{display:block;width:auto;height:70px;max-width:none}
+@media (max-width:1024px){.logo-link img.logo-brand{height:48px}}
+
+/* Header and footer logos swap to logo_v3.png on hover (the second <img> sits on top of the first) */
+.logo-link:has(.logo-hover){position:relative;display:inline-block}
+.logo-link img{transition:opacity .2s}
+.logo-link img.logo-hover{position:absolute;inset:0;width:100%;height:100%;opacity:0}
+.logo-link:hover img:not(.logo-hover),.logo-link:focus-visible img:not(.logo-hover){opacity:0}
+.logo-link:hover img.logo-hover,.logo-link:focus-visible img.logo-hover{opacity:1}
+
+/* Footer: Social on the left, logo centred in the middle, empty column on the right for balance */
+.elementor-115 .elementor-element-74b303b>.e-con-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem}
+.elementor-115 .elementor-element-14cb72c{--width:auto}
+.footer-logo{display:flex;justify-content:center}
+.footer-logo-img{display:block;width:260px;max-width:100%;height:auto}
+/* Footer credit ("Designed by …") centred, full width */
+.elementor-115 .elementor-element.elementor-element-c64db47{--width:100%}
+.elementor-115 .elementor-element.elementor-element-53bad13{text-align:center}
+@media (max-width:767px){
+  .elementor-115 .elementor-element-74b303b>.e-con-inner{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .footer-logo{order:-1}
+  .footer-spacer{display:none}
+}
+
+/* Agenda: "Upcoming Events" section copied from the homepage. Its Elementor rules are scoped to .elementor-2 (homepage), so repeat them for .elementor-3366 (agenda) */
+.elementor-3366 .elementor-element.elementor-element-e94778d{--display:flex;--padding-top:100px;--padding-bottom:100px;--padding-left:10px;--padding-right:10px;}
+.elementor-3366 .elementor-element.elementor-element-2605d55{text-align:start;}
+.elementor-3366 .elementor-element.elementor-element-814a331 .bg-overlay{opacity:0.4!important;}
+.e-con>.e-con-inner.agenda-events-inner{padding-inline-start:100px;padding-inline-end:100px}
+@media (max-width:767px){.e-con>.e-con-inner.agenda-events-inner{padding-inline-start:0;padding-inline-end:0}}
+/* Vídeo do YouTube na página do evento (16:9, largura total da coluna) */
+.event-video{margin-top:30px;aspect-ratio:16/9}
+.event-video iframe{display:block;width:100%;height:100%;border:0}
+/* Evento cancelado: faixa com "CANCELADO"/"CANCELLED" a vermelho sobre a imagem (agenda e página do evento) */
+.event-accordion-img,.event-thumbnail>a{position:relative;display:block}
+.cancelado-banner{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:2;padding:.35em 1em;background:rgba(255,255,255,.9);color:#d00000;font-weight:700;font-size:clamp(1.25rem,3vw,2rem);letter-spacing:.12em;line-height:1.2;text-align:center;text-transform:uppercase;pointer-events:none}
+.cancelado-banner--grande{font-size:clamp(2rem,7vw,5rem)}
+/* Agenda: o tema põe cursor:pointer em toda a linha do evento, mas só o botão de seta abre/fecha; retirar a "mãozinha" da data/tipo */
+.entry-event-accordion-inner{cursor:auto}
+.entry-event-accordion--btn{cursor:pointer}
+/* Página inicial: secção do container 1f78caa com fundo #f3f3f3 */
+.elementor-2 .elementor-element.elementor-element-1f78caa{background-color:#f3f3f3}

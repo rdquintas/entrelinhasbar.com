@@ -6,23 +6,59 @@ hero:
 
 # Sem limite de itens. Cada item tem OU "imagem" OU "youtube". A ordem no site é aleatória.
 itens:
-  - imagem: { ficheiro: mural-01.png }
-  - imagem: { ficheiro: mural-02.png }
-  - imagem: { ficheiro: mural-03.png }
-  - imagem: { ficheiro: mural-04.png }
-  - youtube: "https://www.youtube.com/watch?v=jNQXAC9IVRw"
-  - imagem: { ficheiro: mural-05.png }
-  - imagem: { ficheiro: mural-06.png }
-  - imagem: { ficheiro: mural-07.png }
-  - imagem: { ficheiro: mural-08.png }
-  - imagem: { ficheiro: mural-09.png }
-  - imagem: { ficheiro: mural-10.png }
-  - imagem: { ficheiro: mural-11.png }
-  - youtube: "jNQXAC9IVRw"
-  - imagem: { ficheiro: mural-12.png }
-  - imagem: { ficheiro: mural-13.png }
-  - imagem: { ficheiro: mural-14.png }
-  - imagem: { ficheiro: cheerful-bearded-man-with-sunglasses-at-outdoor-event-450x500.jpg }
-  - imagem: { ficheiro: casual-contemporary-portrait-scaled-335x446.jpg }
-  - imagem: { ficheiro: 632254843-450x500.jpg }
-  
+  - imagem: { ficheiro: m01.jpg }
+  - imagem: { ficheiro: m02.jpg }
+  - imagem: { ficheiro: m03.jpg }
+  - imagem: { ficheiro: m04.jpg }
+  - imagem: { ficheiro: m05.jpg }
+  - imagem: { ficheiro: m06.jpg }
+  - imagem: { ficheiro: m07.jpg }
+  - imagem: { ficheiro: m08.jpg }
+  - imagem: { ficheiro: m09.jpg }
+  - imagem: { ficheiro: m10.jpg }
+  - imagem: { ficheiro: m11.jpg }
+  - imagem: { ficheiro: m12.jpg }
+  - imagem: { ficheiro: m13.jpg }
+  - imagem: { ficheiro: m14.jpg }
+  - imagem: { ficheiro: m15.jpg }
+  - imagem: { ficheiro: m16.jpg }
+  - imagem: { ficheiro: m17.jpg }
+  - imagem: { ficheiro: m18.jpg }
+  - imagem: { ficheiro: m19.jpg }
+  - imagem: { ficheiro: m20.jpg }
+  - imagem: { ficheiro: m21.jpg }
+  - imagem: { ficheiro: m22.jpg }
+  - imagem: { ficheiro: m23.jpg }
+  - imagem: { ficheiro: m24.jpg }
+  - imagem: { ficheiro: m25.jpg }
+  - imagem: { ficheiro: m26.jpg }
+  - imagem: { ficheiro: m27.jpg }
+  - imagem: { ficheiro: m28.jpg }
+  - imagem: { ficheiro: m29.jpg }
+  - imagem: { ficheiro: m30.jpg }
+  - imagem: { ficheiro: m31.jpg }
+  - imagem: { ficheiro: m32.jpg }
+  - imagem: { ficheiro: m33.jpg }
+  - imagem: { ficheiro: m34.jpg }
+  - imagem: { ficheiro: m35.jpg }
+  - imagem: { ficheiro: m36.jpg }
+  - imagem: { ficheiro: m37.jpg }
+  - imagem: { ficheiro: m38.jpg }
+  - imagem: { ficheiro: m39.jpg }
+  - imagem: { ficheiro: m40.jpg }
+  - imagem: { ficheiro: m41.jpg }
+  - imagem: { ficheiro: m42.jpg }
+  - imagem: { ficheiro: m43.jpg }
+  - imagem: { ficheiro: m44.jpg }
+  - imagem: { ficheiro: m45.jpg }
+  - imagem: { ficheiro: m46.jpg }
+  - imagem: { ficheiro: m47.jpg }
+  - imagem: { ficheiro: m48.jpg }
+  - imagem: { ficheiro: m49.jpg }
+  - imagem: { ficheiro: m50.jpg }
+  - imagem: { ficheiro: m51.jpg }
+  - imagem: { ficheiro: m52.jpg }
+  - imagem: { ficheiro: m53.jpg }
+
+                              
+
