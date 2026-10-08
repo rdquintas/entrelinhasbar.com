@@ -6,9 +6,9 @@ seo:
     pt: "Fotografias e vídeos."
     en: "Photos and videos."
 hero:
-  horizontal:
+  img_horizontal:
     ficheiro: hero-mural-h.png
-  vertical:
+  img_vertical:
     ficheiro: hero-mural-v.png
 
 # Sem limite de itens. Cada item tem OU "imagem" OU "youtube". A ordem no site é aleatória.

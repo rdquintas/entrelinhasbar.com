@@ -1,95 +1,72 @@
-titulo:
-  pt: "Agenda"
-  en: "Events"
-seo:
-  descricao:
-    pt: "Próximos eventos."
-    en: "Upcoming events."
-hero:
-  horizontal:
-    ficheiro: hero-agenda-h.png
-  vertical:
-    ficheiro: hero-agenda-v.png
-
 # Os eventos podem estar por qualquer ordem: o site ordena-os por data e hora.
 # Os eventos com data anterior a hoje são removidos desta lista no build (e as suas imagens também).
 # Apagar o evento desta lista remove-o e remove também as suas imagens do repositório.
 # O endereço da página do evento (ex.: /event/tuba-ao-vivo/ ou /en/event/tuba-ao-vivo/) é gerado a partir do título.
 eventos:
-  - titulo: { pt: "Roda de Samba de Primavera", en: "Spring Samba Circle" }
+  - titulo: { pt: "The Invisible Tuba", en: "The Invisible Tuba" }
     descritivo:
-      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n\nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n\nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      pt: "Nascidos no coração da cena musical de Lisboa por volta de 2017, os THE INVISIBLE TUBA têm conquistado o público de forma consistente, estabelecendo-se como uma referência vibrante no panorama musical de Lisboa. Unindo músicos de Portugal, Venezuela, EUA, Reino Unido e Itália, a banda tem atraído uma base diversificada de seguidores, desde aficionados do jazz tradicional a entusiastas da cultura vintage, através de uma musicalidade irrepreensível e de uma abordagem contagiante ao repertório do swing clássico."
+      en: "Formed around 2017 in the heart of Lisbon’s music scene, THE INVISIBLE TUBA has steadily grown in popularity, establishing themselves as a vibrant fixture in Lisbon’s music scene. Bringing together musicians from Portugal, Venezuela, the United Kingdom, USA, and Italy, they’ve attracted a wide variety of fans, from traditional jazz aficionados to vintage dance enthusiasts, with the strength of their musicianship and their infectious approach to the classic swing catalog."
     tipo: concerto
     data: "2027-03-20"
     hora: "18:00"
-    imagem_horizontal: { ficheiro: evento-3-h.png }
-    imagem_vertical: { ficheiro: evento-3-v.png }
+    imagem_horizontal: { ficheiro: tuba_h.png }
+    imagem_vertical: { ficheiro: tuba_v.png }
     destaque: true
     cancelado: false
     link_bilhetes: "https://www.ticketline.pt/"
-    youtube: "https://www.youtube.com/watch?v=JP8iTiSx-kU&list=RDJP8iTiSx-kU&start_radio=1"
+    youtube: "https://youtube.com/shorts/AcbqJxNbXdg?feature=shared"
     links:
-      - nome: { pt: "Bilhetes", en: "Tickets" }
-        url: "https://exemplo.com/bilhetes"
-      - nome: { pt: "Como chegar", en: "Getting there" }
-        url: "https://exemplo.com/mapa"
+      - nome: { pt: "Instagram", en: "Instagram" }
+        url: "https://www.instagram.com/theinvisibletuba/"
+      - nome: { pt: "Youtube", en: "Youtube" }
+        url: "https://www.youtube.com/@theinvisibletuba4630"
+      - nome: { pt: "Spotify", en: "Spotify" }
+        url: "https://open.spotify.com/artist/2CqJyOnOEm6hm7QGs2llZ2?si=qKnEiOglRLGIvY5vBNmFNg/"
 
-  - titulo: { pt: "Workshop de Cozinha com José Barman", en: "Cooking Workshop with José Barman" }
+  - titulo: { pt: "Workshop de cozinha", en: "Cooking Workshop" }
     descritivo:
-      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      pt: "Vem aprender a fazer bolos."
+      en: ""
     tipo: workshop
-    data: "2026-10-24"
-    hora: "15:00"
-    imagem_horizontal: { ficheiro: evento-2-h.png }
-    imagem_vertical: { ficheiro: evento-2-v.png }
-    destaque: true
-    cancelado: true
-    link_bilhetes: ""
-    youtube: ""
-    links: []
-
-  - titulo: { pt: "Noite de Fados", en: "Fado Night" }
-    descritivo:
-      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
-      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
-    tipo: concerto
     data: "2026-12-12"
     hora: "22:00"
-    imagem_horizontal: { ficheiro: evento-5-h.png }
-    destaque: false
+    imagem_horizontal: { ficheiro: workshop_h.png }
+    destaque: true
     cancelado: false
     link_bilhetes: ""
     links: []
 
-  - titulo: { pt: "Ensaio Aberto (rascunho)", en: "Open Rehearsal (draft)" }
+  - titulo: { pt: "Música Mariachi", en: "Mariachi Music" }
     descritivo:
-      pt: "Evento escondido: continua no YAML mas não aparece em lado nenhum."
-      en: "Hidden event: stays in the YAML but does not appear anywhere."
-    tipo: outro
-    data: "2026-12-01"
-    hora: "19:00"
-    imagem_horizontal: { ficheiro: evento-4-h.png }
-    imagem_vertical: { ficheiro: evento-4-v.png }
-    destaque: false
+      pt: "Em “El Son de la Negra / Guadalajara” do Mariachi Vargas de Tecalitlán, combinam-se duas peças representativas do mariachi tradicional, destacando a essência cultural do regional mexicano"
+      en: "In “El Son de la Negra / Guadalajara” by Mariachi Vargas de Tecalitlán, two representative pieces of traditional mariachi are combined, highlighting the cultural essence of regional Mexican music."
+    tipo: concerto
+    data: "2026-12-25"
+    hora: "21:30"
+    imagem_horizontal: { ficheiro: mariachi_h.png }
+    imagem_vertical: { ficheiro: mariachi_v.png }
+    destaque: true
     cancelado: false
     link_bilhetes: ""
-
-  - titulo: { pt: "Masterclass de Percussão", en: "Percussion Masterclass" }
-    descritivo:
-      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis nostrud exercitation ullamco laboris nisi ut aliquip."
-      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis nostrud exercitation ullamco laboris nisi ut aliquip."
-    tipo: workshop
-    data: "2026-11-02"
-    hora: "10:00"
-    imagem_horizontal: { ficheiro: evento-6-h.png }
-    imagem_vertical: { ficheiro: evento-6-v.png }
-    destaque: false
-    cancelado: false
-    link_bilhetes: ""
+    youtube: "https://www.youtube.com/watch?v=9J9YxWNXS4c&list=RD9J9YxWNXS4c&start_radio=1"
     links:
       - nome: { pt: "Inscrições", en: "Sign up" }
         url: "https://exemplo.com/inscricoes"
       - nome: { pt: "Regulamento", en: "Rules" }
         url: "https://exemplo.com/regulamento"
+
+  - titulo: { pt: "Tony Marcelino", en: "Tony Marcelino" }
+    descritivo:
+      pt: "Tony Marcelino e os Afinados estrearam-se ontem no café central. O baterista perdeu as baquetas, o baixista tocou de olhos fechados para não ver a plateia e o Tony cantou tudo em playback... desafinado. Valia 5 euros o bilhete, mas o público pagou 10 só para eles pararem. Um sucesso!"
+      en: "Tony Marcelino & The Tuned-Ups debuted yesterday at the local pub. The drummer lost his sticks, the bassist played with eyes shut to avoid the crowd, and Tony lip-synced completely off-key. Tickets were €5, but people paid €10 just to make them stop. An absolute hit!"
+    tipo: concerto
+    data: "2026-11-02"
+    hora: "22:00"
+    imagem_horizontal: { ficheiro: barrigas_h.png }
+    imagem_vertical: { ficheiro: barrigas_v.png }
+    destaque: false
+    cancelado: true
+    link_bilhetes: ""
+    youtube: "https://www.youtube.com/watch?v=HohwjP_XCnk&list=RDHohwjP_XCnk&start_radio=1&pp=ygUSbmF0YWxpYSBkZSBhbmRyYWRloAcB"
+    links:      

@@ -81,3 +81,5 @@
 /* Agenda: o tema põe cursor:pointer em toda a linha do evento, mas só o botão de seta abre/fecha; retirar a "mãozinha" da data/tipo */
 .entry-event-accordion-inner{cursor:auto}
 .entry-event-accordion--btn{cursor:pointer}
+/* Página inicial: secção do container 1f78caa com fundo #f3f3f3 */
+.elementor-2 .elementor-element.elementor-element-1f78caa{background-color:#f3f3f3}

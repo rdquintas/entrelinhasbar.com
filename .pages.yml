@@ -59,21 +59,28 @@ components:
     label: Imagem principal (hero)
     description: A horizontal aparece em computador/tablet; a vertical aparece em telemóvel. Se não houver vertical, usa-se a horizontal.
     fields:
-      - name: horizontal
+      - name: img_horizontal
         label: Horizontal (obrigatória)
-        type: object
-        fields:
-          - name: ficheiro
-            label: Imagem
-            type: image
-            required: true
-      - name: vertical
+        component: imagem
+      - name: img_vertical
         label: Vertical (opcional)
-        type: object
-        fields:
-          - name: ficheiro
-            label: Imagem
-            type: image
+        component: imagem_opcional
+
+  # Hero da página inicial: imagens + título (só aparece quando não há eventos em destaque)
+  hero_titulo:
+    type: object
+    label: Imagem principal (hero)
+    description: Só aparece quando não há eventos em destaque. A horizontal aparece em computador/tablet; a vertical aparece em telemóvel. Se não houver vertical, usa-se a horizontal.
+    fields:
+      - name: img_horizontal
+        label: Horizontal (obrigatória)
+        component: imagem
+      - name: img_vertical
+        label: Vertical (opcional)
+        component: imagem_opcional
+      - name: titulo
+        label: Título sobre a imagem
+        component: texto
 
   seo:
     type: object
@@ -98,13 +105,12 @@ content:
     path: content/index.yaml
     description: Hero por defeito, galeria de imagens e vídeo. Os eventos marcados como destaque (em Agenda) substituem o hero.
     fields:
-      - name: titulo
-        label: Título da página
-        component: texto
-      - name: seo
-        component: seo
       - name: hero
-        component: hero
+        component: hero_titulo
+      - name: historia
+        label: A nossa história
+        description: Separar os parágrafos com uma linha em branco.
+        component: texto_longo
       - name: imagens
         label: Galeria (até 10 imagens)
         type: object
@@ -128,13 +134,6 @@ content:
     path: content/agenda.yaml
     description: Os eventos podem estar por qualquer ordem; o site ordena-os por data e hora.
     fields:
-      - name: titulo
-        label: Título da página
-        component: texto
-      - name: seo
-        component: seo
-      - name: hero
-        component: hero
       - name: eventos
         label: Eventos
         description: >-

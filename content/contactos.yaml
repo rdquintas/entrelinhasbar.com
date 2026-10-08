@@ -6,9 +6,9 @@ seo:
     pt: "Como falar connosco."
     en: "How to reach us."
 hero:
-  horizontal:
+  img_horizontal:
     ficheiro: hero-contactos-h.png
-  vertical:
+  img_vertical:
     ficheiro: hero-contactos-v.png
 
 telefone: "+351219574276"

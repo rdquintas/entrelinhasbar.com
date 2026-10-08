@@ -1,18 +1,25 @@
-titulo:
-  pt: "Bem-vindo"
-  en: "Welcome"
-seo:
-  descricao:
-    pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-
 # Hero por defeito (só aparece quando não há eventos em destaque).
 hero:
-  horizontal:
-    ficheiro: hero-index-h.png
-  vertical:
-    ficheiro: hero-index-v.png
+  img_horizontal:
+    ficheiro: hero_h.png
+  img_vertical:
+    ficheiro: hero_v.png
+  titulo: { pt: "Bistrô Bar Entrelinhas", en: "Bistrô Bar Entrelinhas" }
 
+historia:
+  pt: |-
+    Fundado no coração de Alverca, o bar Entrelinhas nasceu do sonho partilhado da Ana e do Luís em criar um espaço acolhedor onde a comunidade se pudesse reunir. O casal transformou uma antiga mercearia de bairro num ponto de encontro moderno, combinando paredes de tijolo burro com iluminação quente para proporcionar um ambiente descontraído após um longo dia de trabalho.
+    
+    Desde a sua abertura, o espaço destacou-se pela oferta criteriosa de cervejas artesanais e pelos petiscos caseiros preparados com receitas de família. A Ana assumiu a gestão da casa com o seu sorriso contagiante, enquanto o Luís ficou encarregue da seleção musical e das noites de música ao vivo, transformando o bar numa referência para os amantes de boa acústica na região.
+    
+    Hoje, o Entrelinhas é muito mais do que um simples bar em Alverca; tornou-se num ponto de encontro entre gerações. Entre conversas cruzadas e brindes ao fim de semana, a história da Ana e do Luís continua a escrever-se em cada canto, provando que os melhores momentos da vida acontecem sempre entre as linhas do quotidiano.
+  en: |-
+    Founded in the heart of Alverca, the Entrelinhas bar was born from Ana and Luís's shared dream of creating a cozy space where the community could gather. The couple transformed an old neighborhood grocery store into a modern hangout spot, blending exposed brick walls with warm lighting to offer a relaxed setting after a long day of work.
+    
+    Since its opening, the venue has stood out for its carefully curated craft beer selection and homemade tapas prepared from family recipes. Ana took charge of management with her welcoming smile, while Luís took care of the music selection and live performance nights, turning the bar into a local benchmark for good acoustics.
+    
+    Today, Entrelinhas is much more than a simple bar in Alverca; it has become a cross-generational meeting point. Between lively conversations and weekend toasts, Ana and Luís's story continues to unfold in every corner, proving that life's best moments always happen between the lines of everyday routine.
+  
 # Até 10 imagens (galeria da página inicial).
 imagens:
   - { ficheiro: galeria-01.png }

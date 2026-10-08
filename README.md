@@ -64,7 +64,7 @@ imagem_horizontal:
 O `alt` descreve a imagem para quem não a vê (recomendado). Nos eventos, se faltar, usa-se o título. **Nunca** referencies ficheiros `.avif` gerados: o build decide os nomes finais.
 
 ### Hero (todas as páginas)
-Cada página tem `hero.horizontal` (computador/tablet) e `hero.vertical` (telemóvel, até 768 px). Se não houver vertical, usa-se a horizontal.
+Cada página tem `hero.img_horizontal` (computador/tablet) e `hero.img_vertical` (telemóvel, até 768 px). Se não houver vertical, usa-se a horizontal. Na página inicial, `hero.titulo` é o título mostrado sobre a imagem quando não há eventos em destaque.
 
 ## Ajustar a qualidade e as larguras das imagens
 No topo de `lib/images.js` há um único objeto `CONFIG`:
@@ -91,7 +91,7 @@ O idioma por defeito (`idioma_padrao`) fica na raiz (`/`, `/agenda/`…); os out
    ```yaml
    titulo: { pt: "Sobre nós", en: "About us" }
    hero:
-     horizontal: { ficheiro: sobre.jpg, alt: { pt: "…", en: "…" } }
+     img_horizontal: { ficheiro: sobre.jpg, alt: { pt: "…", en: "…" } }
    texto: { pt: "…", en: "…" }
    ```
 2. Cria `src/templates/nova.html` (copia `contactos.html` e simplifica; o texto multilinha usa `{{para texto}}`).

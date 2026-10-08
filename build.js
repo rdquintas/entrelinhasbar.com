@@ -149,7 +149,7 @@ async function main() {
   allContent.forEach((d) => content.collectImageNames(d).forEach((n) => refs.add(n)));
 
   const ogNames = new Set();
-  const siteOg = site.og_imagem || cleanImage(raw.index.hero && raw.index.hero.horizontal);
+  const siteOg = site.og_imagem || cleanImage(raw.index.hero && raw.index.hero.img_horizontal);
   if (siteOg) ogNames.add(imageName(siteOg.ficheiro));
   events.forEach((e) => ogNames.add(imageName(e.imagem_horizontal.ficheiro)));
   // Thumbs (495x378) da imagem horizontal, só para a listagem da página agenda.
@@ -192,8 +192,8 @@ async function main() {
       });
     },
     hero(e, h) {
-      const hp = e.pos[0] || 'hero.horizontal';
-      const vp = e.pos.length ? e.pos[1] : 'hero.vertical';
+      const hp = e.pos[0] || 'hero.img_horizontal';
+      const vp = e.pos.length ? e.pos[1] : 'hero.img_vertical';
       const hv = h.get(hp);
       const hn = imgOf(hv);
       if (!hn) throw h.fail(`imagem "${hp}" em falta para o hero.`);
@@ -269,7 +269,11 @@ async function main() {
       const d = dataOf(key);
       return {
         ...d,
-        hero: { horizontal: cleanImage(d.hero && d.hero.horizontal), vertical: cleanImage(d.hero && d.hero.vertical) },
+        hero: {
+          ...d.hero,
+          img_horizontal: cleanImage(d.hero && d.hero.img_horizontal),
+          img_vertical: cleanImage(d.hero && d.hero.img_vertical),
+        },
       };
     };
     const seoOf = (key) => ({

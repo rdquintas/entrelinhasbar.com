@@ -18,7 +18,7 @@
 							{{#if destaques}}
 							{{> carousel}}
 							{{else}}
-							{{hero}}
+							{{> hero-default}}
 							{{/if}}
 							<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-e74f2bd e-con-full e-flex e-con e-parent e-lazyloaded"
 								data-color-tone="" data-e-type="container" data-element_type="container"
@@ -46,18 +46,11 @@
 										data-widget_type="heading.default">
 										<div class="elementor-widget-container">
 											<span class="elementor-heading-title elementor-size-default"
-												data-animation="subtitle">CREATORS OF TOMORROW’S
-												SOUND</span>
+												data-animation="subtitle">Entrelinhas Bistô Bar</span>
 										</div>
 									</div>
-									{{#lang pt}}
-									<h2>A nossa história</h2>
-									<p>Texto longo em português…</p>
-									{{/lang}}
-									{{#lang en}}
-									<h2>Our story</h2>
-									<p>Long English text…</p>
-									{{/lang}}
+									<h2>{{#lang pt}}A nossa história{{/lang}}{{#lang en}}Our story{{/lang}}</h2>
+									{{para historia}}
 									<div class="elementor-element elementor-element-c366831 animated-heading-yes elementor-widget elementor-widget-heading"
 										data-e-type="widget" data-element_type="widget" data-id="c366831"
 										data-widget_type="heading.default">
@@ -343,23 +336,6 @@
 								<div class="e-con-inner">
 								</div>
 							</div>
-							<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-c82beb3 e-con-full e-flex e-con e-parent e-lazyloaded"
-								data-color-tone="" data-e-type="container" data-element_type="container"
-								data-font-skin="" data-id="c82beb3" data-scroll-class="locoscroll-animate"
-								data-scroll-css-progress="" data-scroll-custom-duration="" data-scroll-custom-offset=""
-								data-scroll-entrance-animation="">
-								<div class="elementor-element elementor-element-e06d4ef e-transform elementor-widget elementor-widget-image"
-									data-e-type="widget" data-element_type="widget" data-id="e06d4ef"
-									data-settings='{"_transform_rotateZ_effect":{"unit":"px","size":180,"sizes":[]},"_transform_rotateZ_effect_tablet":{"unit":"deg","size":"","sizes":[]},"_transform_rotateZ_effect_mobile":{"unit":"deg","size":"","sizes":[]} }'
-									data-widget_type="image.default">
-									<div class="elementor-widget-container">
-										<img alt="" class="attachment-full size-full wp-image-4034" decoding="async"
-											height="142" loading="lazy" src="/images/p_paint-border-light.png"
-											width="1920" />
-									</div>
-								</div>
-							</div>
-
 							<div class="wolf-core-elementor-row wolf-core-font-light elementor-element elementor-element-1156471 wolf-core-font-light e-flex e-con-boxed e-con e-parent e-lazyloaded"
 								data-color-tone="dark" data-e-type="container" data-element_type="container"
 								data-font-skin="light" data-id="1156471" data-scroll-class="locoscroll-animate"
