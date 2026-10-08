@@ -100,7 +100,7 @@
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'mural__abrir';
-        if (labelOpen) btn.setAttribute('aria-label', labelOpen + (it.legenda ? ': ' + it.legenda : ''));
+        if (labelOpen) btn.setAttribute('aria-label', labelOpen);
         btn.innerHTML = it.html; // HTML gerado e escapado pelo build
         btn.addEventListener('click', function () {
           openLightbox(btn.querySelector('picture') || btn.querySelector('img'));
@@ -110,7 +110,7 @@
         var yt = document.createElement('button');
         yt.type = 'button';
         yt.className = 'mural__yt';
-        yt.setAttribute('aria-label', (labelPlay || 'Play') + (it.legenda ? ': ' + it.legenda : ''));
+        yt.setAttribute('aria-label', labelPlay || 'Play');
         var thumb = document.createElement('img');
         thumb.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(it.id) + '/hqdefault.jpg';
         thumb.alt = '';
@@ -127,7 +127,7 @@
           var iframe = document.createElement('iframe');
           iframe.className = 'mural__iframe';
           iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(it.id) + '?autoplay=1&rel=0';
-          iframe.title = it.legenda || labelVideo;
+          iframe.title = labelVideo;
           iframe.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
           iframe.setAttribute('allowfullscreen', '');
           iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
@@ -135,12 +135,6 @@
           if (msnry) msnry.layout();
         });
         fig.appendChild(yt);
-      }
-
-      if (it.legenda) {
-        var cap = document.createElement('figcaption');
-        cap.textContent = it.legenda;
-        fig.appendChild(cap);
       }
       return fig;
     }
@@ -156,18 +150,40 @@
       }
       if (window.Masonry) {
         if (!msnry) {
+          // Como em masonry.desandro.com (demo horizontalOrder): mantém a ordem esquerda→direita.
           msnry = new window.Masonry(grid, {
             itemSelector: '.mural__item',
             columnWidth: '.mural__sizer',
             percentPosition: true,
+            horizontalOrder: true,
             transitionDuration: 0
           });
         } else {
           msnry.appended(els);
         }
+        // Volta a arrumar quando cada imagem termina de carregar (alturas finais).
+        els.forEach(function (el) {
+          el.querySelectorAll('img').forEach(function (img) {
+            if (!img.complete) img.addEventListener('load', function () { msnry.layout(); }, { once: true });
+          });
+        });
       }
+      els.forEach(function (el) {
+        if (revealer) revealer.observe(el); else el.classList.add('is-visible');
+      });
       return position < items.length;
     }
+
+    // Fade-in-up de cada item quando entra no ecrã; os que entram juntos aparecem em cascata.
+    var revealer = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
+      var shown = 0;
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.style.transitionDelay = (shown++ * 100) + 'ms';
+        e.target.classList.add('is-visible');
+        revealer.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' }) : null;
 
     var observer = null;
     function next() {

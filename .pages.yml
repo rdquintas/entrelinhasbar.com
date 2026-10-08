@@ -239,11 +239,6 @@ content:
     path: content/mural.yaml
     description: Sem limite de itens. Cada item é uma imagem OU um vídeo do YouTube. No site a ordem é aleatória.
     fields:
-      - name: titulo
-        label: Título da página
-        component: texto
-      - name: seo
-        component: seo
       - name: hero
         component: hero
       - name: itens
@@ -261,9 +256,6 @@ content:
           - name: youtube
             label: Vídeo do YouTube
             type: string
-          - name: legenda
-            label: Legenda (opcional)
-            component: texto
 
   - name: contactos
     label: Contactos

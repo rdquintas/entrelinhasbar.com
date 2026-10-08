@@ -1,15 +1,8 @@
-titulo:
-  pt: "Mural"
-  en: "Wall"
-seo:
-  descricao:
-    pt: "Fotografias e vídeos."
-    en: "Photos and videos."
 hero:
   img_horizontal:
-    ficheiro: hero-mural-h.png
+    ficheiro: default_h.png
   img_vertical:
-    ficheiro: hero-mural-v.png
+    ficheiro: default_v.png
 
 # Sem limite de itens. Cada item tem OU "imagem" OU "youtube". A ordem no site é aleatória.
 itens:
@@ -18,9 +11,7 @@ itens:
   - imagem: { ficheiro: mural-03.png }
   - imagem: { ficheiro: mural-04.png }
   - youtube: "https://www.youtube.com/watch?v=jNQXAC9IVRw"
-    legenda: { pt: "Vídeo 1", en: "Video 1" }
   - imagem: { ficheiro: mural-05.png }
-    legenda: { pt: "Uma legenda de exemplo", en: "An example caption" }
   - imagem: { ficheiro: mural-06.png }
   - imagem: { ficheiro: mural-07.png }
   - imagem: { ficheiro: mural-08.png }
@@ -31,3 +22,7 @@ itens:
   - imagem: { ficheiro: mural-12.png }
   - imagem: { ficheiro: mural-13.png }
   - imagem: { ficheiro: mural-14.png }
+  - imagem: { ficheiro: cheerful-bearded-man-with-sunglasses-at-outdoor-event-450x500.jpg }
+  - imagem: { ficheiro: casual-contemporary-portrait-scaled-335x446.jpg }
+  - imagem: { ficheiro: 632254843-450x500.jpg }
+  

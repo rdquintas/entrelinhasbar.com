@@ -44,6 +44,8 @@ const THEME_PAGES = {
 };
 const NAV_PAGES = ['index', ...Object.keys(THEME_PAGES)];
 const cleanImage = content.cleanImage;
+/** JSON seguro para <script type="application/json"> (um "</script>" no conteúdo não fecha a tag). */
+const safeJson = (obj) => JSON.stringify(obj).replace(/</g, '\\u003c');
 
 const write = (rel, data) => {
   const file = path.join(DIR.dist, rel);
@@ -315,11 +317,27 @@ async function main() {
       }));
     }
 
+    /* mural: itens (imagens/YouTube) para o Masonry; a ordem é baralhada no browser */
+    const mural = { hero: pageData('mural').hero, mural_items: [], mural_noscript: [] };
+    (Array.isArray(raw.mural.itens) ? raw.mural.itens : []).forEach((it, i) => {
+      const im = cleanImage(it.imagem);
+      if (im) {
+        const html = images.render(imageName(im.ficheiro), { alt: T(im.alt, `mural.yaml › itens[${i}].imagem.alt`), preset: 'mural' });
+        mural.mural_items.push({ k: 'img', html });
+        mural.mural_noscript.push({ html });
+      } else if (parseYoutubeId(it.youtube)) {
+        const id = parseYoutubeId(it.youtube);
+        mural.mural_items.push({ k: 'yt', id });
+        mural.mural_noscript.push({ html: `<a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer">YouTube</a>` });
+      }
+    });
+    mural.mural_json = safeJson(mural.mural_items);
+
     /* páginas do tema (sem YAML) */
     for (const [name, title] of Object.entries(THEME_PAGES)) {
+      const extra = { agenda: { eventos: localized }, mural }[name] || {};
       emit(name, name, makeCtx({
-        pageKey: name, pathFor: (l) => pageUrl(name, l), title,
-        extra: name === 'agenda' ? { eventos: localized } : {},
+        pageKey: name, pathFor: (l) => pageUrl(name, l), title, extra,
       }));
     }
 
