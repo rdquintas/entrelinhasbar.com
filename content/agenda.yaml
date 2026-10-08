@@ -13,7 +13,7 @@ hero:
     ficheiro: hero-agenda-v.png
 
 # Os eventos podem estar por qualquer ordem: o site ordena-os por data e hora.
-# ativo: false -> esconde o evento em todo o site (continua aqui e as imagens mantêm-se).
+# Os eventos com data anterior a hoje são removidos desta lista no build (e as suas imagens também).
 # Apagar o evento desta lista remove-o e remove também as suas imagens do repositório.
 # O endereço da página do evento (ex.: /event/tuba-ao-vivo/ ou /en/event/tuba-ao-vivo/) é gerado a partir do título.
 eventos:
@@ -34,33 +34,6 @@ eventos:
         url: "https://exemplo.com/bilhetes"
       - nome: { pt: "Como chegar", en: "Getting there" }
         url: "https://exemplo.com/mapa"
-
-  - titulo: { pt: "Tuba ao Vivo", en: "Tuba Live" }
-    resumo:
-      pt: "Uma noite com tuba, convidados especiais e muito groove."
-      en: "A night of tuba, special guests and plenty of groove."
-    descritivo:
-      pt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    tipo: concerto
-    data: "2026-11-14"
-    hora: "21:30"
-    imagem_horizontal: { ficheiro: evento-1-h.png, alt: { pt: "Tuba ao vivo", en: "Tuba live" } }
-    imagem_vertical: { ficheiro: evento-1-v.png }
-    destaque: true
-    cancelado: false
-    youtube: "https://www.youtube.com/watch?v=jNQXAC9IVRw"
-    links:
-      - nome: { pt: "Bilhetes", en: "Tickets" }
-        url: "https://exemplo.com/bilhetes"
-      - nome: { pt: "Facebook", en: "Facebook" }
-        url: "https://www.facebook.com/"
-      - nome: { pt: "Instagram", en: "Instagram" }
-        url: "https://www.instagram.com/"
-      - nome: { pt: "Programa completo", en: "Full programme" }
-        url: "https://exemplo.com/programa"
-      - nome: { pt: "Parcerias", en: "Partners" }
-        url: "https://exemplo.com/parcerias"
 
   - titulo: { pt: "Workshop de Cozinha com José Barman", en: "Cooking Workshop with José Barman" }
     descritivo:

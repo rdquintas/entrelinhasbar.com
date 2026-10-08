@@ -180,7 +180,7 @@ content:
         label: Eventos
         description: >-
           Apagar um evento desta lista remove-o do site e também apaga as suas imagens do repositório.
-          Para apenas esconder um evento (sem apagar nada), desmarcar "Ativo".
+          Os eventos com data anterior a hoje são removidos automaticamente (entrada e imagens).
           O endereço da página do evento é criado automaticamente a partir do título.
         type: object
         list:
@@ -188,11 +188,6 @@ content:
             collapsed: true
             summary: "{data} {hora}"
         fields:
-          - name: ativo
-            label: Ativo
-            description: Desmarcar para esconder o evento em todo o site (sem o apagar).
-            type: boolean
-            default: true
           - name: titulo
             label: Título
             component: texto

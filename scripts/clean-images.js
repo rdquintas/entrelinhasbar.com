@@ -7,7 +7,6 @@
  * Regras:
  *  - candidatas = imagens de eventos em content/agenda.yaml no commit ANTERIOR
  *                 menos tudo o que está referenciado AGORA em qualquer content/*.yaml;
- *  - eventos com ativo: false continuam no YAML, logo as suas imagens NÃO são apagadas;
  *  - imagens partilhadas com outro conteúdo (outro evento, hero, mural…) NÃO são apagadas;
  *  - nunca varre src/images/ à procura de "órfãs" (um upload recente ainda por associar seria apagado);
  *  - aborta sem apagar nada se o YAML for inválido, se não houver versão anterior
@@ -56,14 +55,14 @@ try { oldAgenda = yaml.load(oldText, { schema: yaml.CORE_SCHEMA }) || {}; } catc
   stop(`ABORTADO: o agenda.yaml anterior é inválido (${e.reason || e.message}). Nada foi apagado.`, 1);
 }
 
-// 1) Imagens de eventos na versão anterior (ativos ou não)
-const oldEventImages = collectImageNames(oldAgenda.eventos, { includeInactive: true });
+// 1) Imagens de eventos na versão anterior
+const oldEventImages = collectImageNames(oldAgenda.eventos);
 
-// 2) Tudo o que está referenciado AGORA (incluindo eventos inativos)
+// 2) Tudo o que está referenciado AGORA
 const referenced = new Set();
 try {
   for (const f of fs.readdirSync(CONTENT_DIR).filter((n) => /\.ya?ml$/.test(n))) {
-    collectImageNames(loadYamlFile(path.join(CONTENT_DIR, f)), { includeInactive: true }).forEach((n) => referenced.add(n));
+    collectImageNames(loadYamlFile(path.join(CONTENT_DIR, f))).forEach((n) => referenced.add(n));
   }
 } catch (e) {
   stop(`ABORTADO: ${e.message}\nNada foi apagado.`, 1);

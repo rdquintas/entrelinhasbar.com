@@ -1,22 +1,24 @@
 'use strict';
 /**
  * build.js — orquestrador. Lê content/*.yaml e src/templates, gera /dist.
+ *   0. remove os eventos passados (entrada no agenda.yaml + imagens que só eles usavam)
  *   1. carrega e valida o conteúdo (falha com mensagens claras)
  *   2. prepara eventos e otimiza as imagens referenciadas
  *   3. copia CSS/JS (com hash no nome) e ficheiros estáticos
- *   4. renderiza cada página em cada idioma + uma página por evento ativo
+ *   4. renderiza cada página em cada idioma + uma página por evento
  *   5. gera _redirects, sitemap.xml, robots.txt e 404.html
  */
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const {
-  Report, BuildError, escapeHtml, imageName, paragraphs, parseYoutubeId, formatBytes,
+  Report, BuildError, escapeHtml, imageName, paragraphs, parseYoutubeId, formatBytes, truncate,
 } = require('./lib/util');
 const content = require('./lib/content');
-const { prepareEvents, formatDate } = require('./lib/events');
+const { prepareEvents, formatDate, formatDateShort } = require('./lib/events');
 const { createImages, convertDirToAvif } = require('./lib/images');
 const { createEngine } = require('./lib/template');
+const { prunePastEvents } = require('./lib/past-events');
 
 const ROOT = __dirname;
 const DIR = {
@@ -32,6 +34,7 @@ const DIR = {
   cache: path.join(ROOT, '.cache/images'),
 };
 const MAX_SLIDES = 5;
+const AGENDA_EXCERPT_MAX = 150;
 /** Páginas do tema sem YAML próprio (src/templates/<nome>.html) e o respetivo título. */
 const THEME_PAGES = {
   agenda: 'Calendário',
@@ -112,6 +115,15 @@ async function main() {
   fs.rmSync(DIR.dist, { recursive: true, force: true });
   fs.mkdirSync(DIR.dist, { recursive: true });
 
+  /* ---------- 0. Eventos passados ---------- */
+  const pruned = prunePastEvents({
+    contentDir: DIR.content, imagesDir: DIR.images, refDirs: [DIR.templates, path.join(ROOT, 'src/css')], report,
+  });
+  if (pruned.removed.length) {
+    console.log(`Eventos passados removidos de content/agenda.yaml: ${pruned.removed.join(', ')}`);
+    if (pruned.images.length) console.log(`Imagens removidas de src/images/: ${pruned.images.join(', ')}`);
+  }
+
   /* ---------- 1. Conteúdo ---------- */
   const raw = content.loadAll(DIR.content);
   const env = content.validateAll(raw, report, { imagesDir: DIR.images });
@@ -136,19 +148,19 @@ async function main() {
   const allContent = [raw.site, ...content.PAGES.map((k) => raw[k]), ...Object.values(raw.extras)];
   const refs = new Set();
   allContent.forEach((d) => content.collectImageNames(d).forEach((n) => refs.add(n)));
-  const allRefs = new Set();
-  allContent.forEach((d) => content.collectImageNames(d, { includeInactive: true }).forEach((n) => allRefs.add(n)));
 
   const ogNames = new Set();
   const siteOg = site.og_imagem || cleanImage(raw.index.hero && raw.index.hero.horizontal);
   if (siteOg) ogNames.add(imageName(siteOg.ficheiro));
   events.forEach((e) => ogNames.add(imageName(e.imagem_horizontal.ficheiro)));
+  // Thumbs (495x378) da imagem horizontal, só para a listagem da página agenda.
+  const thumbNames = new Set(events.map((e) => imageName(e.imagem_horizontal.ficheiro)));
 
   const images = createImages({ srcDir: DIR.images, outDir: path.join(DIR.dist, 'images'), cacheDir: DIR.cache });
-  await images.prepare(refs, ogNames);
+  await images.prepare(refs, ogNames, thumbNames);
 
   const orphans = fs.existsSync(DIR.images)
-    ? fs.readdirSync(DIR.images).filter((f) => !f.startsWith('.') && !allRefs.has(f))
+    ? fs.readdirSync(DIR.images).filter((f) => !f.startsWith('.') && !refs.has(f))
     : [];
   if (orphans.length) {
     report.warn(`${orphans.length} imagem(ns) em src/images/ não estão referenciadas em nenhum YAML (convertidas para AVIF no tamanho original, sem versões responsivas):${orphans.slice(0, 8).join(', ')}${orphans.length > 8 ? ', …' : ''}`);
@@ -258,7 +270,14 @@ async function main() {
       description: T(dataOf(key).seo && dataOf(key).seo.descricao, `${key}.yaml › seo.descricao`),
     });
 
-    const localized = events.map((e) => ({ ...e, url: eventUrl(e.slug, lang), data_fmt: formatDate(e.data, L.locale) }));
+    const localized = events.map((e) => ({
+      ...e,
+      url: eventUrl(e.slug, lang),
+      data_fmt: formatDate(e.data, L.locale),
+      data_curta: formatDateShort(e.data, L.locale),
+      thumb_src: `/images/${images.thumbFile(imageName(e.imagem_horizontal.ficheiro))}`,
+      descritivo_curto: truncate(T(e.descritivo, `evento "${e.slug}" › descritivo`), AGENDA_EXCERPT_MAX).replace(/…$/, '...'),
+    }));
 
     const render = (tpl, ctx) => engine.render(tpl, ctx, { lang, defaultLang, langCodes });
     const emit = (relDir, tpl, ctx) => {
@@ -284,7 +303,10 @@ async function main() {
 
     /* páginas do tema (sem YAML) */
     for (const [name, title] of Object.entries(THEME_PAGES)) {
-      emit(name, name, makeCtx({ pageKey: name, pathFor: (l) => pageUrl(name, l), title }));
+      emit(name, name, makeCtx({
+        pageKey: name, pathFor: (l) => pageUrl(name, l), title,
+        extra: name === 'agenda' ? { eventos: localized } : {},
+      }));
     }
 
     /* páginas extra (content/<nome>.yaml + src/templates/<nome>.html) */
@@ -295,7 +317,7 @@ async function main() {
       }));
     }
 
-    /* uma página por evento ativo, a partir de um único template */
+    /* uma página por evento, a partir de um único template */
     for (const e of localized) {
       const title = T(e.titulo, `evento "${e.slug}" › titulo`);
       const ctx = makeCtx({
@@ -346,7 +368,7 @@ async function main() {
   const s = images.summary();
   const saved = s.before ? Math.round((1 - s.after / s.before) * 100) : 0;
   console.log('\n✔ Build concluído');
-  console.log(`  Páginas: ${counts.pages} (${langs.length} idiomas) · eventos ativos: ${events.length}`);
+  console.log(`  Páginas: ${counts.pages} (${langs.length} idiomas) · eventos: ${events.length}`);
   if (events.length) console.log(`  URLs dos eventos: ${events.map((e) => e.slug).join(', ')}`);
   console.log(`  Imagens: ${s.processed} processadas, ${s.cached} vindas da cache`);
   console.log(`  Tamanho: ${formatBytes(s.before)} (originais) → ${formatBytes(s.after)} (maior versão AVIF de cada) · poupança ${saved}%`);

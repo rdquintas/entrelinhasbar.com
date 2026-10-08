@@ -46,7 +46,7 @@ Se faltar uma tradução, o site usa o idioma por defeito (pt) e o build mostra 
 - `data: "2026-11-14"` (AAAA-MM-DD, com aspas) e `hora: "21:30"` (HH:MM, 24 h, com aspas).
 - `destaque: true` → o evento aparece no **carrossel** da página inicial (no lugar do hero; máx. 5). Sem destaques, mostra o hero por defeito.
 - `cancelado: true` → faixa vermelha **CANCELADO** no evento, na agenda e no carrossel.
-- `ativo: false` → o evento **não aparece em lado nenhum** (nem tem página), mas continua no YAML e as suas imagens mantêm-se.
+- Eventos com data **anterior a hoje** (Lisboa) são removidos no build: a entrada sai do `agenda.yaml`, as imagens que só eles usavam são apagadas e a página deixa de existir. Entre builds, a agenda esconde-os no browser.
 - **Apagar** o evento do YAML remove-o do site **e** apaga as suas imagens do repositório (ver [Limpeza de imagens](#limpeza-de-imagens-de-eventos-apagados)).
 - O endereço do evento é gerado a partir do título: `Tuba ao Vivo` → `/event/tuba-ao-vivo/` (em inglês: `/en/event/tuba-ao-vivo/`). Se mudares o título depois de partilhares o link, o endereço muda; para o fixar, preenche o campo opcional `slug`.
 - Cada evento tem uma imagem **horizontal** (obrigatória) e uma **vertical** (opcional, usada em telemóvel); até 5 `links`; `youtube` opcional (URL ou ID).
@@ -138,7 +138,7 @@ Para o repositório não acumular imagens inúteis, quando um evento é **removi
 
 - O build do Netlify nunca altera o repositório, por isso a limpeza corre num **GitHub Action** (`.github/workflows/limpar-imagens.yml`) a cada push que altere `content/**`. Usa só o `GITHUB_TOKEN` automático (sem segredos) e faz um commit com `[skip ci]`, para não repetir o deploy.
 - Compara o `agenda.yaml` **anterior** com o **atual**. Só apaga imagens que **eram de eventos** e **já não são referenciadas em lado nenhum** (nenhum YAML).
-- **Não** apaga: imagens de eventos com `ativo: false`; imagens partilhadas com outro conteúdo (outro evento, hero, mural…); uploads recentes ainda por associar a um evento (nunca se faz um varrimento geral de `src/images/`).
+- **Não** apaga: imagens partilhadas com outro conteúdo (outro evento, hero, mural…); uploads recentes ainda por associar a um evento (nunca se faz um varrimento geral de `src/images/`).
 - **Atenção:** se trocares a imagem de um evento por outra, a imagem antiga também é apagada (deixa de estar referenciada).
 - **Limite de segurança:** se mais de 20 imagens fossem apagadas de uma vez, aborta sem apagar nada e o job falha (visível no separador *Actions*). Para forçar localmente: `npm run clean-images -- --before <commit> --max <N>`.
 - Para ver o que seria apagado: `npm run clean-images -- --before HEAD~1 --dry`.
@@ -146,6 +146,6 @@ Para o repositório não acumular imagens inúteis, quando um evento é **removi
 - **Apagar ficheiros não reduz o histórico do Git:** os ficheiros antigos continuam nos commits anteriores, por isso o `.git` não encolhe. Redimensiona as imagens antes de as carregar.
 
 ## Notas
-- **Eventos passados** não são escondidos automaticamente: ficam na agenda até serem apagados (ou `ativo: false`). Eventos com `destaque: true` ficam no carrossel até desmarcares o destaque.
+- **Eventos passados** são removidos automaticamente no build (ver [Eventos](#eventos-contentagendayaml)). O build do Netlify não altera o repositório: para o `agenda.yaml` e as imagens ficarem limpos no Git, corre `npm run build` localmente e faz commit.
 - Segurança: cabeçalhos e CSP no `netlify.toml` (sem scripts/estilos inline). Vídeos via `youtube-nocookie.com`; as miniaturas do mural vêm de `i.ytimg.com`. Só são aceites links `https://`, `http://`, `mailto:` e `tel:`.
 - O CSS é propositadamente mínimo e funcional (sem estética): quando escolheres o tema, substitui `src/css/style.css` e ajusta as classes dos templates.
