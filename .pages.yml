@@ -36,7 +36,7 @@ components:
         label: English
         type: text
 
-  # Imagem obrigatória + descrição (alt) por idioma
+  # Imagem obrigatória
   imagem:
     type: object
     fields:
@@ -44,17 +44,6 @@ components:
         label: Imagem
         type: image
         required: true
-      - name: alt
-        label: Descrição da imagem (acessibilidade)
-        description: Descreve a imagem em poucas palavras, para quem não a consegue ver.
-        type: object
-        fields:
-          - name: pt
-            label: Português
-            type: string
-          - name: en
-            label: English
-            type: string
 
   # Imagem opcional (deixar vazio para não usar)
   imagem_opcional:
@@ -63,16 +52,6 @@ components:
       - name: ficheiro
         label: Imagem
         type: image
-      - name: alt
-        label: Descrição da imagem (acessibilidade)
-        type: object
-        fields:
-          - name: pt
-            label: Português
-            type: string
-          - name: en
-            label: English
-            type: string
 
   # Imagem principal da página: horizontal (desktop) e vertical (telemóvel)
   hero:
@@ -88,16 +67,6 @@ components:
             label: Imagem
             type: image
             required: true
-          - name: alt
-            label: Descrição da imagem (acessibilidade)
-            type: object
-            fields:
-              - name: pt
-                label: Português
-                type: string
-              - name: en
-                label: English
-                type: string
       - name: vertical
         label: Vertical (opcional)
         type: object
@@ -148,16 +117,6 @@ content:
           - name: ficheiro
             label: Imagem
             type: image
-          - name: alt
-            label: Descrição da imagem (acessibilidade)
-            type: object
-            fields:
-              - name: pt
-                label: Português
-                type: string
-              - name: en
-                label: English
-                type: string
       - name: video_youtube
         label: Vídeo do YouTube (opcional)
         description: Colar o endereço do vídeo (youtube.com/watch?v=... ou youtu.be/...). Deixar vazio para não mostrar vídeo.

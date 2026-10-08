@@ -8,27 +8,26 @@ seo:
 hero:
   horizontal:
     ficheiro: hero-mural-h.png
-    alt: { pt: "Mural", en: "Wall" }
   vertical:
     ficheiro: hero-mural-v.png
 
 # Sem limite de itens. Cada item tem OU "imagem" OU "youtube". A ordem no site é aleatória.
 itens:
-  - imagem: { ficheiro: mural-01.png, alt: { pt: "Mural 1", en: "Wall 1" } }
-  - imagem: { ficheiro: mural-02.png, alt: { pt: "Mural 2", en: "Wall 2" } }
-  - imagem: { ficheiro: mural-03.png, alt: { pt: "Mural 3", en: "Wall 3" } }
-  - imagem: { ficheiro: mural-04.png, alt: { pt: "Mural 4", en: "Wall 4" } }
+  - imagem: { ficheiro: mural-01.png }
+  - imagem: { ficheiro: mural-02.png }
+  - imagem: { ficheiro: mural-03.png }
+  - imagem: { ficheiro: mural-04.png }
   - youtube: "https://www.youtube.com/watch?v=jNQXAC9IVRw"
     legenda: { pt: "Vídeo 1", en: "Video 1" }
-  - imagem: { ficheiro: mural-05.png, alt: { pt: "Mural 5", en: "Wall 5" } }
+  - imagem: { ficheiro: mural-05.png }
     legenda: { pt: "Uma legenda de exemplo", en: "An example caption" }
-  - imagem: { ficheiro: mural-06.png, alt: { pt: "Mural 6", en: "Wall 6" } }
-  - imagem: { ficheiro: mural-07.png, alt: { pt: "Mural 7", en: "Wall 7" } }
-  - imagem: { ficheiro: mural-08.png, alt: { pt: "Mural 8", en: "Wall 8" } }
-  - imagem: { ficheiro: mural-09.png, alt: { pt: "Mural 9", en: "Wall 9" } }
-  - imagem: { ficheiro: mural-10.png, alt: { pt: "Mural 10", en: "Wall 10" } }
-  - imagem: { ficheiro: mural-11.png, alt: { pt: "Mural 11", en: "Wall 11" } }
+  - imagem: { ficheiro: mural-06.png }
+  - imagem: { ficheiro: mural-07.png }
+  - imagem: { ficheiro: mural-08.png }
+  - imagem: { ficheiro: mural-09.png }
+  - imagem: { ficheiro: mural-10.png }
+  - imagem: { ficheiro: mural-11.png }
   - youtube: "jNQXAC9IVRw"
-  - imagem: { ficheiro: mural-12.png, alt: { pt: "Mural 12", en: "Wall 12" } }
-  - imagem: { ficheiro: mural-13.png, alt: { pt: "Mural 13", en: "Wall 13" } }
-  - imagem: { ficheiro: mural-14.png, alt: { pt: "Mural 14", en: "Wall 14" } }
+  - imagem: { ficheiro: mural-12.png }
+  - imagem: { ficheiro: mural-13.png }
+  - imagem: { ficheiro: mural-14.png }

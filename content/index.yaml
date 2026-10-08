@@ -10,22 +10,21 @@ seo:
 hero:
   horizontal:
     ficheiro: hero-index-h.png
-    alt: { pt: "Imagem principal", en: "Main image" }
   vertical:
     ficheiro: hero-index-v.png
 
 # Até 10 imagens (galeria da página inicial).
 imagens:
-  - { ficheiro: galeria-01.png, alt: { pt: "Galeria 1", en: "Gallery 1" } }
-  - { ficheiro: galeria-02.png, alt: { pt: "Galeria 2", en: "Gallery 2" } }
-  - { ficheiro: galeria-03.png, alt: { pt: "Galeria 3", en: "Gallery 3" } }
-  - { ficheiro: galeria-04.png, alt: { pt: "Galeria 4", en: "Gallery 4" } }
-  - { ficheiro: galeria-05.png, alt: { pt: "Galeria 5", en: "Gallery 5" } }
-  - { ficheiro: galeria-06.png, alt: { pt: "Galeria 6", en: "Gallery 6" } }
-  - { ficheiro: galeria-07.png, alt: { pt: "Galeria 7", en: "Gallery 7" } }
-  - { ficheiro: galeria-08.png, alt: { pt: "Galeria 8", en: "Gallery 8" } }
-  - { ficheiro: galeria-09.png, alt: { pt: "Galeria 9", en: "Gallery 9" } }
-  - { ficheiro: galeria-10.png, alt: { pt: "Galeria 10", en: "Gallery 10" } }
+  - { ficheiro: galeria-01.png }
+  - { ficheiro: galeria-02.png }
+  - { ficheiro: galeria-03.png }
+  - { ficheiro: galeria-04.png }
+  - { ficheiro: galeria-05.png }
+  - { ficheiro: galeria-06.png }
+  - { ficheiro: galeria-07.png }
+  - { ficheiro: galeria-08.png }
+  - { ficheiro: galeria-09.png }
+  - { ficheiro: galeria-10.png }
 
 # Endereço do vídeo (ou só o ID). Deixar vazio para não mostrar.
 video_youtube: "https://www.youtube.com/watch?v=jNQXAC9IVRw"

@@ -8,7 +8,6 @@ seo:
 hero:
   horizontal:
     ficheiro: hero-agenda-h.png
-    alt: { pt: "Agenda", en: "Events" }
   vertical:
     ficheiro: hero-agenda-v.png
 
@@ -24,7 +23,7 @@ eventos:
     tipo: concerto
     data: "2027-03-20"
     hora: "18:00"
-    imagem_horizontal: { ficheiro: evento-3-h.png, alt: { pt: "Roda de samba", en: "Samba circle" } }
+    imagem_horizontal: { ficheiro: evento-3-h.png }
     imagem_vertical: { ficheiro: evento-3-v.png }
     destaque: true
     cancelado: false
@@ -43,7 +42,7 @@ eventos:
     tipo: workshop
     data: "2026-10-24"
     hora: "15:00"
-    imagem_horizontal: { ficheiro: evento-2-h.png, alt: { pt: "Workshop de cozinha", en: "Cooking workshop" } }
+    imagem_horizontal: { ficheiro: evento-2-h.png }
     imagem_vertical: { ficheiro: evento-2-v.png }
     destaque: true
     cancelado: true
@@ -58,7 +57,7 @@ eventos:
     tipo: concerto
     data: "2026-12-12"
     hora: "22:00"
-    imagem_horizontal: { ficheiro: evento-5-h.png, alt: { pt: "Noite de fados", en: "Fado night" } }
+    imagem_horizontal: { ficheiro: evento-5-h.png }
     destaque: false
     cancelado: false
     link_bilhetes: ""
@@ -84,7 +83,7 @@ eventos:
     tipo: workshop
     data: "2026-11-02"
     hora: "10:00"
-    imagem_horizontal: { ficheiro: evento-6-h.png, alt: { pt: "Masterclass", en: "Masterclass" } }
+    imagem_horizontal: { ficheiro: evento-6-h.png }
     imagem_vertical: { ficheiro: evento-6-v.png }
     destaque: false
     cancelado: false

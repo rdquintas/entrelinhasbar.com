@@ -8,7 +8,6 @@ seo:
 hero:
   horizontal:
     ficheiro: hero-contactos-h.png
-    alt: { pt: "Contactos", en: "Contact" }
   vertical:
     ficheiro: hero-contactos-v.png
 
