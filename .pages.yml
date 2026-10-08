@@ -193,8 +193,9 @@ content:
             component: texto
           - name: tipo
             label: Tipo
+            description: Se ficar vazio, o evento é um concerto.
             type: select
-            required: true
+            default: concerto
             options:
               values:
                 - name: concerto
@@ -220,12 +221,12 @@ content:
               message: "Usar o formato HH:MM, por exemplo 21:30"
           - name: destaque
             label: Destaque
-            description: Os eventos em destaque aparecem num carrossel no topo da página inicial, no lugar da imagem principal.
+            description: Os eventos em destaque aparecem num carrossel no topo da página inicial, no lugar da imagem principal. Ignorado se o evento estiver cancelado.
             type: boolean
             default: false
           - name: cancelado
             label: Cancelado
-            description: Mostra uma faixa vermelha "CANCELADO" no evento.
+            description: Mostra uma faixa vermelha "CANCELADO" no evento e retira-o dos destaques.
             type: boolean
             default: false
           - name: imagem_horizontal

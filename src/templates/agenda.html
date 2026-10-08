@@ -59,10 +59,10 @@
 														<div class="entry-event-accordion-inner">
 															<div class="entry-event-info">
 																<div class="event-accordion-big-date">
-																	{{data_curta}} </div>
+																	{{data_curta}} {{hora}} </div>
 
 																<div class="venue">
-																	{{hora}} </div>
+																	{{tipo_label}} </div>
 																<span class="entry-event-accordion--btn"></span>
 															</div>
 															<div class="entry-event-summary">
@@ -92,7 +92,8 @@
 																	href="{{url}}" itemprop="url">
 																	<img class="resized-thumbnail" decoding="async"
 																		height="378" loading="lazy" src="{{thumb_src}}"
-																		width="495" /> </a>
+																		width="495" />
+																	{{#if cancelado}}<span class="cancelado-banner">{{ui.cancelado}}</span>{{/if}} </a>
 															</div>
 														</div>
 													</article>
@@ -100,11 +101,6 @@
 												</div>
 											</div>
 											<script src="/js/agenda-past-events.js"></script>
-											<div class="trigger-container wvc-element">
-												<a class="theme-button-primary wolf-core-button wolf-core-button-size-lg internal-link"
-													data-aos="fade" data-aos-once="true" href="{{urls.agenda}}"><span>
-														View more events </span></a>
-											</div>
 										</div>
 									</div>
 								</div>

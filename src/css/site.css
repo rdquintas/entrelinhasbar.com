@@ -74,3 +74,10 @@
 /* Vídeo do YouTube na página do evento (16:9, largura total da coluna) */
 .event-video{margin-top:30px;aspect-ratio:16/9}
 .event-video iframe{display:block;width:100%;height:100%;border:0}
+/* Evento cancelado: faixa com "CANCELADO"/"CANCELLED" a vermelho sobre a imagem (agenda e página do evento) */
+.event-accordion-img,.event-thumbnail>a{position:relative;display:block}
+.cancelado-banner{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:2;padding:.35em 1em;background:rgba(255,255,255,.9);color:#d00000;font-weight:700;font-size:clamp(1.25rem,3vw,2rem);letter-spacing:.12em;line-height:1.2;text-align:center;text-transform:uppercase;pointer-events:none}
+.cancelado-banner--grande{font-size:clamp(2rem,7vw,5rem)}
+/* Agenda: o tema põe cursor:pointer em toda a linha do evento, mas só o botão de seta abre/fecha; retirar a "mãozinha" da data/tipo */
+.entry-event-accordion-inner{cursor:auto}
+.entry-event-accordion--btn{cursor:pointer}
