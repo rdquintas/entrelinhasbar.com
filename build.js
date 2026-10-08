@@ -39,7 +39,7 @@ const AGENDA_EXCERPT_MAX = 150;
 const THEME_PAGES = {
   agenda: 'Calendário',
   venue: 'Venue',
-  aboutus: 'About Us',
+  mural: 'Mural',
   contacts: 'Contact Us',
 };
 const NAV_PAGES = ['index', ...Object.keys(THEME_PAGES)];
