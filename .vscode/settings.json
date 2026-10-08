@@ -1,0 +1,4 @@
+{
+  // Evita que content/site.yaml seja validado como Ansible Playbook (falso positivo do SchemaStore).
+  "yaml.schemaStore.enable": false
+}
