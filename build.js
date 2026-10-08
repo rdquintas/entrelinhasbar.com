@@ -286,7 +286,6 @@ async function main() {
       url: eventUrl(e.slug, lang),
       data_fmt: formatDate(e.data, L.locale),
       data_curta: formatDateShort(e.data, L.locale),
-      data_longa: formatDateShort(e.data, L.locale, 'long'),
       thumb_src: `/images/${images.thumbFile(imageName(e.imagem_horizontal.ficheiro))}`,
       banner_src: `/images/${images.bannerFile(imageName(e.imagem_horizontal.ficheiro))}`,
       // Original em tamanho real (convertido para /images/<nome>.avif no passo 6).
