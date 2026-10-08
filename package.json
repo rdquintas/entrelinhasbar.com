@@ -1,8 +1,8 @@
 {
-  "name": "site-institucional",
+  "name": "entrelinhasbar",
   "version": "1.0.0",
   "private": true,
-  "description": "Site estático bilingue (pt/en) para Netlify, com conteúdo em YAML.",
+  "description": "Site do entrelinhasbar.com",
   "engines": {
     "node": ">=22"
   },

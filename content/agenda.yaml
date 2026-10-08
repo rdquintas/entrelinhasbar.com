@@ -28,7 +28,8 @@ eventos:
     imagem_vertical: { ficheiro: evento-3-v.png }
     destaque: true
     cancelado: false
-    youtube: ""
+    link_bilhetes: "https://www.ticketline.pt/"
+    youtube: "https://www.youtube.com/watch?v=JP8iTiSx-kU&list=RDJP8iTiSx-kU&start_radio=1"
     links:
       - nome: { pt: "Bilhetes", en: "Tickets" }
         url: "https://exemplo.com/bilhetes"
@@ -46,6 +47,7 @@ eventos:
     imagem_vertical: { ficheiro: evento-2-v.png }
     destaque: true
     cancelado: true
+    link_bilhetes: ""
     youtube: ""
     links: []
 
@@ -59,6 +61,7 @@ eventos:
     imagem_horizontal: { ficheiro: evento-5-h.png, alt: { pt: "Noite de fados", en: "Fado night" } }
     destaque: false
     cancelado: false
+    link_bilhetes: ""
     links: []
 
   - titulo: { pt: "Ensaio Aberto (rascunho)", en: "Open Rehearsal (draft)" }
@@ -72,6 +75,7 @@ eventos:
     imagem_vertical: { ficheiro: evento-4-v.png }
     destaque: false
     cancelado: false
+    link_bilhetes: ""
 
   - titulo: { pt: "Masterclass de Percussão", en: "Percussion Masterclass" }
     descritivo:
@@ -84,6 +88,7 @@ eventos:
     imagem_vertical: { ficheiro: evento-6-v.png }
     destaque: false
     cancelado: false
+    link_bilhetes: ""
     links:
       - nome: { pt: "Inscrições", en: "Sign up" }
         url: "https://exemplo.com/inscricoes"

@@ -49,7 +49,7 @@ Se faltar uma tradução, o site usa o idioma por defeito (pt) e o build mostra 
 - Eventos com data **anterior a hoje** (Lisboa) são removidos no build: a entrada sai do `agenda.yaml`, as imagens que só eles usavam são apagadas e a página deixa de existir. Entre builds, a agenda esconde-os no browser.
 - **Apagar** o evento do YAML remove-o do site **e** apaga as suas imagens do repositório (ver [Limpeza de imagens](#limpeza-de-imagens-de-eventos-apagados)).
 - O endereço do evento é gerado a partir do título: `Tuba ao Vivo` → `/event/tuba-ao-vivo/` (em inglês: `/en/event/tuba-ao-vivo/`). Se mudares o título depois de partilhares o link, o endereço muda; para o fixar, preenche o campo opcional `slug`.
-- Cada evento tem uma imagem **horizontal** (obrigatória) e uma **vertical** (opcional, usada em telemóvel); até 5 `links`; `youtube` opcional (URL ou ID).
+- Cada evento tem uma imagem **horizontal** (obrigatória) e uma **vertical** (opcional, usada em telemóvel); até 5 `links`; `youtube` opcional (URL ou ID); `link_bilhetes` opcional (mostra o botão de bilhetes na página do evento).
 
 ### Imagens
 1. Põe o ficheiro original em `src/images/` (jpg, png, webp, tiff, gif, avif; SVG e GIFs animados são copiados sem conversão). **Tamanho máximo: 15 MB** — recomenda-se redimensionar antes (lado maior até ~2400 px).

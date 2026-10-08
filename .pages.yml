@@ -244,6 +244,10 @@ content:
           - name: youtube
             label: Vídeo do YouTube (opcional)
             type: string
+          - name: link_bilhetes
+            label: Link para bilhetes (opcional)
+            description: Endereço da página de venda de bilhetes. Deixar vazio para não mostrar o botão.
+            type: string
           - name: slug
             label: Endereço personalizado (opcional)
             description: Normalmente deixar vazio. Só preencher para fixar o endereço do evento (minúsculas, números e hífens) se mudares o título depois de o partilhar.

@@ -12,13 +12,13 @@ hero:
   vertical:
     ficheiro: hero-contactos-v.png
 
-telefone: "+351 912 345 678"
-email: "geral@exemplo.com"
-morada: "Rua de Exemplo, 123\n1000-001 Lisboa"
+telefone: "+351219574276"
+email: "entrelinhascafebistro@gmail.com"
+morada: "R. José António Veríssimo Silva Lt 4.22 \n2615-107 Alverca do Ribatejo"
 horario:
   pt: "Segunda a sexta: 10h–18h\nSábado: 10h–14h"
   en: "Monday to Friday: 10am–6pm\nSaturday: 10am–2pm"
-link_google_maps: "https://maps.google.com/"
+link_google_maps: "https://maps.app.goo.gl/pcHo4ynKotedPXD3A"
 
 faq:
   - pergunta: { pt: "Lorem ipsum dolor sit amet?", en: "Lorem ipsum dolor sit amet?" }

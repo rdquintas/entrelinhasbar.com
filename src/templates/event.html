@@ -19,18 +19,16 @@
 											itemscope="" itemtype="https://schema.org/MusicEvent">
 											<div class="event-thumbnail">
 												<a class="lightbox no-link-style"
-													href="/images/contemplative-muse-in-futuristic-attire-scaled.jpg">
-													<img alt="Contemplative Muse in Futuristic Attire"
+													href="{{imagem_original_src}}">
+													<img alt="{{imagem_horizontal.alt}}"
 														class="resized-thumbnail" height="500" loading="lazy"
-														src="/images/contemplative-muse-in-futuristic-attire-scaled-1400x500.jpg"
-														title="Contemplative Muse in Futuristic Attire" width="1400" />
+														src="{{banner_src}}"
+														title="{{imagem_horizontal.alt}}" width="1400" />
 												</a>
 											</div>
-											<meta content="Velvet Pulse + Guests" itemprop="name" />
+											<meta content="{{titulo}}" itemprop="name" />
 
-											<meta
-												content="Experience an unforgettable night of music and energy at [Event Name], where creativity meets passion on stage. Join us as we bring together a lineup of renowned artists, immersive performances, and an electric atmosphere that will leave you wanting more. Prepare to be transported into a world of sound, light, and emotions, crafted with the..."
-												itemprop="description" />
+											<meta content="{{resumo}}" itemprop="description" />
 											<span itemprop="location" itemscope=""
 												itemtype="https://schema.org/MusicVenue">
 												<span itemprop="address" itemscope=""
@@ -47,74 +45,68 @@
 												<div class="col col-3 event-meta-container">
 													<div class="event-info">
 														<div class="event-artist-meta event-meta">
-															<h4>Velvet Pulse</h4>
+															<h4>{{data_longa}} {{hora}}</h4>
 														</div>
 														<div class="event-date event-meta">
-															<span class="start-date" itemprop="startDate">
-																November 7, 2028
+															<meta content="{{datetime}}" itemprop="startDate" />
+															<span class="start-date">
+																{{tipo_label}}
 															</span>
 														</div>
-														<a class="single-event-button theme-button-primary wolf-core-button-size-lg internal-link"
-															href="#">
-															<span>Tickets $40</span>
+														{{#if link_bilhetes}}
+														<a class="single-event-button theme-button-primary wolf-core-button-size-lg"
+															href="{{link_bilhetes}}" target="_blank" rel="noopener">
+															<span>{{#lang pt}}Bilhetes{{/lang}}{{#lang en}}Tickets{{/lang}}</span>
 														</a>
+														{{/if}}
 														<div class="event-location event-meta">
-															<h5 class="event-meta-label">Location</h5>
-															<a href="https://maps.app.goo.gl/76HghM1ER1KWY5Nu7"
-																target="_blank">
-																Toronto </a>
-														</div>
-														<div class="event-venue event-meta">
-															<h5 class="event-meta-label">Venue</h5>
-															Phoenix Concert Theatre
-
-														</div>
+															<h5 class="event-meta-label">{{#lang en}}Address{{/lang}}{{#lang pt}}Morada{{/lang}}</h5>
+															{{#if contactos.link_google_maps}}
+															<a href="{{contactos.link_google_maps}}" target="_blank" rel="noopener">
+																{{linhas contactos.morada}}</a>
+															<br>
+															<a href="{{contactos.link_google_maps}}" target="_blank" rel="noopener">
+																📍Google Maps</a>
+															{{else}}
+															{{linhas contactos.morada}}
+															{{/if}}
+														</div>																									
+														{{#if links}}
 														<div class="event-opening-hours event-meta">
-															<h5 class="event-meta-label">Time</h5>
-															09:00 PM<br />
-															Door: 08:00PM
+															<h5 class="event-meta-label">Links</h5>
+															<ul>
+																{{#each links}}
+																<li><a href="{{url}}" target="_blank" rel="noopener"><span class="elementor-icon-list-text">{{nome}}</span></a></li>
+																{{/each}}
+															</ul>
 														</div>
-														<div class="event-opening-hours event-meta">
-															<h5 class="event-meta-label">Price</h5>
-															Online Price: $40<br />
-															Retailers: $45<br />
-															On Site: $47
-														</div>
-														<ul>
+														{{/if}}
+														<!-- <ul>
 															<li class="event-meta event-partners">
 																<h5 class="event-meta-label">Partners</h5>
 																<span class="event-meta-separator"></span>
 																<span class="event-meta-value">EchoWave, SonicForge,
 																	RhythmPulse</span>
 															</li>
-														</ul>
+														</ul> -->
 													</div>
 												</div>
 												<div class="col col-9 event-container">
 													<header class="entry-content-header">
 														<div class="event-title">
-															<h2 class="entry-title" itemprop="name">Velvet Pulse +
-																Guests</h2>
+															<h2 class="entry-title" itemprop="name">{{titulo}}</h2>
 														</div>
 														<div class="envent-types">
 														</div>
 													</header>
-													<p>Experience an unforgettable night of music and energy at [Event
-														Name], where creativity meets passion on stage. Join us as we
-														bring together a lineup of renowned artists, immersive
-														performances, and an electric atmosphere that will leave you
-														wanting more. Prepare to be transported into a world of sound,
-														light, and emotions, crafted with the sole purpose of making
-														this event a standout in your memory.</p>
-													<p>Whether you’re here for the music, the community, or simply to
-														enjoy an incredible night out, [Event Name] promises to deliver
-														an experience like no other. From high-energy beats to intimate
-														acoustic sessions, this event caters to all music lovers. Expect
-														an unparalleled lineup of talent, breathtaking visuals, and a
-														night filled with unforgettable moments. Secure your tickets
-														now, and be part of a night that will resonate long after the
-														final encore.</p>
-
+													{{para descritivo}}
+													{{#if youtube_embed}}
+													<div class="event-video">
+														<iframe src="{{youtube_embed}}" title="{{titulo}}" loading="lazy"
+															allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+															referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+													</div>
+													{{/if}}											
 												</div>
 											</div>
 										</article>

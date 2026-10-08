@@ -38,7 +38,6 @@ const AGENDA_EXCERPT_MAX = 150;
 /** Páginas do tema sem YAML próprio (src/templates/<nome>.html) e o respetivo título. */
 const THEME_PAGES = {
   agenda: 'Calendário',
-  event: 'Velvet Pulse + Guests',
   venue: 'Venue',
   aboutus: 'About Us',
   contacts: 'Contact Us',
@@ -131,7 +130,7 @@ async function main() {
 
   const { langs, defaultLang, langCodes } = env;
   // Páginas extra não podem ter o nome de um idioma nem de uma pasta gerada (colidiriam na raiz).
-  const reserved = new Set([...langCodes, ...NAV_PAGES, 'assets', 'images', 'css', 'js', 'fonts']);
+  const reserved = new Set([...langCodes, ...NAV_PAGES, 'event', 'assets', 'images', 'css', 'js', 'fonts']);
   const clash = Object.keys(raw.extras).find((n) => reserved.has(n));
   if (clash) {
     throw new BuildError(`content/${clash}.yaml: o nome "${clash}" está reservado (idiomas, páginas do tema, assets, images, css, js, fonts). Mudar o nome do ficheiro.`);
@@ -155,9 +154,11 @@ async function main() {
   events.forEach((e) => ogNames.add(imageName(e.imagem_horizontal.ficheiro)));
   // Thumbs (495x378) da imagem horizontal, só para a listagem da página agenda.
   const thumbNames = new Set(events.map((e) => imageName(e.imagem_horizontal.ficheiro)));
+  // Recorte 1400x500 da imagem horizontal, para o topo da página de cada evento.
+  const bannerNames = thumbNames;
 
   const images = createImages({ srcDir: DIR.images, outDir: path.join(DIR.dist, 'images'), cacheDir: DIR.cache });
-  await images.prepare(refs, ogNames, thumbNames);
+  await images.prepare(refs, ogNames, thumbNames, bannerNames);
 
   const orphans = fs.existsSync(DIR.images)
     ? fs.readdirSync(DIR.images).filter((f) => !f.startsWith('.') && !refs.has(f))
@@ -207,6 +208,10 @@ async function main() {
     para(e, h) {
       return paragraphs(h.text(h.get(e.pos[0]), e.pos[0]));
     },
+    // Texto multilinha sem <p>: cada quebra de linha passa a <br> (ex.: morada dentro de um link).
+    linhas(e, h) {
+      return escapeHtml(h.text(h.get(e.pos[0]), e.pos[0]).trim()).replace(/\r?\n/g, '<br>');
+    },
   };
   const engine = createEngine({ templatesDir: DIR.templates, helpers, report });
 
@@ -234,6 +239,7 @@ async function main() {
       locale: L.locale,
       locale_og: L.locale.replace('-', '_'),
       site,
+      contactos: raw.contactos,
       ui: raw.site.ui,
       site_name: siteName,
       year: new Date().getFullYear(),
@@ -244,7 +250,8 @@ async function main() {
       agenda_url: pageUrl('agenda', lang),
       mural_url: pageUrl('mural', lang),
       contactos_url: pageUrl('contactos', lang),
-      urls: Object.fromEntries(NAV_PAGES.map((k) => [k, pageUrl(k, lang)])),
+      // urls.event (links de demonstração do tema) aponta para a agenda: cada evento tem a sua página.
+      urls: { ...Object.fromEntries(NAV_PAGES.map((k) => [k, pageUrl(k, lang)])), event: pageUrl('agenda', lang) },
       nav: pageKey ? { [pageKey]: true } : {},
       alternates: pathFor ? langs.map((l) => ({
         codigo: l.codigo, nome: l.nome, href: pathFor(l.codigo), abs_href: abs(pathFor(l.codigo)), current: l.codigo === lang,
@@ -275,7 +282,11 @@ async function main() {
       url: eventUrl(e.slug, lang),
       data_fmt: formatDate(e.data, L.locale),
       data_curta: formatDateShort(e.data, L.locale),
+      data_longa: formatDateShort(e.data, L.locale, 'long'),
       thumb_src: `/images/${images.thumbFile(imageName(e.imagem_horizontal.ficheiro))}`,
+      banner_src: `/images/${images.bannerFile(imageName(e.imagem_horizontal.ficheiro))}`,
+      // Original em tamanho real (convertido para /images/<nome>.avif no passo 6).
+      imagem_original_src: `/images/${imageName(e.imagem_horizontal.ficheiro)}`,
       descritivo_curto: truncate(T(e.descritivo, `evento "${e.slug}" › descritivo`), AGENDA_EXCERPT_MAX).replace(/…$/, '...'),
     }));
 
