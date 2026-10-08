@@ -29,6 +29,8 @@
 .hero-dot{width:12px;height:12px;padding:0;border:2px solid #fff;border-radius:50%;background:transparent;cursor:pointer;opacity:.7;transition:background-color .3s,opacity .3s}
 .hero-dot:hover{opacity:1}
 .hero-dot.is-active{background:#fff;opacity:1}
+/* The torn-paper edge below the hero overlaps it (negative margin): let clicks through to the dots */
+.elementor-2 .elementor-element.elementor-element-e74f2bd{pointer-events:none}
 /* Hero title: undo the theme's slabText (fixed lines, nowrap, per-line font size) so the title
    wraps between words, with a fluid size and balanced lines (mainly for mobile). */
 .elementor-2 .hero-slide .elementor-element.elementor-element-b460e3f .elementor-heading-title{font-size:clamp(2.5rem,10vw,7.8rem);line-height:.95;white-space:normal;word-break:normal;overflow-wrap:normal;hyphens:none;text-wrap:balance}

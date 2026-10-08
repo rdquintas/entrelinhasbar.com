@@ -33,7 +33,7 @@ const DIR = {
   dist: path.join(ROOT, 'dist'),
   cache: path.join(ROOT, '.cache/images'),
 };
-const MAX_SLIDES = 5;
+const MAX_SLIDES = 10;
 const AGENDA_EXCERPT_MAX = 150;
 /** Páginas do tema sem YAML próprio (src/templates/<nome>.html) e o respetivo título. */
 const THEME_PAGES = {

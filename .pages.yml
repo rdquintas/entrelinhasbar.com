@@ -179,7 +179,7 @@ content:
               message: "Usar o formato HH:MM, por exemplo 21:30"
           - name: destaque
             label: Destaque
-            description: Os eventos em destaque aparecem num carrossel no topo da página inicial, no lugar da imagem principal. Ignorado se o evento estiver cancelado.
+            description: Os eventos em destaque aparecem num carrossel no topo da página inicial, no lugar da imagem principal (máximo 10, os mais próximos). Ignorado se o evento estiver cancelado.
             type: boolean
             default: false
           - name: cancelado

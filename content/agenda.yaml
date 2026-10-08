@@ -32,7 +32,7 @@ eventos:
     data: "2026-12-12"
     hora: "22:00"
     imagem_horizontal: { ficheiro: workshop_h.png }
-    destaque: true
+    destaque: false
     cancelado: false
     link_bilhetes: ""
     links: []

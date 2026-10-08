@@ -44,7 +44,7 @@ Se faltar uma tradução, o site usa o idioma por defeito (pt) e o build mostra 
 ### Eventos (`content/agenda.yaml`)
 - Podem estar por **qualquer ordem**: o site ordena-os por data e hora.
 - `data: "2026-11-14"` (AAAA-MM-DD, com aspas) e `hora: "21:30"` (HH:MM, 24 h, com aspas).
-- `destaque: true` → o evento aparece no **carrossel** da página inicial (no lugar do hero; máx. 5). Sem destaques, mostra o hero por defeito.
+- `destaque: true` → o evento aparece no **carrossel** da página inicial (no lugar do hero; máx. 10). Sem destaques, mostra o hero por defeito.
 - `cancelado: true` → faixa vermelha **CANCELADO** no evento, na agenda e no carrossel.
 - Eventos com data **anterior a hoje** (Lisboa) são removidos no build: a entrada sai do `agenda.yaml`, as imagens que só eles usavam são apagadas e a página deixa de existir. Entre builds, a agenda esconde-os no browser.
 - **Apagar** o evento do YAML remove-o do site **e** apaga as suas imagens do repositório (ver [Limpeza de imagens](#limpeza-de-imagens-de-eventos-apagados)).
