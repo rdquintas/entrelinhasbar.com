@@ -263,11 +263,6 @@ content:
     path: content/contactos.yaml
     description: Detalhes de contacto e perguntas frequentes. O logótipo e as redes sociais estão em "Definições do site".
     fields:
-      - name: titulo
-        label: Título da página
-        component: texto
-      - name: seo
-        component: seo
       - name: hero
         component: hero
       - name: telefone

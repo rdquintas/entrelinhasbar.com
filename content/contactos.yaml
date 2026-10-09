@@ -1,10 +1,3 @@
-titulo:
-  pt: "Contactos"
-  en: "Contact"
-seo:
-  descricao:
-    pt: "Como falar connosco."
-    en: "How to reach us."
 hero:
   img_horizontal:
     ficheiro: hero-contactos-h.png
