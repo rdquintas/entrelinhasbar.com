@@ -181,9 +181,12 @@ async function main() {
   const thumbNames = new Set(events.map((e) => imageName(e.imagem_horizontal.ficheiro)));
   // Recorte 1400x500 da imagem horizontal, para o topo da página de cada evento.
   const bannerNames = thumbNames;
+  // Fotos da equipa (index.yaml › equipa) recortadas para 600x800.
+  const equipa = (Array.isArray(raw.index.equipa) ? raw.index.equipa : []).filter(cleanImage);
+  const teamNames = new Set(equipa.map((p) => imageName(p.ficheiro)));
 
   const images = createImages({ srcDir: DIR.images, outDir: path.join(DIR.dist, 'images'), cacheDir: DIR.cache });
-  await images.prepare(refs, ogNames, thumbNames, bannerNames);
+  await images.prepare(refs, ogNames, thumbNames, bannerNames, teamNames);
 
   // Imagens fora dos YAML usadas diretamente pelos templates/CSS/JS do tema (ex.: "logo_v3.avif") são normais.
   const codeText = [DIR.templates, ...DIR.theme].map(readTextTree).join('\n');
@@ -334,7 +337,7 @@ async function main() {
         pageKey: 'index', pathFor: (l) => pageUrl('index', l), ...seoOf('index'),
         extra: {
           ...pageData('index'),
-          equipa: (Array.isArray(raw.index.equipa) ? raw.index.equipa : []).filter(cleanImage),
+          equipa: equipa.map((p) => ({ ...p, foto_src: `/images/${images.teamFile(imageName(p.ficheiro))}` })),
           video: parseVideo(raw.index.linkvideo),
           destaques,
           destaques_multiplos: destaques.length > 1,

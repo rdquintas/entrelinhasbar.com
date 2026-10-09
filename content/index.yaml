@@ -24,45 +24,45 @@ historia:
 # nome e titulo: máx. 40 caracteres; subtitulo: máx. 100 caracteres.
 equipa:
   - ficheiro: galeria-01.png
-    nome: "Galeria 01"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Ana Ribeiro"
+    titulo: { pt: "Cofundadora e gerente", en: "Co-founder & manager" }
+    subtitulo: { pt: "Recebe cada cliente como se fosse da família.", en: "Welcomes every guest as if they were family." }
   - ficheiro: galeria-02.png
-    nome: "Galeria 02"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Luís Matos"
+    titulo: { pt: "Cofundador e programador musical", en: "Co-founder & music curator" }
+    subtitulo: { pt: "Escolhe a banda sonora das noites e dos concertos ao vivo.", en: "Picks the soundtrack for every night and live show." }
   - ficheiro: galeria-03.png
-    nome: "Galeria 03"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Marta Coelho"
+    titulo: { pt: "Chefe de cozinha", en: "Head chef" }
+    subtitulo: { pt: "Petiscos caseiros com receitas de família e produtos da época.", en: "Homemade tapas from family recipes and seasonal produce." }
   - ficheiro: galeria-04.png
-    nome: "Galeria 04"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Rui Fernandes"
+    titulo: { pt: "Chefe de bar", en: "Head bartender" }
+    subtitulo: { pt: "Especialista em cervejas artesanais e cocktails de autor.", en: "Craft beer expert and signature cocktail maker." }
   - ficheiro: galeria-05.png
-    nome: "Galeria 05"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Inês Carvalho"
+    titulo: { pt: "Empregada de mesa", en: "Server" }
+    subtitulo: { pt: "Conhece o pedido de todos os clientes habituais de cor.", en: "Knows every regular's order by heart." }
   - ficheiro: galeria-06.png
-    nome: "Galeria 06"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Tiago Lopes"
+    titulo: { pt: "Técnico de som", en: "Sound engineer" }
+    subtitulo: { pt: "Garante que cada concerto soa tão bem como merece.", en: "Makes sure every gig sounds as good as it deserves." }
   - ficheiro: galeria-07.png
-    nome: "Galeria 07"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Sofia Martins"
+    titulo: { pt: "Pasteleira", en: "Pastry chef" }
+    subtitulo: { pt: "Responsável pelas sobremesas que ninguém consegue recusar.", en: "Behind the desserts nobody can resist." }
   - ficheiro: galeria-08.png
-    nome: "Galeria 08"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Pedro Antunes"
+    titulo: { pt: "Barman", en: "Bartender" }
+    subtitulo: { pt: "Mestre do gin tónico e das conversas ao balcão.", en: "Master of gin and tonics and bar-side chats." }
   - ficheiro: galeria-09.png
-    nome: "Galeria 09"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Beatriz Sousa"
+    titulo: { pt: "Eventos e comunicação", en: "Events & communications" }
+    subtitulo: { pt: "Organiza a agenda e mantém as redes sociais sempre ao dia.", en: "Runs the events calendar and keeps social media up to date." }
   - ficheiro: galeria-10.png
-    nome: "Galeria 10"
-    titulo: { pt: "", en: "" }
-    subtitulo: { pt: "", en: "" }
+    nome: "Miguel Rocha"
+    titulo: { pt: "Ajudante de cozinha", en: "Kitchen assistant" }
+    subtitulo: { pt: "O braço direito da cozinha nas noites mais movimentadas.", en: "The kitchen's right hand on the busiest nights." }
 
 # Link de um vídeo do YouTube, Facebook ou Instagram. Deixar vazio para não mostrar.
 linkvideo: "https://www.youtube.com/watch?v=3_x3Fv4KQvQ&list=RD3_x3Fv4KQvQ&start_radio=1"
