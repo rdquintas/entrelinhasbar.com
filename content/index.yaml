@@ -43,26 +43,6 @@ equipa:
     nome: "Inês Carvalho"
     titulo: { pt: "Empregada de mesa", en: "Server" }
     subtitulo: { pt: "Conhece o pedido de todos os clientes habituais de cor.", en: "Knows every regular's order by heart." }
-  - ficheiro: galeria-06.png
-    nome: "Tiago Lopes"
-    titulo: { pt: "Técnico de som", en: "Sound engineer" }
-    subtitulo: { pt: "Garante que cada concerto soa tão bem como merece.", en: "Makes sure every gig sounds as good as it deserves." }
-  - ficheiro: galeria-07.png
-    nome: "Sofia Martins"
-    titulo: { pt: "Pasteleira", en: "Pastry chef" }
-    subtitulo: { pt: "Responsável pelas sobremesas que ninguém consegue recusar.", en: "Behind the desserts nobody can resist." }
-  - ficheiro: galeria-08.png
-    nome: "Pedro Antunes"
-    titulo: { pt: "Barman", en: "Bartender" }
-    subtitulo: { pt: "Mestre do gin tónico e das conversas ao balcão.", en: "Master of gin and tonics and bar-side chats." }
-  - ficheiro: galeria-09.png
-    nome: "Beatriz Sousa"
-    titulo: { pt: "Eventos e comunicação", en: "Events & communications" }
-    subtitulo: { pt: "Organiza a agenda e mantém as redes sociais sempre ao dia.", en: "Runs the events calendar and keeps social media up to date." }
-  - ficheiro: galeria-10.png
-    nome: "Miguel Rocha"
-    titulo: { pt: "Ajudante de cozinha", en: "Kitchen assistant" }
-    subtitulo: { pt: "O braço direito da cozinha nas noites mais movimentadas.", en: "The kitchen's right hand on the busiest nights." }
 
 # Link de um vídeo do YouTube, Facebook ou Instagram. Deixar vazio para não mostrar.
 linkvideo: "https://www.youtube.com/watch?v=3_x3Fv4KQvQ&list=RD3_x3Fv4KQvQ&start_radio=1"
