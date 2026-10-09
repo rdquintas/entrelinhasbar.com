@@ -5,7 +5,13 @@ nome:
   en: "Entrelinhas Bistro Bar"
 
 # Endereço público do site, sem barra final (usado em canonical, sitemap e og:image).
-url_base: "https://exemplo.netlify.app"
+url_base: "https://entrelinhasbar.netlify.app"
+
+# Texto que aparece ao partilhar o link (WhatsApp, Facebook...) nas páginas sem descrição própria.
+# As páginas dos eventos usam o resumo do evento e a sua imagem horizontal.
+descricao:
+  pt: "Bistrô bar no coração de Alverca: cervejas artesanais, petiscos caseiros e música ao vivo. Consulta a agenda de eventos."
+  en: "Bistro bar in the heart of Alverca: craft beer, homemade tapas and live music. Check out our events."
 
 idiomas:
   - codigo: pt

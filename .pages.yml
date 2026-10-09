@@ -356,6 +356,17 @@ content:
         label: Endereço público do site (sem barra no fim)
         description: "Ex.: https://meusite.netlify.app. Usado para partilha nas redes e motores de pesquisa."
         type: string
+      - name: descricao
+        label: Descrição do site (partilha nas redes e motores de pesquisa)
+        description: Texto que aparece ao partilhar o link (WhatsApp, Facebook...) nas páginas sem descrição própria. Os eventos usam o seu resumo.
+        type: object
+        fields:
+          - name: pt
+            label: Português
+            type: string
+          - name: en
+            label: English
+            type: string
       - name: idiomas
         label: Idiomas
         description: Só alterar se for para acrescentar/remover um idioma (requer também alterar os textos em todo o site).

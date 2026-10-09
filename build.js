@@ -116,7 +116,10 @@ function findNonAvifRefs() {
   const re = /images\/[\w.%-]+?\.(?:jpe?g|png|gif|webp|svg|tiff?)(?![\w.-])/gi;
   const found = new Set();
   for (const f of textFiles(DIR.dist)) {
-    for (const m of fs.readFileSync(f, 'utf8').match(re) || []) found.add(`${path.relative(DIR.dist, f)}: ${m}`);
+    for (const m of fs.readFileSync(f, 'utf8').match(re) || []) {
+      if (/-og-q\d+\.jpg$/.test(m)) continue; // og:image é JPEG de propósito (as redes sociais não lêem AVIF)
+      found.add(`${path.relative(DIR.dist, f)}: ${m}`);
+    }
   }
   return [...found];
 }
@@ -263,6 +266,7 @@ async function main() {
     const lang = L.codigo;
     const T = (val, label) => content.resolveText(val, { lang, defaultLang, report, label });
     const siteName = T(raw.site.nome, 'site.yaml › nome');
+    const siteDescription = T(raw.site.descricao, 'site.yaml › descricao') || '';
 
     /** Contexto comum a todas as páginas deste idioma. */
     const makeCtx = ({ pageKey, pathFor, title, description, ogName, noindex = false, extra = {} }) => ({
@@ -290,7 +294,7 @@ async function main() {
       x_default: pathFor ? abs(pathFor(defaultLang)) : '',
       canonical: pathFor && siteUrl ? abs(pathFor(lang)) : '',
       seo_title: title && title !== siteName ? `${title} — ${siteName}` : siteName,
-      seo_description: description || '',
+      seo_description: description || siteDescription,
       og_image: ogFor(ogName || (siteOg && imageName(siteOg.ficheiro))),
       noindex,
       ...extra,

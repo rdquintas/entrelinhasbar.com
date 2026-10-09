@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://exemplo.netlify.app/sitemap.xml
+Sitemap: https://entrelinhasbar.netlify.app/sitemap.xml
