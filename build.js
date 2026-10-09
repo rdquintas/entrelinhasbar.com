@@ -335,7 +335,7 @@ async function main() {
         pageKey: 'index', pathFor: (l) => pageUrl('index', l), ...seoOf('index'),
         extra: {
           ...pageData('index'),
-          imagens: (Array.isArray(raw.index.imagens) ? raw.index.imagens : []).filter(cleanImage),
+          equipa: (Array.isArray(raw.index.equipa) ? raw.index.equipa : []).filter(cleanImage),
           video_embed: ytId ? `https://www.youtube-nocookie.com/embed/${ytId}` : '',
           destaques,
           destaques_multiplos: destaques.length > 1,

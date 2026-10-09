@@ -25,6 +25,36 @@ components:
         label: English
         type: string
 
+  # Texto curto por idioma, máximo 40 caracteres
+  texto_40:
+    type: object
+    fields:
+      - name: pt
+        label: Português
+        type: string
+        options:
+          maxlength: 40
+      - name: en
+        label: English
+        type: string
+        options:
+          maxlength: 40
+
+  # Texto curto por idioma, máximo 100 caracteres
+  texto_100:
+    type: object
+    fields:
+      - name: pt
+        label: Português
+        type: string
+        options:
+          maxlength: 100
+      - name: en
+        label: English
+        type: string
+        options:
+          maxlength: 100
+
   # Texto longo (várias linhas; linha em branco = novo parágrafo)
   texto_longo:
     type: object
@@ -103,7 +133,7 @@ content:
     label: Página inicial
     type: file
     path: content/index.yaml
-    description: Hero por defeito, galeria de imagens e vídeo. Os eventos marcados como destaque (em Agenda) substituem o hero.
+    description: Hero por defeito, equipa e vídeo. Os eventos marcados como destaque (em Agenda) substituem o hero.
     fields:
       - name: hero
         component: hero_titulo
@@ -111,18 +141,32 @@ content:
         label: A nossa história
         description: Separar os parágrafos com uma linha em branco.
         component: texto_longo
-      - name: imagens
-        label: Galeria (até 10 imagens)
+      - name: equipa
+        label: Equipa
+        description: Sem limite de pessoas. Nome e título até 40 caracteres; subtítulo até 100 caracteres.
         type: object
         list:
-          max: 10
           collapsible:
             collapsed: true
-            summary: "Imagem {index}"
+            summary: "Imagem {index} {fields.nome}"
         fields:
           - name: ficheiro
             label: Imagem
             type: image
+          - name: nome
+            label: Nome
+            description: Máximo 40 caracteres.
+            type: string
+            options:
+              maxlength: 40
+          - name: titulo
+            label: Título
+            description: Máximo 40 caracteres (em cada idioma).
+            component: texto_40
+          - name: subtitulo
+            label: Subtítulo
+            description: Máximo 100 caracteres (em cada idioma).
+            component: texto_100
       - name: video_youtube
         label: Vídeo do YouTube (opcional)
         description: Colar o endereço do vídeo (youtube.com/watch?v=... ou youtu.be/...). Deixar vazio para não mostrar vídeo.

@@ -20,18 +20,49 @@ historia:
     
     Today, Entrelinhas is much more than a simple bar in Alverca; it has become a cross-generational meeting point. Between lively conversations and weekend toasts, Ana and Luís's story continues to unfold in every corner, proving that life's best moments always happen between the lines of everyday routine.
   
-# Até 10 imagens (galeria da página inicial).
-imagens:
-  - { ficheiro: galeria-01.png }
-  - { ficheiro: galeria-02.png }
-  - { ficheiro: galeria-03.png }
-  - { ficheiro: galeria-04.png }
-  - { ficheiro: galeria-05.png }
-  - { ficheiro: galeria-06.png }
-  - { ficheiro: galeria-07.png }
-  - { ficheiro: galeria-08.png }
-  - { ficheiro: galeria-09.png }
-  - { ficheiro: galeria-10.png }
+# Equipa da página inicial (sem limite de pessoas).
+# nome e titulo: máx. 40 caracteres; subtitulo: máx. 100 caracteres.
+equipa:
+  - ficheiro: galeria-01.png
+    nome: "Galeria 01"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
+  - ficheiro: galeria-02.png
+    nome: "Galeria 02"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
+  - ficheiro: galeria-03.png
+    nome: "Galeria 03"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
+  - ficheiro: galeria-04.png
+    nome: "Galeria 04"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
+  - ficheiro: galeria-05.png
+    nome: "Galeria 05"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
+  - ficheiro: galeria-06.png
+    nome: "Galeria 06"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
+  - ficheiro: galeria-07.png
+    nome: "Galeria 07"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
+  - ficheiro: galeria-08.png
+    nome: "Galeria 08"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
+  - ficheiro: galeria-09.png
+    nome: "Galeria 09"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
+  - ficheiro: galeria-10.png
+    nome: "Galeria 10"
+    titulo: { pt: "", en: "" }
+    subtitulo: { pt: "", en: "" }
 
 # Endereço do vídeo (ou só o ID). Deixar vazio para não mostrar.
 video_youtube: "https://www.youtube.com/watch?v=jNQXAC9IVRw"
