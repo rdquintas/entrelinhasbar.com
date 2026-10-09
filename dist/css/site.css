@@ -50,7 +50,7 @@
 /* "Juno" headings and logo (Anton, see fonts.css). Juno has capitals only, hence the uppercase;
    the brushed texture is recreated with a small tiled mask,
    sized in em so it scales with the text. */
-.logo-text,.poize-big-text-yes .elementor-heading-title{-webkit-mask-image:url(../images/grunge-mask.avif);mask-image:url(../images/grunge-mask.avif);-webkit-mask-size:5em auto;mask-size:5em auto;text-transform:uppercase}
+.logo-text,.poize-big-text-yes .elementor-heading-title{-webkit-mask-image:url(../images/grunge-mask.png);mask-image:url(../images/grunge-mask.png);-webkit-mask-size:5em auto;mask-size:5em auto;text-transform:uppercase}
 
 /* Header logo (src/images/logo.avif) in place of the theme's text logo */
 .logo-link img.logo-brand{display:block;width:auto;height:70px;max-width:none}

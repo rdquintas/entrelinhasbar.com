@@ -1,8 +1,8 @@
 hero:
   img_horizontal:
-    ficheiro: hero-contactos-h.png
+    ficheiro: default_h.png
   img_vertical:
-    ficheiro: hero-contactos-v.png
+    ficheiro: default_v.png
 
 telefone: "+351219574276"
 email: "entrelinhascafebistro@gmail.com"
