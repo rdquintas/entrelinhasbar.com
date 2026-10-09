@@ -1,8 +1,8 @@
 # Conteúdo partilhado por todas as páginas.
 # Para adicionar um idioma: acrescentar em "idiomas" e preencher a nova chave em TODOS os textos.
 nome:
-  pt: "Entrelinhas Bistro Bar"
-  en: "Entrelinhas Bistro Bar"
+  pt: "Entrelinhas Bistrô Bar"
+  en: "Entrelinhas Bistrô Bar"
 
 # Endereço público do site, sem barra final (usado em canonical, sitemap e og:image).
 url_base: "https://entrelinhasbar.netlify.app"
