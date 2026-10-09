@@ -100,3 +100,5 @@
 .entry-event-accordion--btn{cursor:pointer}
 /* Página inicial: secção do container 1f78caa com fundo #f3f3f3 */
 .elementor-2 .elementor-element.elementor-element-1f78caa{background-color:#f3f3f3}
+/* My Team: as imagens não são clicáveis; anular o efeito de opacidade no hover do tema */
+.not-mobile .wolf-core-team-member-image:hover{opacity:1}
