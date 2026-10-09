@@ -12,9 +12,19 @@
 /* Disable the theme custom cursor (circle + hover labels like "Discover artist"); use the native pointer */
 .cursor,.cursor-text{display:none!important}
 
-/* Homepage "Meet Our Artists": the grid no longer uses Isotope (masonry-container removed in index.html);
-   the theme's fade-in-up uses "transition:all", so only animate the entrance properties */
-.artist-items.items-entrance-animation-fade-in-up .entry{transition-property:opacity,transform!important}
+/* Homepage "The Team": theme's fade-in-up entrance (as in .items-entrance-animation-fade-in-up),
+   one member after another (.2s steps), when the row gets .section-appeared-once on scroll */
+.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member{opacity:0;transform:translateY(100px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.loaded .elementor-2 .elementor-element-3bcb9d8.section-appeared-once .elementor-widget-team-member{opacity:1;transform:translateY(0)}
+.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member:nth-child(1){transition-delay:.2s}
+.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member:nth-child(2){transition-delay:.4s}
+.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member:nth-child(3){transition-delay:.6s}
+.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member:nth-child(4){transition-delay:.8s}
+.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member:nth-child(5){transition-delay:1s}
+.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member:nth-child(6){transition-delay:1.2s}
+.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member:nth-child(7){transition-delay:1.4s}
+.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member:nth-child(8){transition-delay:1.6s}
+@media (prefers-reduced-motion:reduce){.elementor-2 .elementor-element-3bcb9d8 .elementor-widget-team-member{opacity:1;transform:none;transition:none}}
 
 /* Homepage hero carousel (js/hero-slider.js): stacked slides crossfade, dots at the bottom */
 .elementor-2 .elementor-element-80ea7dc{position:relative}
