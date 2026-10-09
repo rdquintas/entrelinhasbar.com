@@ -305,7 +305,7 @@ content:
     label: Definições do site
     type: file
     path: content/site.yaml
-    description: Nome, idiomas, redes sociais e textos de botões/etiquetas. Mexer com cuidado.
+    description: Nome, idiomas, redes sociais e etiquetas dos tipos de evento. Mexer com cuidado.
     fields:
       - name: nome
         label: Nome do site
@@ -353,87 +353,9 @@ content:
             label: Newsletter (URL)
             type: string
       - name: ui
-        label: Textos de botões e etiquetas
+        label: Etiquetas dos tipos de evento
         type: object
         fields:
-          - name: menu_principal
-            label: Nome do menu (leitores de ecrã)
-            component: texto
-          - name: idioma
-            label: Seletor de idioma (leitores de ecrã)
-            component: texto
-          - name: ir_conteudo
-            label: Link "saltar para o conteúdo"
-            component: texto
-          - name: contactos
-            label: Link "Contactos" (rodapé)
-            component: texto
-          - name: saber_mais
-            label: Botão "Saber mais"
-            component: texto
-          - name: cancelado
-            label: Etiqueta "CANCELADO"
-            component: texto
-          - name: voltar_agenda
-            label: Link "Voltar à agenda"
-            component: texto
-          - name: sem_eventos
-            label: Mensagem "sem eventos"
-            component: texto
-          - name: galeria
-            label: Galeria (leitores de ecrã)
-            component: texto
-          - name: video_titulo
-            label: Título do vídeo
-            component: texto
-          - name: destaques
-            label: Carrossel de destaques (leitores de ecrã)
-            component: texto
-          - name: slide
-            label: Bullet do carrossel (leitores de ecrã)
-            component: texto
-          - name: ampliar
-            label: Ampliar imagem
-            component: texto
-          - name: reproduzir
-            label: Reproduzir vídeo
-            component: texto
-          - name: fechar
-            label: Fechar
-            component: texto
-          - name: telefone
-            label: Rótulo "Telefone"
-            component: texto
-          - name: email
-            label: Rótulo "Email"
-            component: texto
-          - name: morada
-            label: Rótulo "Morada"
-            component: texto
-          - name: horario
-            label: Rótulo "Horário"
-            component: texto
-          - name: mapa
-            label: Rótulo "Mapa"
-            component: texto
-          - name: ver_no_maps
-            label: Link "Ver no Google Maps"
-            component: texto
-          - name: faq
-            label: Título das perguntas frequentes
-            component: texto
-          - name: redes
-            label: Redes sociais (leitores de ecrã)
-            component: texto
-          - name: pagina_nao_encontrada
-            label: Título da página 404
-            component: texto
-          - name: voltar_inicio
-            label: Link "Voltar ao início"
-            component: texto
-          - name: mural_sem_js
-            label: Aviso do mural sem JavaScript
-            component: texto
           - name: tipos
             label: Nomes dos tipos de evento
             type: object

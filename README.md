@@ -56,7 +56,7 @@ Os textos fixos dos templates (títulos de secções, etc.) estão no próprio H
 ### Ficheiros
 | Ficheiro | O que controla |
 |---|---|
-| `content/site.yaml` | nome, idiomas, `url_base`, `og_imagem`, redes sociais (rodapé), textos de interface (`ui`) |
+| `content/site.yaml` | nome, idiomas, `url_base`, `og_imagem`, redes sociais (rodapé), etiquetas dos tipos de evento (`ui.tipos`) |
 | `content/index.yaml` | hero por defeito (com título), `historia`, galeria (até 10 imagens) e `video_youtube`* |
 | `content/agenda.yaml` | lista de eventos |
 | `content/mural.yaml` | hero e itens (imagens ou vídeos YouTube, sem limite) |

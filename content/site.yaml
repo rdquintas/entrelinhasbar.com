@@ -26,34 +26,8 @@ redes:
   youtube: ""
   newsletter: ""
 
-# Textos de interface (botões, etiquetas, acessibilidade).
+# Etiquetas dos tipos de evento.
 ui:
-  menu_principal: { pt: "Menu principal", en: "Main menu" }
-  idioma: { pt: "Idioma", en: "Language" }
-  ir_conteudo: { pt: "Saltar para o conteúdo", en: "Skip to content" }
-  contactos: { pt: "Contactos", en: "Contact" }
-  saber_mais: { pt: "Saber mais", en: "Learn more" }
-  cancelado: { pt: "CANCELADO", en: "CANCELLED" }
-  voltar_agenda: { pt: "Voltar à agenda", en: "Back to events" }
-  sem_eventos: { pt: "De momento não há eventos agendados.", en: "There are no events scheduled at the moment." }
-  galeria: { pt: "Galeria de imagens", en: "Image gallery" }
-  video_titulo: { pt: "Vídeo", en: "Video" }
-  destaques: { pt: "Eventos em destaque", en: "Featured events" }
-  slide: { pt: "Ir para o destaque", en: "Go to featured event" }
-  ampliar: { pt: "Ampliar imagem", en: "Enlarge image" }
-  reproduzir: { pt: "Reproduzir vídeo", en: "Play video" }
-  fechar: { pt: "Fechar", en: "Close" }
-  telefone: { pt: "Telefone", en: "Phone" }
-  email: { pt: "Email", en: "Email" }
-  morada: { pt: "Morada", en: "Address" }
-  horario: { pt: "Horário", en: "Opening hours" }
-  mapa: { pt: "Mapa", en: "Map" }
-  ver_no_maps: { pt: "Ver no Google Maps", en: "View on Google Maps" }
-  faq: { pt: "Perguntas frequentes", en: "Frequently asked questions" }
-  redes: { pt: "Redes sociais", en: "Social media" }
-  pagina_nao_encontrada: { pt: "Página não encontrada", en: "Page not found" }
-  voltar_inicio: { pt: "Voltar ao início", en: "Back to home" }
-  mural_sem_js: { pt: "Para ver o mural em mosaico é preciso ativar o JavaScript.", en: "Enable JavaScript to see the wall as a mosaic." }
   tipos:
     concerto: { pt: "Concerto", en: "Concert" }
     workshop: { pt: "Workshop", en: "Workshop" }

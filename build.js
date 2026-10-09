@@ -43,6 +43,19 @@ const THEME_PAGES = {
   contacts: 'Contact Us',
 };
 const NAV_PAGES = ['index', ...Object.keys(THEME_PAGES)];
+/** Textos fixos da interface ({{ui.*}} nos templates); as etiquetas dos tipos de evento vêm de site.yaml › ui.tipos. */
+const UI = {
+  saber_mais: { pt: 'Saber mais', en: 'Learn more' },
+  cancelado: { pt: 'CANCELADO', en: 'CANCELLED' },
+  video_titulo: { pt: 'Vídeo', en: 'Video' },
+  destaques: { pt: 'Eventos em destaque', en: 'Featured events' },
+  slide: { pt: 'Ir para o destaque', en: 'Go to featured event' },
+  ampliar: { pt: 'Ampliar imagem', en: 'Enlarge image' },
+  reproduzir: { pt: 'Reproduzir vídeo', en: 'Play video' },
+  fechar: { pt: 'Fechar', en: 'Close' },
+  pagina_nao_encontrada: { pt: 'Página não encontrada', en: 'Page not found' },
+  voltar_inicio: { pt: 'Voltar ao início', en: 'Back to home' },
+};
 const cleanImage = content.cleanImage;
 /** JSON seguro para <script type="application/json"> (um "</script>" no conteúdo não fecha a tag). */
 const safeJson = (obj) => JSON.stringify(obj).replace(/</g, '\\u003c');
@@ -52,6 +65,16 @@ const write = (rel, data) => {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, data);
 };
+
+/** Conteúdo concatenado dos ficheiros de texto (html/css/js) de uma pasta, recursivamente. */
+function readTextTree(dir) {
+  if (!fs.existsSync(dir)) return '';
+  return fs.readdirSync(dir, { withFileTypes: true }).map((entry) => {
+    const p = path.join(dir, entry.name);
+    if (entry.isDirectory()) return readTextTree(p);
+    return /\.(html|css|js)$/i.test(entry.name) ? fs.readFileSync(p, 'utf8') : '';
+  }).join('\n');
+}
 
 function copyDir(from, to) {
   if (!fs.existsSync(from)) return;
@@ -162,11 +185,14 @@ async function main() {
   const images = createImages({ srcDir: DIR.images, outDir: path.join(DIR.dist, 'images'), cacheDir: DIR.cache });
   await images.prepare(refs, ogNames, thumbNames, bannerNames);
 
+  // Imagens fora dos YAML usadas diretamente pelos templates/CSS/JS do tema (ex.: "logo_v3.avif") são normais.
+  const codeText = [DIR.templates, ...DIR.theme].map(readTextTree).join('\n');
   const orphans = fs.existsSync(DIR.images)
-    ? fs.readdirSync(DIR.images).filter((f) => !f.startsWith('.') && !refs.has(f))
+    ? fs.readdirSync(DIR.images).filter((f) => !f.startsWith('.') && !refs.has(f)
+      && !codeText.includes(f.replace(/\.[^.]+$/, '') + '.'))
     : [];
   if (orphans.length) {
-    report.warn(`${orphans.length} imagem(ns) em src/images/ não estão referenciadas em nenhum YAML (convertidas para AVIF no tamanho original, sem versões responsivas):${orphans.slice(0, 8).join(', ')}${orphans.length > 8 ? ', …' : ''}`);
+    report.warn(`${orphans.length} imagem(ns) em src/images/ não são usadas em nenhum YAML, template, CSS ou JS (podem ser apagadas):${orphans.slice(0, 8).join(', ')}${orphans.length > 8 ? ', …' : ''}`);
   }
 
   /* ---------- 3. Assets ---------- */
@@ -242,7 +268,7 @@ async function main() {
       locale_og: L.locale.replace('-', '_'),
       site,
       contactos: raw.contactos,
-      ui: raw.site.ui,
+      ui: { ...UI, tipos: raw.site.ui.tipos },
       site_name: siteName,
       year: new Date().getFullYear(),
       css_href: cssHref,
@@ -364,7 +390,7 @@ async function main() {
 
     /* 404 (só no idioma por defeito, na raiz) */
     if (lang === defaultLang) {
-      const ctx = makeCtx({ pageKey: null, pathFor: null, title: T(raw.site.ui.pagina_nao_encontrada, 'ui.pagina_nao_encontrada'), noindex: true });
+      const ctx = makeCtx({ pageKey: null, pathFor: null, title: T(UI.pagina_nao_encontrada, 'ui.pagina_nao_encontrada'), noindex: true });
       write('404.html', render('404', ctx));
     }
   }
