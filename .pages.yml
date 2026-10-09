@@ -167,9 +167,12 @@ content:
             label: Subtítulo
             description: Máximo 100 caracteres (em cada idioma).
             component: texto_100
-      - name: video_youtube
-        label: Vídeo do YouTube (opcional)
-        description: Colar o endereço do vídeo (youtube.com/watch?v=... ou youtu.be/...). Deixar vazio para não mostrar vídeo.
+      - name: linkvideo
+        label: Link do vídeo (opcional)
+        description: >-
+          Colar o endereço de um vídeo do YouTube, Facebook ou Instagram
+          (ex.: youtube.com/watch?v=..., youtu.be/..., facebook.com/.../videos/..., fb.watch/..., instagram.com/reel/... ou instagram.com/p/...).
+          Aparece entre "A nossa história" e a equipa. Deixar vazio para não mostrar vídeo.
         type: string
 
   - name: agenda

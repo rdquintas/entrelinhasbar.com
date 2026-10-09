@@ -64,5 +64,5 @@ equipa:
     titulo: { pt: "", en: "" }
     subtitulo: { pt: "", en: "" }
 
-# Endereço do vídeo (ou só o ID). Deixar vazio para não mostrar.
-video_youtube: "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+# Link de um vídeo do YouTube, Facebook ou Instagram. Deixar vazio para não mostrar.
+linkvideo: "https://www.youtube.com/watch?v=3_x3Fv4KQvQ&list=RD3_x3Fv4KQvQ&start_radio=1"

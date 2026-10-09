@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const {
-  Report, BuildError, escapeHtml, imageName, paragraphs, parseYoutubeId, formatBytes, truncate,
+  Report, BuildError, escapeHtml, imageName, paragraphs, parseYoutubeId, parseVideo, formatBytes, truncate,
 } = require('./lib/util');
 const content = require('./lib/content');
 const { prepareEvents, formatDate, formatDateShort } = require('./lib/events');
@@ -330,13 +330,12 @@ async function main() {
     /* index */
     {
       const destaques = localized.filter((e) => e.destaque).slice(0, MAX_SLIDES);
-      const ytId = parseYoutubeId(raw.index.video_youtube);
       emit('', 'index', makeCtx({
         pageKey: 'index', pathFor: (l) => pageUrl('index', l), ...seoOf('index'),
         extra: {
           ...pageData('index'),
           equipa: (Array.isArray(raw.index.equipa) ? raw.index.equipa : []).filter(cleanImage),
-          video_embed: ytId ? `https://www.youtube-nocookie.com/embed/${ytId}` : '',
+          video: parseVideo(raw.index.linkvideo),
           destaques,
           destaques_multiplos: destaques.length > 1,
         },

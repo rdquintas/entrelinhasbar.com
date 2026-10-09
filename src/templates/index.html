@@ -53,6 +53,15 @@
 									{{para historia}}
 								</div>
 							</div>
+							{{#if video}}
+							<div class="home-video">
+								<div class="home-video-frame home-video-frame--{{video.formato}}">
+									<iframe src="{{video.embed}}" title="{{#lang pt}}Vídeo{{/lang}}{{#lang en}}Video{{/lang}}" loading="lazy"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+										referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+								</div>
+							</div>
+							{{/if}}
 	
 							<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-1242080 e-flex e-con-boxed e-con e-parent e-lazyloaded"
 								data-color-tone="" data-e-type="container"

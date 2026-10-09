@@ -17,7 +17,7 @@
 # Estilos inline são permitidos: o tema (GSAP/Elementor/Poize) injeta <style> e atributos style
 # em runtime para as animações, e o HTML tem alguns style="..." — sem isto as animações partem.
 # Fontes data: são usadas por CSS de terceiros (ex.: ícones embutidos em base64).
-# Exceções: miniaturas do YouTube (i.ytimg.com) e vídeos incorporados (youtube-nocookie.com).
+# Exceções: miniaturas do YouTube (i.ytimg.com) e vídeos incorporados (youtube-nocookie.com, Facebook, Instagram).
 [[headers]]
   for = "/*"
   [headers.values]
@@ -25,7 +25,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "SAMEORIGIN"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://i.ytimg.com; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://i.ytimg.com; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src https://www.youtube-nocookie.com https://www.facebook.com https://www.instagram.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
 
 # Imagens e CSS/JS têm hash no nome: cache longa e imutável.
 [[headers]]
