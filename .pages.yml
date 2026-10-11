@@ -130,7 +130,7 @@ components:
 content:
 
   - name: index
-    label: Página inicial
+    label: Home Page
     type: file
     path: content/index.yaml
     description: Hero por defeito, equipa e vídeo. Os eventos marcados como destaque (em Agenda) substituem o hero.
@@ -176,7 +176,7 @@ content:
         type: string
 
   - name: agenda
-    label: Agenda e eventos
+    label: Calendário
     type: file
     path: content/agenda.yaml
     description: Os eventos podem estar por qualquer ordem; o site ordena-os por data e hora.
