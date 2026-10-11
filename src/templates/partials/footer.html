@@ -114,27 +114,7 @@
 			<button type="button" class="cookie-banner__btn cookie-banner__btn--accept" data-consent="granted">{{#lang pt}}Aceitar{{/lang}}{{#lang en}}Accept{{/lang}}</button>
 		</div>
 	</div>
-	<script>
-		(function () {
-			var KEY = 'cookie_consent';
-			var banner = document.getElementById('cookie-banner');
-			var get = function () { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
-			if (!get()) banner.hidden = false;
-			banner.addEventListener('click', function (e) {
-				var btn = e.target.closest('[data-consent]');
-				if (!btn) return;
-				var value = btn.getAttribute('data-consent');
-				try { localStorage.setItem(KEY, value); } catch (e) {}
-				gtag('consent', 'update', { analytics_storage: value });
-				banner.hidden = true;
-			});
-			document.addEventListener('click', function (e) {
-				if (!e.target.closest('.cookie-settings-link')) return;
-				e.preventDefault();
-				banner.hidden = false;
-			});
-		})();
-	</script>
+	<script src="/js/cookie-consent.js"></script>
 	{{/if}}
 
 	<script src="/js/vendor/jquery.js"></script>

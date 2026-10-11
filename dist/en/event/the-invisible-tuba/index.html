@@ -23,20 +23,7 @@
    
 <meta charset="utf-8" />
 <!-- Google Analytics (ID em content/site.yaml › google_analytics) -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Consent Mode v2: tudo recusado até o visitante aceitar no banner (partials/footer.html).
-  gtag('consent', 'default', {
-    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
-    analytics_storage: 'denied', wait_for_update: 500
-  });
-  try {
-    if (localStorage.getItem('cookie_consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' });
-  } catch (e) {}
-  gtag('js', new Date());
-  gtag('config', 'G-DF5CDE6GZR');
-</script>
+<script src="/js/analytics.js" data-ga-id="G-DF5CDE6GZR"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DF5CDE6GZR"></script>
 <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
 <title>Entrelinhas Bistrô Bar</title>
@@ -458,27 +445,7 @@
 			<button type="button" class="cookie-banner__btn cookie-banner__btn--accept" data-consent="granted">Accept</button>
 		</div>
 	</div>
-	<script>
-		(function () {
-			var KEY = 'cookie_consent';
-			var banner = document.getElementById('cookie-banner');
-			var get = function () { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
-			if (!get()) banner.hidden = false;
-			banner.addEventListener('click', function (e) {
-				var btn = e.target.closest('[data-consent]');
-				if (!btn) return;
-				var value = btn.getAttribute('data-consent');
-				try { localStorage.setItem(KEY, value); } catch (e) {}
-				gtag('consent', 'update', { analytics_storage: value });
-				banner.hidden = true;
-			});
-			document.addEventListener('click', function (e) {
-				if (!e.target.closest('.cookie-settings-link')) return;
-				e.preventDefault();
-				banner.hidden = false;
-			});
-		})();
-	</script>
+	<script src="/js/cookie-consent.js"></script>
 	
 
 	<script src="/js/vendor/jquery.js"></script>
