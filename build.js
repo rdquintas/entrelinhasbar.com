@@ -293,7 +293,8 @@ async function main() {
       })) : [],
       x_default: pathFor ? abs(pathFor(defaultLang)) : '',
       canonical: pathFor && siteUrl ? abs(pathFor(lang)) : '',
-      seo_title: title && title !== siteName ? `${title} — ${siteName}` : siteName,
+      // Todas as páginas usam o mesmo título: o nome do site (site.yaml › nome).
+      seo_title: siteName,
       seo_description: description || siteDescription,
       og_image: ogFor(ogName || (siteOg && imageName(siteOg.ficheiro))),
       noindex,
