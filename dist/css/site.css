@@ -53,21 +53,38 @@
 .logo-text,.poize-big-text-yes .elementor-heading-title{-webkit-mask-image:url(../images/grunge-mask.avif);mask-image:url(../images/grunge-mask.avif);-webkit-mask-size:5em auto;mask-size:5em auto;text-transform:uppercase}
 
 /* Header logo (src/images/logo.avif) in place of the theme's text logo */
-.logo-link img.logo-brand{display:block;width:auto;height:70px;max-width:none}
-@media (max-width:1024px){.logo-link img.logo-brand{height:48px}}
+.logo-link img.logo-brand{display:block;width:auto;height:140px;max-width:none}
+@media (max-width:1024px){.logo-link img.logo-brand{height:96px}}
 
 /* Header and footer logos swap to logo_v3.png on hover (the second <img> sits on top of the first) */
 .logo-link:has(.logo-hover){position:relative;display:inline-block}
 .logo-link img{transition:opacity .2s}
 .logo-link img.logo-hover{position:absolute;inset:0;width:100%;height:100%;opacity:0}
-.logo-link:hover img:not(.logo-hover),.logo-link:focus-visible img:not(.logo-hover){opacity:0}
-.logo-link:hover img.logo-hover,.logo-link:focus-visible img.logo-hover{opacity:1}
+/* Hover only on devices that really hover: on touch screens a tap leaves :hover stuck on */
+@media (hover:hover){
+  .logo-link:hover img:not(.logo-hover){opacity:0}
+  .logo-link:hover img.logo-hover{opacity:1}
+}
+.logo-link:focus-visible img:not(.logo-hover){opacity:0}
+.logo-link:focus-visible img.logo-hover{opacity:1}
 
 /* Footer: Social on the left, logo centred in the middle, empty column on the right for balance */
 .elementor-115 .elementor-element-74b303b>.e-con-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem}
-.elementor-115 .elementor-element-14cb72c{--width:auto}
+/* Same specificity as Elementor's --width:25% rule, which would otherwise shrink the column and wrap "Segue-nos" and the icons */
+.elementor-115 .elementor-element.elementor-element-14cb72c{--width:auto}
+.elementor-115 .elementor-element-4eb44a6 .elementor-heading-title{white-space:nowrap}
+.elementor-115 .elementor-element-b5d356f .elementor-social-icons-wrapper{white-space:nowrap}
 .footer-logo{display:flex;justify-content:center}
-.footer-logo-img{display:block;width:260px;max-width:100%;height:auto}
+/* The link gets the explicit width (not the images): with a shrink-to-fit link, a % image width is circular and the hover image drifts off the base one. Also undo the theme's header-only top/translate on a.logo-link */
+.footer-logo a.logo-link{display:block;width:260px;max-width:100%;top:0;transform:none;margin:0 auto}
+.footer-logo-img{display:block;width:100%;height:auto}
+/* Footer "Follow Us": same circular icons and hover as the contacts page (.elementor-6 .elementor-element-ae32320) */
+.elementor-115 .elementor-element.elementor-element-b5d356f{--grid-template-columns:repeat(0, auto);--grid-column-gap:10px;--grid-row-gap:0px}
+.elementor-115 .elementor-element.elementor-element-b5d356f .elementor-widget-container{text-align:left}
+.elementor-115 .elementor-element.elementor-element-b5d356f .elementor-social-icon{background-color:#161616}
+.elementor-115 .elementor-element.elementor-element-b5d356f .elementor-social-icon svg{fill:#FFFFFF}
+.elementor-115 .elementor-element.elementor-element-b5d356f .elementor-social-icon:hover{background-color:#000000C7}
+.elementor-115 .elementor-element.elementor-element-b5d356f .elementor-social-icon:hover svg{fill:#FFFFFF}
 /* Footer credit ("Designed by …") centred, full width */
 .elementor-115 .elementor-element.elementor-element-c64db47{--width:100%}
 .elementor-115 .elementor-element.elementor-element-53bad13{text-align:center}
@@ -75,8 +92,9 @@
   /* Stacked with flex, not a one-column grid: iOS Safari sized the grid row shorter than the lazy-loaded logo, so the logo overlapped Social */
   .elementor-115 .elementor-element-74b303b>.e-con-inner{display:flex;flex-direction:column;align-items:center;text-align:center}
   .footer-logo{order:-1;width:100%}
-  .footer-logo-img{width:min(260px,100%)}
   .footer-spacer{display:none}
+  .elementor-115 .elementor-element.elementor-element-b5d356f{--justify-content:center}
+  .elementor-115 .elementor-element.elementor-element-b5d356f .elementor-widget-container{text-align:center}
 }
 
 /* Agenda: "Upcoming Events" section copied from the homepage. Its Elementor rules are scoped to .elementor-2 (homepage), so repeat them for .elementor-3366 (agenda) */
