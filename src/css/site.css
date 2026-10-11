@@ -72,8 +72,10 @@
 .elementor-115 .elementor-element.elementor-element-c64db47{--width:100%}
 .elementor-115 .elementor-element.elementor-element-53bad13{text-align:center}
 @media (max-width:767px){
-  .elementor-115 .elementor-element-74b303b>.e-con-inner{grid-template-columns:1fr;justify-items:center;text-align:center}
-  .footer-logo{order:-1}
+  /* Stacked with flex, not a one-column grid: iOS Safari sized the grid row shorter than the lazy-loaded logo, so the logo overlapped Social */
+  .elementor-115 .elementor-element-74b303b>.e-con-inner{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .footer-logo{order:-1;width:100%}
+  .footer-logo-img{width:min(260px,100%)}
   .footer-spacer{display:none}
 }
 
