@@ -39,3 +39,7 @@ faq:
     resposta:
       pt: "Sim, recebemos aniversários, jantares de grupo e outras celebrações. Contacta-nos por telefone ou email com a data, o número de convidados e o que tens em mente, e preparamos uma proposta à tua medida."
       en: "Yes, we host birthdays, group dinners and other celebrations. Get in touch by phone or email with the date, number of guests and what you have in mind, and we'll put together a tailored proposal."
+  - pergunta: { pt: "Que tipo de pratos servem?", en: "What kind of dishes do you serve?" }
+    resposta:
+      pt: "Servimos petiscos caseiros, feitos com receitas de família e produtos da época, pensados para partilhar à mesa. Como a oferta muda ao longo do ano, o melhor é perguntares-nos o que há no dia. Se tiveres alguma restrição alimentar, avisa-nos e vemos o que podemos preparar para ti."
+      en: "We serve homemade tapas, made from family recipes and seasonal produce and meant for sharing. Since the menu changes throughout the year, it's best to ask us what's on that day. If you have any dietary requirements, let us know and we'll see what we can prepare for you."
