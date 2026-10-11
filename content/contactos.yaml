@@ -3,6 +3,7 @@ hero:
     ficheiro: default_h.png
   img_vertical:
     ficheiro: default_v.png
+  titulo: { pt: "Me Liga Vai", en: "Connect with us" }
 
 telefone: "+351219574276"
 email: "entrelinhascafebistro@gmail.com"
@@ -10,22 +11,31 @@ morada: "R. José António Veríssimo Silva Lt 4.22 \n2615-107 Alverca do Ribate
 horario:
   pt: "Segunda a sexta: 10h–18h\nSábado: 10h–14h"
   en: "Monday to Friday: 10am–6pm\nSaturday: 10am–2pm"
+
 link_google_maps: "https://maps.app.goo.gl/pcHo4ynKotedPXD3A"
 
 faq:
-  - pergunta: { pt: "Lorem ipsum dolor sit amet?", en: "Lorem ipsum dolor sit amet?" }
+  - pergunta: { pt: "Qual o vosso horário?", en: "What are your opening hours?" }
     resposta:
-      pt: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
-      en: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
-  - pergunta: { pt: "Ut enim ad minim veniam?", en: "Ut enim ad minim veniam?" }
+      pt: "Estamos abertos de segunda a sexta, das 10h às 18h, e ao sábado, das 10h às 14h. Em noites de concerto ou evento o horário pode ser alargado. Consulta a agenda para saberes mais."
+      en: "We're open Monday to Friday, 10am to 6pm, and on Saturdays from 10am to 2pm. On concert or event nights we may stay open later. Check the agenda for details."
+  - pergunta: { pt: "Servem refeições?", en: "Do you serve food?" }
     resposta:
-      pt: "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.\n\nDuis aute irure dolor in reprehenderit."
-      en: "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.\n\nDuis aute irure dolor in reprehenderit."
-  - pergunta: { pt: "Duis aute irure dolor?", en: "Duis aute irure dolor?" }
+      pt: "Sim! A nossa cozinha prepara petiscos caseiros com receitas de família e produtos da época, ideais para partilhar à mesa com uma cerveja artesanal."
+      en: "Yes! Our kitchen prepares homemade tapas from family recipes and seasonal produce, perfect for sharing over a craft beer."
+  - pergunta: { pt: "Posso reservar mesa?", en: "Can I book a table?" }
     resposta:
-      pt: "Excepteur sint occaecat cupidatat non proident."
-      en: "Excepteur sint occaecat cupidatat non proident."
-  - pergunta: { pt: "Sed ut perspiciatis unde omnis?", en: "Sed ut perspiciatis unde omnis?" }
+      pt: "Podes, sim. Liga-nos ou envia-nos um email com o dia, a hora e o número de pessoas. Em noites de concerto recomendamos reservar com antecedência."
+      en: "Of course. Give us a call or send us an email with the date, time and number of people. On concert nights we recommend booking in advance."
+  - pergunta: { pt: "Posso levar crianças?", en: "Can I bring children?" }
     resposta:
-      pt: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."
-      en: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."
+      pt: "Claro! As crianças são bem-vindas, acompanhadas por um adulto. O Entrelinhas é um ponto de encontro para todas as gerações."
+      en: "Of course! Children are welcome when accompanied by an adult. Entrelinhas is a meeting place for all generations."
+  - pergunta: { pt: "Tenho uma banda e gostava de ir aí tocar. Como posso fazer?", en: "I have a band and would love to play at your place. How can I do that?" }
+    resposta:
+      pt: "Adoramos conhecer novos músicos! Envia-nos um email com uma breve apresentação da banda, o estilo musical e links para ouvirmos o vosso trabalho (YouTube, Spotify, Instagram...). O Luís, responsável pela programação musical, entrará em contacto."
+      en: "We love discovering new musicians! Send us an email with a short introduction to your band, your musical style and links to your work (YouTube, Spotify, Instagram...). Luís, our music curator, will get back to you."
+  - pergunta: { pt: "Posso reservar o espaço para organizar uma festa particular?", en: "Can I book the venue for a private party?" }
+    resposta:
+      pt: "Sim, recebemos aniversários, jantares de grupo e outras celebrações. Contacta-nos por telefone ou email com a data, o número de convidados e o que tens em mente, e preparamos uma proposta à tua medida."
+      en: "Yes, we host birthdays, group dinners and other celebrations. Get in touch by phone or email with the date, number of guests and what you have in mind, and we'll put together a tailored proposal."

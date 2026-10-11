@@ -1,0 +1,32 @@
+/* Contactos — hero igual ao do mural (regras de .elementor-5 em inline-elementor-frontend-aboutus.css e mural.css). */
+
+.elementor-6 .elementor-element.elementor-element-9b4a77b { --display: flex; --overlay-opacity: 0.3; --padding-top: 180px; --padding-bottom: 060px; --padding-left: 10px; --padding-right: 10px; }
+/* O zoom (locoscroll-bg-zoomin) aumenta a imagem de fundo; o .e-con do Elementor repõe overflow:visible,
+   o que a deixava passar para baixo da borda de tinta. No mural isso fica tapado pelo fundo da secção seguinte. */
+.elementor-6 .elementor-element.elementor-element-9b4a77b.e-con { --overflow: hidden; }
+.elementor-6 .elementor-element.elementor-element-9b4a77b:not(.elementor-motion-effects-element-type-background),
+.elementor-6 .elementor-element.elementor-element-9b4a77b > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-position: center center; background-size: cover; }
+.elementor-6 .elementor-element.elementor-element-9b4a77b::before,
+.elementor-6 .elementor-element.elementor-element-9b4a77b > .elementor-background-video-container::before,
+.elementor-6 .elementor-element.elementor-element-9b4a77b > .e-con-inner > .elementor-background-video-container::before,
+.elementor-6 .elementor-element.elementor-element-9b4a77b > .elementor-background-slideshow::before,
+.elementor-6 .elementor-element.elementor-element-9b4a77b > .e-con-inner > .elementor-background-slideshow::before,
+.elementor-6 .elementor-element.elementor-element-9b4a77b > .elementor-motion-effects-container > .elementor-motion-effects-layer::before { background-color: #0E0E0E; --background-overlay: ''; }
+.elementor-6 .elementor-element.elementor-element-14fcbc8 { --display: flex; --padding-top: 0px; --padding-bottom: 0px; --padding-left: 0px; --padding-right: 0px; }
+.elementor-6 .elementor-element.elementor-element-4a8c9d4 .elementor-heading-title { font-family: "Juno", Sans-serif; font-size: 195px; font-weight: 400; }
+@media (max-width: 1024px) { .elementor-6 .elementor-element.elementor-element-4a8c9d4 .elementor-heading-title { font-size: 102px; } }
+@media (max-width: 767px) { .elementor-6 .elementor-element.elementor-element-4a8c9d4 .elementor-heading-title { font-size: 43px; } }
+
+/* Borda de tinta sobre o fundo do hero. A sobreposição é proporcional à largura (94px a 1920px),
+   porque a imagem da borda encolhe com o ecrã: com -94px fixos, em mobile ficava a meio do hero. */
+.contacts-hero-border { display: flex; margin-top: calc(-94% / 19.2); position: relative; pointer-events: none; }
+.contacts-hero-border img { display: block; width: 100%; height: auto; }
+
+/* Em mobile o hero usa a imagem vertical: altura de ecrã inteiro, título centrado. */
+@media (max-width: 768px) {
+  .elementor-6 .elementor-element.elementor-element-9b4a77b.e-con { --min-height: 100vh; --justify-content: center; --padding-top: 100px; --padding-bottom: 100px; }
+}
+
+/* Fundo da página de contactos. */
+body.page-id-6 { background-color: #f4f4f4; }
+body.page-id-6 .content-inner { background-color: #f4f4f4 !important; }

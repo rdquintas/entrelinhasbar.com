@@ -368,7 +368,7 @@ async function main() {
 
     /* páginas do tema (sem YAML) */
     for (const [name, title] of Object.entries(THEME_PAGES)) {
-      const extra = { agenda: { eventos: localized }, mural }[name] || {};
+      const extra = { agenda: { eventos: localized }, mural, contacts: { hero: pageData('contactos').hero } }[name] || {};
       emit(name, name, makeCtx({
         pageKey: name, pathFor: (l) => pageUrl(name, l), title, extra,
       }));
