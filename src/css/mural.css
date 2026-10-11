@@ -6,6 +6,13 @@
 .mural-hero-border { display: flex; margin-top: -94px; position: relative; pointer-events: none; }
 .mural-hero-border img { display: block; width: 100%; height: auto; }
 
+/* Em mobile o hero usa a imagem vertical (img_vertical): dar-lhe altura de ecrã inteiro,
+   como no index, senão o object-fit:cover recorta-a numa faixa e parece a horizontal. */
+@media (max-width: 768px) {
+  /* Título centrado na vertical; padding simétrico para o centro coincidir com o do ecrã. */
+  .elementor-5 .elementor-element.elementor-element-9b4a77b.e-con { --min-height: 100vh; --justify-content: center; --padding-top: 100px; --padding-bottom: 100px; }
+}
+
 .mural {
   --mural-cols: 2;
   max-width: 1400px;
