@@ -16,6 +16,8 @@
 .elementor-6 .elementor-element.elementor-element-4a8c9d4 .elementor-heading-title { font-family: "Juno", Sans-serif; font-size: 195px; font-weight: 400; }
 @media (max-width: 1024px) { .elementor-6 .elementor-element.elementor-element-4a8c9d4 .elementor-heading-title { font-size: 102px; } }
 @media (max-width: 767px) { .elementor-6 .elementor-element.elementor-element-4a8c9d4 .elementor-heading-title { font-size: 43px; } }
+/* Desktop: título do hero semi-transparente. */
+@media (min-width: 769px) { .elementor-6 .elementor-element.elementor-element-4a8c9d4 .elementor-heading-title { opacity: .5; } }
 
 /* Borda de tinta sobre o fundo do hero. A sobreposição é proporcional à largura (94px a 1920px),
    porque a imagem da borda encolhe com o ecrã: com -94px fixos, em mobile ficava a meio do hero. */
@@ -53,3 +55,8 @@ body.page-id-6 .content-inner { background-color: #f4f4f4 !important; }
   .contacts-faq-question::after { right: 16px; }
   .contacts-faq-answer { padding: 0 16px 16px; }
 }
+
+/* Mapa (Google Maps embebido) a seguir à FAQ. */
+.contacts-map { --display: flex; --padding-top: 0px; --padding-bottom: 80px; --padding-left: 10px; --padding-right: 10px; }
+.contacts-map-frame { display: block; width: 100%; height: 450px; border: 1px solid #e2e2e2; }
+@media (max-width: 767px) { .contacts-map-frame { height: 320px; } }

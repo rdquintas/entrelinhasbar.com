@@ -1,8 +1,8 @@
 hero:
   img_horizontal:
-    ficheiro: default_h.png
+    ficheiro: contactos_h.png
   img_vertical:
-    ficheiro: default_v.png
+    ficheiro: contactos_v.png
   titulo: { pt: "Me Liga Vai", en: "Connect with us" }
 
 telefone: "+351219574276"
@@ -33,8 +33,8 @@ faq:
       en: "Of course! Children are welcome when accompanied by an adult. Entrelinhas is a meeting place for all generations."
   - pergunta: { pt: "Tenho uma banda e gostava de ir aí tocar. Como posso fazer?", en: "I have a band and would love to play at your place. How can I do that?" }
     resposta:
-      pt: "Adoramos conhecer novos músicos! Envia-nos um email para entrelinhascafebistro@gmail.com com o seguinte:\n- Texto com uma breve apresentação da banda e o estilo musical\n- Links, se tiveres, para ouvirmos o vosso trabalho (YouTube, Spotify, Instagram...)\n- Um link do YouTube (só se tiveres, claro)\n- 2 fotos: uma HORIZONTAL e outra VERTICAL"
-      en: "We love discovering new musicians! Send us an email at entrelinhascafebistro@gmail.com with the following:\n- A short text introducing your band and your musical style\n- Links, if you have them, so we can listen to your work (YouTube, Spotify, Instagram...)\n- A YouTube link (only if you have one, of course)\n- 2 photos: one HORIZONTAL and one VERTICAL"
+      pt: "Adoramos conhecer novos músicos! Envia-nos um email para entrelinhascafebistro@gmail.com com o seguinte:\n- Texto com uma breve apresentação da banda e o estilo musical (em Português e Inglês)\n- Links, se tiveres, para ouvirmos o vosso trabalho (YouTube, Spotify, Instagram...)\n- Um link de um video no YouTube (só se tiveres, claro)\n- 2 fotos: uma HORIZONTAL e outra VERTICAL"
+      en: "We love discovering new musicians! Send us an email at entrelinhascafebistro@gmail.com with the following:\n- A short text introducing your band and your musical style (in Portuguese and English)\n- Links, if you have them, so we can listen to your work (YouTube, Spotify, Instagram...)\n- A single YouTube video link (only if you have one, of course)\n- 2 photos: one HORIZONTAL and one VERTICAL"
   - pergunta: { pt: "Posso reservar o espaço para organizar uma festa particular?", en: "Can I book the venue for a private party?" }
     resposta:
       pt: "Sim, recebemos aniversários, jantares de grupo e outras celebrações. Contacta-nos por telefone ou email com a data, o número de convidados e o que tens em mente, e preparamos uma proposta à tua medida."

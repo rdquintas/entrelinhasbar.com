@@ -19,6 +19,7 @@ const { prepareEvents, formatDate, formatDateShort } = require('./lib/events');
 const { createImages, convertDirToAvif } = require('./lib/images');
 const { createEngine } = require('./lib/template');
 const { prunePastEvents } = require('./lib/past-events');
+const { mapsEmbedUrl } = require('./lib/maps');
 
 const ROOT = __dirname;
 const DIR = {
@@ -283,6 +284,8 @@ async function main() {
     },
   };
   const engine = createEngine({ templatesDir: DIR.templates, helpers, report });
+  // Mapa da página de contactos (iframe), a partir de contactos.yaml › link_google_maps.
+  const mapsEmbed = await mapsEmbedUrl(raw.contactos.link_google_maps, raw.contactos.morada, report);
 
   // O idioma por defeito vive na raiz (/agenda/); os restantes têm prefixo (/en/agenda/).
   const langDir = (l) => (l === defaultLang ? '' : l);
@@ -403,7 +406,7 @@ async function main() {
 
     /* páginas do tema (sem YAML) */
     for (const [name, title] of Object.entries(THEME_PAGES)) {
-      const extra = { agenda: { eventos: localized }, mural, contacts: { hero: pageData('contactos').hero } }[name] || {};
+      const extra = { agenda: { eventos: localized }, mural, contacts: { hero: pageData('contactos').hero, maps_embed: mapsEmbed } }[name] || {};
       emit(name, name, makeCtx({
         pageKey: name, pathFor: (l) => pageUrl(name, l), title, extra,
       }));

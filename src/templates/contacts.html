@@ -212,6 +212,16 @@
 								</div>
 							</div>
 							{{/if}}
+							<!-- Mapa: gerado a partir de contactos.yaml › link_google_maps (ver lib/maps.js). -->
+							{{#if maps_embed}}
+							<div class="wolf-core-elementor-row elementor-element contacts-map e-flex e-con-boxed e-con e-parent">
+								<div class="e-con-inner">
+									<iframe class="contacts-map-frame" src="{{maps_embed}}" loading="lazy"
+										referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+										title="{{#lang pt}}Mapa – como chegar ao Entrelinhas{{/lang}}{{#lang en}}Map – how to find Entrelinhas{{/lang}}"></iframe>
+								</div>
+							</div>
+							{{/if}}
 							<div class="wolf-core-elementor-row wolf-core-font- elementor-element elementor-element-ff73d3c e-flex e-con-boxed e-con e-parent e-lazyloaded section-appeared section-appeared-once"
 								data-color-tone="" data-e-type="container" data-element_type="container"
 								data-font-skin="" data-id="ff73d3c" data-scroll-class="locoscroll-animate"
