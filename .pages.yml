@@ -356,6 +356,10 @@ content:
         label: Endereço público do site (sem barra no fim)
         description: "Ex.: https://meusite.netlify.app. Usado para partilha nas redes e motores de pesquisa."
         type: string
+      - name: google_analytics
+        label: ID do Google Analytics
+        description: "ID de medição GA4 (ex.: G-XXXXXXXXXX). Deixar vazio para desativar."
+        type: string
       - name: descricao
         label: Descrição do site (partilha nas redes e motores de pesquisa)
         description: Texto que aparece ao partilhar o link (WhatsApp, Facebook...) nas páginas sem descrição própria. Os eventos usam o seu resumo.

@@ -34,6 +34,7 @@ scripts/          clean-images.js (limpeza) e fetch-placeholders.js (imagens de 
 | Mural | `/mural/` | `mural.yaml` |
 | Venue | `/venue/` | HTML fixo em `src/templates/venue.html` (ainda com conteúdo de demonstração do tema) |
 | Contactos | `/contacts/` | HTML fixo em `src/templates/contacts.html` |
+| Privacidade | `/privacidade/` | HTML fixo em `src/templates/privacidade.html` (política de privacidade e cookies) |
 | 404 | `/404.html` | só no idioma por defeito |
 
 A versão inglesa de cada página tem o prefixo `/en/`. O menu do cabeçalho está escrito diretamente em `src/templates/partials/header.html`, e os títulos das páginas do tema (Calendário, Venue, Mural, Contact Us) estão em `THEME_PAGES`, no `build.js`.

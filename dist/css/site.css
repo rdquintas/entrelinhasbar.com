@@ -128,3 +128,20 @@
 .menu-item-lang--en .menu-item-text-container::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'%3E%3CclipPath id='t'%3E%3Cpath d='M30 15h30v15zv15H0zH0V0zV0h30z'/%3E%3C/clipPath%3E%3Cpath d='M0 0v30h60V0z' fill='%23012169'/%3E%3Cpath d='M0 0l60 30m0-30L0 30' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0 0l60 30m0-30L0 30' clip-path='url(%23t)' stroke='%23C8102E' stroke-width='4'/%3E%3Cpath d='M30 0v30M0 15h60' stroke='%23fff' stroke-width='10'/%3E%3Cpath d='M30 0v30M0 15h60' stroke='%23C8102E' stroke-width='6'/%3E%3C/svg%3E")}
 /* Heros do mural e contactos: sem overlay escuro do Elementor por cima da imagem (a home mantém o degradê) */
 .elementor-5 .elementor-element-9b4a77b::before,.elementor-6 .elementor-element-9b4a77b::before{display:none}
+/* Banner de consentimento de cookies (Google Analytics / Consent Mode) */
+.cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:99999;max-width:560px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:18px 20px;background:#151515;color:#f1f0eb;box-shadow:0 8px 30px rgba(0,0,0,.35);font-size:14px;line-height:1.5}
+.cookie-banner[hidden]{display:none}
+.cookie-banner__text{flex:1 1 260px;margin:0;color:inherit}
+.cookie-banner__actions{display:flex;gap:10px;margin-left:auto}
+.cookie-banner__btn{cursor:pointer;padding:8px 16px;border:1px solid #f1f0eb;background:transparent;color:#f1f0eb;font:inherit;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.cookie-banner__btn--accept{background:#f1f0eb;color:#151515}
+.cookie-banner__btn:hover,.cookie-banner__btn:focus-visible{opacity:.85}
+.cookie-banner__text a{color:inherit;text-decoration:underline}
+/* Página de privacidade */
+.legal-page{max-width:760px;margin:0 auto;padding:160px 16px 80px;line-height:1.7}
+.legal-page h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:0 0 .5rem}
+.legal-page h2{font-size:1.4rem;margin:2.5rem 0 .75rem}
+.legal-page__updated{opacity:.7;font-size:.9em}
+.legal-page a{text-decoration:underline}
+.legal-page__table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9em;display:block;overflow-x:auto}
+.legal-page__table th,.legal-page__table td{text-align:left;vertical-align:top;padding:.5rem .75rem;border-bottom:1px solid rgba(0,0,0,.15)}

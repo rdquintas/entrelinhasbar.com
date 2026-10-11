@@ -61,6 +61,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://entrelinhasbar.netlify.app/contacts/"/>
   </url>
   <url>
+    <loc>https://entrelinhasbar.netlify.app/privacidade/</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://entrelinhasbar.netlify.app/privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://entrelinhasbar.netlify.app/en/privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://entrelinhasbar.netlify.app/privacidade/"/>
+  </url>
+  <url>
+    <loc>https://entrelinhasbar.netlify.app/en/privacidade/</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://entrelinhasbar.netlify.app/privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://entrelinhasbar.netlify.app/en/privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://entrelinhasbar.netlify.app/privacidade/"/>
+  </url>
+  <url>
     <loc>https://entrelinhasbar.netlify.app/event/tony-marcelino/</loc>
     <xhtml:link rel="alternate" hreflang="pt" href="https://entrelinhasbar.netlify.app/event/tony-marcelino/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://entrelinhasbar.netlify.app/en/event/tony-marcelino/"/>

@@ -73,7 +73,8 @@
 											<div class="elementor-widget-container">
 												©<span class="wolf-core-current-year">2026</span> Designed by <a
 													href="https://ricardoquintas.com/" rel="noopener"
-													target="_blank">Ricardo Quintas</a> </div>
+													target="_blank">Ricardo Quintas</a> · <a href="{{urls.privacidade}}">{{#lang pt}}Privacidade{{/lang}}{{#lang en}}Privacy{{/lang}}</a>{{#if site.google_analytics}} · <a href="#"
+													class="cookie-settings-link">Cookies</a>{{/if}} </div>
 									</div>
 									</div>
 								</div>
@@ -104,6 +105,37 @@
 	</div>
 
 	<span class="elementor-screen-only" id="elementor-device-mode"></span>
+
+	{{#if site.google_analytics}}
+	<div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
+		<p class="cookie-banner__text">{{#lang pt}}Usamos cookies do Google Analytics para perceber como o site é visitado. Só são ativados se aceitares. <a href="{{urls.privacidade}}">Saber mais</a>{{/lang}}{{#lang en}}We use Google Analytics cookies to understand how the site is used. They are only enabled if you accept. <a href="{{urls.privacidade}}">Learn more</a>{{/lang}}</p>
+		<div class="cookie-banner__actions">
+			<button type="button" class="cookie-banner__btn" data-consent="denied">{{#lang pt}}Recusar{{/lang}}{{#lang en}}Decline{{/lang}}</button>
+			<button type="button" class="cookie-banner__btn cookie-banner__btn--accept" data-consent="granted">{{#lang pt}}Aceitar{{/lang}}{{#lang en}}Accept{{/lang}}</button>
+		</div>
+	</div>
+	<script>
+		(function () {
+			var KEY = 'cookie_consent';
+			var banner = document.getElementById('cookie-banner');
+			var get = function () { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+			if (!get()) banner.hidden = false;
+			banner.addEventListener('click', function (e) {
+				var btn = e.target.closest('[data-consent]');
+				if (!btn) return;
+				var value = btn.getAttribute('data-consent');
+				try { localStorage.setItem(KEY, value); } catch (e) {}
+				gtag('consent', 'update', { analytics_storage: value });
+				banner.hidden = true;
+			});
+			document.addEventListener('click', function (e) {
+				if (!e.target.closest('.cookie-settings-link')) return;
+				e.preventDefault();
+				banner.hidden = false;
+			});
+		})();
+	</script>
+	{{/if}}
 
 	<script src="/js/vendor/jquery.js"></script>
 	<script src="/js/vendor/jquery-migrate.js"></script>

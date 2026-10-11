@@ -7,6 +7,9 @@ nome:
 # Endereço público do site, sem barra final (usado em canonical, sitemap e og:image).
 url_base: "https://entrelinhasbar.netlify.app"
 
+# ID de medição do Google Analytics 4 (ex.: G-XXXXXXXXXX). Vazio = sem Analytics.
+google_analytics: "G-DF5CDE6GZR"
+
 # Texto que aparece ao partilhar o link (WhatsApp, Facebook...) nas páginas sem descrição própria.
 # As páginas dos eventos usam o resumo do evento e a sua imagem horizontal.
 descricao:

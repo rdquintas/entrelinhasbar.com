@@ -42,6 +42,7 @@ const THEME_PAGES = {
   venue: 'Venue',
   mural: 'Mural',
   contacts: 'Contact Us',
+  privacidade: 'Privacidade',
 };
 const NAV_PAGES = ['index', ...Object.keys(THEME_PAGES)];
 /** Textos fixos da interface ({{ui.*}} nos templates); as etiquetas dos tipos de evento vêm de site.yaml › ui.tipos. */
