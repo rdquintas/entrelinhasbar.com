@@ -246,6 +246,41 @@ async function main() {
     linhas(e, h) {
       return escapeHtml(h.text(h.get(e.pos[0]), e.pos[0]).trim()).replace(/\r?\n/g, '<br>');
     },
+    // Como "linhas", mas emails, URLs (http(s)://… ou www.…) e telefones passam a links clicáveis.
+    linhas_links(e, h) {
+      const src = h.text(h.get(e.pos[0]), e.pos[0]).trim();
+      const RE = /(https?:\/\/[^\s<>"]+|www\.[^\s<>"]+)|([\w.+-]+@[\w-]+(?:\.[\w-]+)+)|((?:\(?\+\d{1,3}\)?[\s.-]?)?\d{3}[\s.-]?\d{3}[\s.-]?\d{3})(?!\d)/g;
+      let out = '';
+      let last = 0;
+      for (const m of src.matchAll(RE)) {
+        let [txt, url, mail, tel] = m;
+        let tail = '';
+        if (url) { // pontuação final ("… em www.x.pt.") fica fora do link
+          const t = url.match(/[.,;:!?)\]]+$/);
+          if (t) { tail = t[0]; txt = url = url.slice(0, -tail.length); }
+        }
+        // Telefone só se não estiver colado a outros dígitos/letras (evita apanhar referências, datas…)
+        if (tel && m.index > 0 && /[\w]/.test(src[m.index - 1])) continue;
+        const href = url ? (url.startsWith('www.') ? `https://${url}` : url)
+          : mail ? `mailto:${mail}` : `tel:${tel.replace(/[^\d+]/g, '')}`;
+        const ext = url ? ' target="_blank" rel="noopener"' : '';
+        out += escapeHtml(src.slice(last, m.index)) + `<a href="${escapeHtml(href)}"${ext}>${escapeHtml(txt)}</a>` + escapeHtml(tail);
+        last = m.index + m[0].length;
+      }
+      out += escapeHtml(src.slice(last));
+      return out.replace(/\r?\n/g, '<br>');
+    },
+    // Telefone para href (tel:+351219574276): só "+" e dígitos.
+    tel_href(e, h) {
+      return escapeHtml(String(h.get(e.pos[0]) ?? '').replace(/[^\d+]/g, ''));
+    },
+    // Telefone para mostrar: "+351219574276" -> "(+351) 219 574 276".
+    tel_fmt(e, h) {
+      const raw = String(h.get(e.pos[0]) ?? '').replace(/[^\d+]/g, '');
+      const m = raw.match(/^\+(\d{1,3})(\d{9})$/);
+      if (!m) return escapeHtml(raw);
+      return escapeHtml(`(+${m[1]}) ${m[2].replace(/(\d{3})(?=\d)/g, '$1 ')}`);
+    },
   };
   const engine = createEngine({ templatesDir: DIR.templates, helpers, report });
 

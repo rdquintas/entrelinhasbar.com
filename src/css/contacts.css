@@ -21,6 +21,9 @@
    porque a imagem da borda encolhe com o ecrã: com -94px fixos, em mobile ficava a meio do hero. */
 .contacts-hero-border { display: flex; margin-top: calc(-94% / 19.2); position: relative; pointer-events: none; }
 .contacts-hero-border img { display: block; width: 100%; height: auto; }
+/* Desktop: sobrepõe 120px, mas nunca mais do que a altura da própria borda (142/1920 da largura),
+   senão entre 769px e ~1624px a borda subia acima do fundo do hero e deixava-o à vista por baixo. */
+@media (min-width: 769px) { .contacts-hero-border { margin-top: max(-120px, calc(-140% / 19.2)); } }
 
 /* Em mobile o hero usa a imagem vertical: altura de ecrã inteiro, título centrado. */
 @media (max-width: 768px) {
@@ -30,3 +33,23 @@
 /* Fundo da página de contactos. */
 body.page-id-6 { background-color: #f4f4f4; }
 body.page-id-6 .content-inner { background-color: #f4f4f4 !important; }
+
+/* FAQ: painéis expansíveis (<details>/<summary>), sem JS. */
+.contacts-faq { --display: flex; --padding-top: 40px; --padding-bottom: 80px; --padding-left: 10px; --padding-right: 10px; }
+.contacts-faq > .e-con-inner { flex-direction: column; gap: 30px; }
+.contacts-faq-title { font-family: "Juno", Sans-serif; font-size: 80px; font-weight: 400; margin: 0; }
+.contacts-faq-list { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+.contacts-faq-item { background: #fff; border: 1px solid #e2e2e2; }
+.contacts-faq-question { cursor: pointer; list-style: none; position: relative; padding: 20px 56px 20px 24px; font-size: 18px; font-weight: 500; }
+.contacts-faq-question::-webkit-details-marker { display: none; }
+.contacts-faq-question::after { content: "+"; position: absolute; right: 24px; top: 50%; transform: translateY(-50%); font-size: 26px; line-height: 1; transition: transform .2s ease; }
+.contacts-faq-item[open] > .contacts-faq-question::after { transform: translateY(-50%) rotate(45deg); }
+.contacts-faq-question:focus-visible { outline: 2px solid #0E0E0E; outline-offset: -2px; }
+.contacts-faq-answer { padding: 0 24px 20px; }
+.contacts-faq-answer p { margin: 0; }
+@media (max-width: 767px) {
+  .contacts-faq-title { font-size: 48px; }
+  .contacts-faq-question { font-size: 16px; padding: 16px 48px 16px 16px; }
+  .contacts-faq-question::after { right: 16px; }
+  .contacts-faq-answer { padding: 0 16px 16px; }
+}
