@@ -8,16 +8,17 @@
 <main id="conteudo" class="legal-page">
 {{#lang pt}}
   <h1>Política de Privacidade e Cookies</h1>
-  <p class="legal-page__updated">Última atualização: 11 de outubro de 2026</p>
+  <p class="legal-page__updated">Última atualização: 12 de outubro de 2026</p>
 
   <h2>Quem somos</h2>
   <p>Este site pertence ao {{site_name}}, {{contactos.morada}}. Para qualquer questão sobre os teus dados pessoais, contacta-nos por email para <a href="mailto:{{contactos.email}}">{{contactos.email}}</a>.</p>
 
   <h2>Que dados recolhemos</h2>
-  <p>O site não tem formulários, contas de utilizador nem loja online. Só tratamos dados pessoais nestes casos:</p>
+  <p>O site não tem contas de utilizador nem loja online{{#if site.redes.newsletter}}; o único formulário é o da newsletter{{else}} e não tem formulários{{/if}}. Só tratamos dados pessoais nestes casos:</p>
   <ul>
     <li><strong>Estatísticas de visitas (Google Analytics)</strong>: só se aceitares os cookies. Recolhe informação sobre as páginas visitadas, o tempo de visita, o tipo de dispositivo e browser e a localização aproximada (país/cidade). Usamos estes dados apenas para perceber como o site é usado e melhorá-lo.</li>
-    <li><strong>Contactos que nos envias</strong>: se nos ligares ou enviares um email (por exemplo, para reservar mesa), usamos os teus dados apenas para te responder.</li>
+    {{#if site.redes.newsletter}}<li><strong>Newsletter</strong>: se subscreveres a <a href="{{urls.newsletter}}">newsletter</a>, guardamos o teu email para te enviarmos a agenda de eventos, novidades e promoções do {{site_name}}. A base legal é o teu consentimento. O formulário e o envio dos emails são geridos pela Brevo (Sendinblue SAS, França), que trata os dados por nossa conta e os guarda na União Europeia. Guardamos o teu email até cancelares a subscrição, o que podes fazer a qualquer momento através do link no fim de cada email ou escrevendo-nos.</li>
+    {{/if}}<li><strong>Contactos que nos envias</strong>: se nos ligares ou enviares um email (por exemplo, para reservar mesa), usamos os teus dados apenas para te responder.</li>
     <li><strong>Alojamento</strong>: o site está alojado na Netlify, que regista temporariamente dados técnicos (como o endereço IP) para garantir o funcionamento e a segurança do serviço.</li>
   </ul>
 
@@ -33,10 +34,10 @@
   <p>Podes mudar de ideias a qualquer momento no link <a href="#" class="cookie-settings-link">Cookies</a>, no rodapé de todas as páginas, ou apagando os cookies nas definições do teu browser.</p>
 
   <h2>Conteúdos de outros sites</h2>
-  <p>Algumas páginas mostram conteúdos de outros serviços: o mapa do Google Maps (Contactos) e vídeos do YouTube, Facebook ou Instagram. Ao carregar esses conteúdos, o teu browser liga-se diretamente a esses serviços, que podem recolher dados e usar cookies segundo as suas próprias políticas de privacidade. Os vídeos do YouTube usam o modo de privacidade reforçada (youtube-nocookie.com).</p>
+  <p>Algumas páginas mostram conteúdos de outros serviços: o mapa do Google Maps (Contactos) e vídeos do YouTube, Facebook ou Instagram. Ao carregar esses conteúdos, o teu browser liga-se diretamente a esses serviços, que podem recolher dados e usar cookies segundo as suas próprias políticas de privacidade. Os vídeos do YouTube usam o modo de privacidade reforçada (youtube-nocookie.com).{{#if site.redes.newsletter}} A página da newsletter carrega o formulário e os scripts da Brevo (sibforms.com).{{/if}}</p>
 
   <h2>Partilha e transferências</h2>
-  <p>Não vendemos nem partilhamos os teus dados com terceiros para fins comerciais. A Google e a Netlify podem tratar dados nos Estados Unidos, ao abrigo do EU-US Data Privacy Framework e das cláusulas contratuais-tipo aprovadas pela Comissão Europeia.</p>
+  <p>Não vendemos nem partilhamos os teus dados com terceiros para fins comerciais{{#if site.redes.newsletter}}; a Brevo só os usa para gerir a newsletter por nossa conta{{/if}}. A Google e a Netlify podem tratar dados nos Estados Unidos, ao abrigo do EU-US Data Privacy Framework e das cláusulas contratuais-tipo aprovadas pela Comissão Europeia.</p>
 
   <h2>Os teus direitos</h2>
   <p>Ao abrigo do Regulamento Geral sobre a Proteção de Dados (RGPD), tens direito a aceder aos teus dados, retificá-los, apagá-los, limitar ou opor-te ao seu tratamento e retirar o consentimento a qualquer momento. Para exercer estes direitos, escreve-nos para <a href="mailto:{{contactos.email}}">{{contactos.email}}</a>. Podes também apresentar reclamação à Comissão Nacional de Proteção de Dados (<a href="https://www.cnpd.pt" target="_blank" rel="noopener">www.cnpd.pt</a>).</p>
@@ -46,16 +47,17 @@
 {{/lang}}
 {{#lang en}}
   <h1>Privacy and Cookie Policy</h1>
-  <p class="legal-page__updated">Last updated: 11 October 2026</p>
+  <p class="legal-page__updated">Last updated: 12 October 2026</p>
 
   <h2>Who we are</h2>
   <p>This website belongs to {{site_name}}, {{contactos.morada}}. For any question about your personal data, email us at <a href="mailto:{{contactos.email}}">{{contactos.email}}</a>.</p>
 
   <h2>What data we collect</h2>
-  <p>The website has no forms, user accounts or online shop. We only process personal data in these cases:</p>
+  <p>The website has no user accounts or online shop{{#if site.redes.newsletter}}; the only form is the newsletter sign-up{{else}} and no forms{{/if}}. We only process personal data in these cases:</p>
   <ul>
     <li><strong>Visit statistics (Google Analytics)</strong>: only if you accept cookies. It collects the pages visited, visit duration, device and browser type and approximate location (country/city). We use this data only to understand how the site is used and to improve it.</li>
-    <li><strong>Messages you send us</strong>: if you call or email us (for example, to book a table), we use your details only to reply to you.</li>
+    {{#if site.redes.newsletter}}<li><strong>Newsletter</strong>: if you subscribe to the <a href="{{urls.newsletter}}">newsletter</a>, we keep your email address to send you {{site_name}}'s event schedule, news and offers. The legal basis is your consent. The form and the emails are handled by Brevo (Sendinblue SAS, France), which processes the data on our behalf and stores it in the European Union. We keep your email until you unsubscribe, which you can do at any time via the link at the end of every email or by writing to us.</li>
+    {{/if}}<li><strong>Messages you send us</strong>: if you call or email us (for example, to book a table), we use your details only to reply to you.</li>
     <li><strong>Hosting</strong>: the site is hosted by Netlify, which temporarily logs technical data (such as your IP address) to keep the service running and secure.</li>
   </ul>
 
@@ -71,10 +73,10 @@
   <p>You can change your mind at any time via the <a href="#" class="cookie-settings-link">Cookies</a> link in the footer of every page, or by deleting cookies in your browser settings.</p>
 
   <h2>Content from other websites</h2>
-  <p>Some pages show content from other services: a Google Maps map (Contact page) and videos from YouTube, Facebook or Instagram. When this content loads, your browser connects directly to those services, which may collect data and use cookies under their own privacy policies. YouTube videos use privacy-enhanced mode (youtube-nocookie.com).</p>
+  <p>Some pages show content from other services: a Google Maps map (Contact page) and videos from YouTube, Facebook or Instagram. When this content loads, your browser connects directly to those services, which may collect data and use cookies under their own privacy policies. YouTube videos use privacy-enhanced mode (youtube-nocookie.com).{{#if site.redes.newsletter}} The newsletter page loads Brevo's form and scripts (sibforms.com).{{/if}}</p>
 
   <h2>Sharing and transfers</h2>
-  <p>We do not sell or share your data with third parties for commercial purposes. Google and Netlify may process data in the United States under the EU-US Data Privacy Framework and the standard contractual clauses approved by the European Commission.</p>
+  <p>We do not sell or share your data with third parties for commercial purposes{{#if site.redes.newsletter}}; Brevo only uses it to run the newsletter on our behalf{{/if}}. Google and Netlify may process data in the United States under the EU-US Data Privacy Framework and the standard contractual clauses approved by the European Commission.</p>
 
   <h2>Your rights</h2>
   <p>Under the General Data Protection Regulation (GDPR) you have the right to access, rectify and erase your data, to restrict or object to its processing, and to withdraw consent at any time. To exercise these rights, email us at <a href="mailto:{{contactos.email}}">{{contactos.email}}</a>. You may also lodge a complaint with the Portuguese data protection authority, CNPD (<a href="https://www.cnpd.pt" target="_blank" rel="noopener">www.cnpd.pt</a>).</p>

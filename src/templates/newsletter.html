@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="wolf-core-no-touch no-touch" data-scroll-orientation="vertical" lang="{{lang}}">
+
+<head>
+	{{> head}}
+	<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+	<link href="/css/newsletter.css" rel="stylesheet" />
+	<!-- Fundo: imagens do hero da página inicial (index.yaml › hero), escolhidas pela proporção do ecrã -->
+	<style>
+		@media (max-aspect-ratio: 1/1) { .newsletter-band { background-image: url('{{newsletter_bg.v}}'); } }
+		@media (min-aspect-ratio: 1/1) { .newsletter-band { background-image: url('{{newsletter_bg.h}}'); } }
+	</style>
+</head>
+
+<body
+	class="page-newsletter wp-singular page-template-default page wp-theme-poize theme-poize woocommerce-js wolf poize not-edge loading-animation-type-none site-layout-wide button-style-square global-skin-light skin-light wolf-core-yes menu-layout-top-justify-left menu-style-absolute menu-skin-light menu-width-wide mega-menu-width-fullwidth menu-hover-style- menu-sticky-hard submenu-bg-light accent-color-dark accent-color-is-black menu-items-visibility- side-panel-position-right side-panel-bg-light no-hero hero-font-light body-font-neue-haas-grotesk-text heading-font-neue-haas-grotesk-display menu-font-neue-haas-grotesk-text submenu-font-default transition-animation-type- has-text-logo logo-visibility-always is-page has-wvc hero-layout-none post-is-title-text post-is-hero footer-type-hidden footer-skin-dark footer-widgets-layout-none footer-layout-boxed bottom-bar-layout-centered bottom-bar-visible desktop wolf-core wolf-core-body wolf-core-layout wolf-core-elementor wolf-core-elementor-page wolf-core-2-1-28 wolf-core-is-desktop wolf-core-not-edge wolf-core-not-firefox wolf-events elementor-default elementor-kit-38 not-mobile no-secondary"
+	data-elementor-device-mode="desktop" data-hero-font-tone="light">
+	{{> header}}
+	<main id="conteudo" class="sib-form newsletter-band">
+		<div id="sib-form-container" class="sib-form-container">
+			<div id="error-message" class="sib-form-message-panel">
+				<div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+					<svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon" aria-hidden="true">
+						<path
+							d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
+					</svg>
+					<span class="sib-form-message-panel__inner-text">
+						{{#lang pt}}A tua subscrição não pôde ser guardada. Tenta novamente.{{/lang}}{{#lang en}}Your subscription could not be saved. Please try again.{{/lang}}
+					</span>
+				</div>
+			</div>
+			<div></div>
+			<div id="success-message" class="sib-form-message-panel">
+				<div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+					<svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon" aria-hidden="true">
+						<path
+							d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
+					</svg>
+					<span class="sib-form-message-panel__inner-text">
+						{{#lang pt}}Subscrição confirmada!{{/lang}}{{#lang en}}Subscription confirmed!{{/lang}}
+					</span>
+				</div>
+			</div>
+			<div></div>
+			<div id="sib-container" class="sib-container--large sib-container--vertical">
+				<!-- URL do formulário: content/site.yaml › redes.newsletter -->
+				<form id="sib-form" method="POST" action="{{site.redes.newsletter}}" data-type="subscription">
+					<div class="sib-form-block">
+						<h1 class="newsletter-title">{{#lang pt}}Queres saber o que se passa no Entrelinhas?{{/lang}}{{#lang en}}Want to know what's on at Entrelinhas?{{/lang}}</h1>
+					</div>
+					<div class="sib-form-block">
+						<div class="sib-text-form-block">
+							<p>{{#lang pt}}Junta-te à nossa lista de amigos e recebe a agenda de concertos e eventos antes de toda a gente.{{/lang}}{{#lang en}}Join our list of friends and get the gig and event schedule before everyone else.{{/lang}}</p>
+							<p>{{#lang pt}}Novidades e promoções que não encontras em mais lado nenhum 😊{{/lang}}{{#lang en}}News and offers you won't find anywhere else 😊{{/lang}}</p>
+							<p>{{#lang pt}}Dá-nos o teu email e nós damos-te música.{{/lang}}{{#lang en}}Give us your email and we'll give you music.{{/lang}}</p>
+						</div>
+					</div>
+					<div class="sib-input sib-form-block">
+						<div class="form__entry entry_block">
+							<div class="form__label-row">
+								<label class="elementor-screen-only" for="EMAIL">Email</label>
+								<div class="entry__field">
+									<input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="email" value=""
+										placeholder="{{#lang pt}}O teu email aqui...{{/lang}}{{#lang en}}Your email here...{{/lang}}"
+										data-required="true" required />
+								</div>
+							</div>
+							<label class="entry__error entry__error--primary"></label>
+						</div>
+					</div>
+					<div class="sib-form-block">
+						<button class="sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit">
+							<svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" aria-hidden="true">
+								<path
+									d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+							</svg>
+							{{#lang pt}}SIM, QUERO JUNTAR-ME À FESTA!{{/lang}}{{#lang en}}YES, I WANT TO JOIN THE PARTY!{{/lang}}
+						</button>
+					</div>
+					<input type="text" name="email_address_check" value="" class="input--hidden">
+					<input type="hidden" name="locale" value="{{lang}}">
+				</form>
+			</div>
+		</div>
+	</main>
+	{{> footer}}
+
+	<!-- Mensagens do formulário da Brevo (validação e contador de listas), no idioma da página -->
+	{{#lang pt}}<script>
+		window.REQUIRED_CODE_ERROR_MESSAGE = 'Escolhe um indicativo de país.';
+		window.LOCALE = 'pt';
+		window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "O email fornecido é inválido. Por favor corrige e tenta novamente.";
+		window.REQUIRED_ERROR_MESSAGE = "Este campo não pode ser deixado em branco.";
+		window.GENERIC_INVALID_MESSAGE = "O email fornecido é inválido. Por favor corrige e tenta novamente.";
+		window.INVALID_NUMBER = "O número fornecido é inválido. Por favor corrige e tenta novamente.";
+		window.INVALID_DATE = "Por favor, introduz uma data válida.";
+		window.REQUIRED_MULTISELECT_MESSAGE = 'Escolhe pelo menos uma opção.';
+		window.translation = {
+			common: {
+				selectedList: '{quantity} lista selecionada',
+				selectedLists: '{quantity} listas selecionadas',
+				selectedOption: '{quantity} selecionada',
+				selectedOptions: '{quantity} selecionadas',
+			}
+		};
+		var AUTOHIDE = Boolean(0);
+	</script>{{/lang}}
+	{{#lang en}}<script>
+		window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code.';
+		window.LOCALE = 'en';
+		window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The email address you entered is invalid. Please correct it and try again.";
+		window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank.";
+		window.GENERIC_INVALID_MESSAGE = "The email address you entered is invalid. Please correct it and try again.";
+		window.INVALID_NUMBER = "The number you entered is invalid. Please correct it and try again.";
+		window.INVALID_DATE = "Please enter a valid date.";
+		window.REQUIRED_MULTISELECT_MESSAGE = 'Please select at least one option.';
+		window.translation = {
+			common: {
+				selectedList: '{quantity} list selected',
+				selectedLists: '{quantity} lists selected',
+				selectedOption: '{quantity} selected',
+				selectedOptions: '{quantity} selected',
+			}
+		};
+		var AUTOHIDE = Boolean(0);
+	</script>{{/lang}}
+	<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+	<script src="/js/config/config-contacts.js"></script>
+	<script src="/js/vendor/wp-hooks.js"></script>
+	<script src="/js/vendor/wp-i18n.js"></script>
+	<script src="/js/vendor/inview.js"></script>
+	<script src="/js/vendor/countdown.js"></script>
+	<script src="/js/theme/wolf-core-countdown.js"></script>
+	<script src="/js/vendor/lazyloadxt.js"></script>
+	<script src="/js/theme/wolf-core.js"></script>
+	<script src="/js/vendor/js-cookie.js"></script>
+	<script src="/js/vendor/fancybox.js"></script>
+	<script src="/js/vendor/sticky-kit.js"></script>
+	<script src="/js/theme/poize-theme.js"></script>
+	<script src="/js/vendor/tooltipsy.js"></script>
+	<script src="/js/vendor/jarallax.js"></script>
+	<script src="/js/vendor/elementor-webpack-runtime.js"></script>
+	<script src="/js/vendor/elementor-frontend-modules.js"></script>
+	<script src="/js/vendor/jquery-ui-core.js"></script>
+	<script src="/js/vendor/elementor-frontend.js"></script>
+	<script src="/js/vendor/react.js"></script>
+	<script src="/js/vendor/react-dom.js"></script>
+	<script src="/js/vendor/wp-escape-html.js"></script>
+	<script src="/js/vendor/wp-element.js"></script>
+	<script src="/js/theme/poize-app.js"></script>
+	<script src="/js/theme/wolf-core-youtube-video-bg.js"></script>
+	<script src="/js/theme/elementor-lazyload.js"></script>
+</body>
+
+</html>

@@ -41,10 +41,13 @@ const THEME_PAGES = {
   agenda: 'Calendário',
   venue: 'Venue',
   mural: 'Mural',
+  newsletter: 'Newsletter',
   contacts: 'Contact Us',
   privacidade: 'Privacidade',
 };
 const NAV_PAGES = ['index', ...Object.keys(THEME_PAGES)];
+/** Páginas que só existem se o respetivo campo do site.yaml estiver preenchido. */
+const OPTIONAL_PAGES = { newsletter: (site) => String((site.redes && site.redes.newsletter) || '').trim() };
 /** Textos fixos da interface ({{ui.*}} nos templates); as etiquetas dos tipos de evento vêm de site.yaml › ui.tipos. */
 const UI = {
   saber_mais: { pt: 'Saber mais', en: 'Learn more' },
@@ -190,6 +193,9 @@ async function main() {
     throw new BuildError(`content/${clash}.yaml: o nome "${clash}" está reservado (idiomas, páginas do tema, assets, images, css, js, fonts). Mudar o nome do ficheiro.`);
   }
   const site = { ...raw.site, og_imagem: cleanImage(raw.site.og_imagem) };
+  // Páginas do tema ativas (ex.: sem site.yaml › redes.newsletter não há página nem entrada no menu).
+  const themePages = Object.entries(THEME_PAGES).filter(([n]) => !OPTIONAL_PAGES[n] || OPTIONAL_PAGES[n](raw.site));
+  const navPages = ['index', ...themePages.map(([n]) => n)];
   const siteUrl = String(raw.site.url_base || '').replace(/\/+$/, '');
   const abs = (p) => (siteUrl ? siteUrl + p : p);
 
@@ -297,6 +303,10 @@ async function main() {
     },
   };
   const engine = createEngine({ templatesDir: DIR.templates, helpers, report });
+  // Fundo da newsletter: as imagens do hero da página inicial, em AVIF no tamanho original (passo 3).
+  const avifOf = (v) => { const n = imgOf(v); return n ? `/images/${n.replace(/\.[^.]+$/, '')}.avif` : ''; };
+  const newsletterBg = { h: avifOf(raw.index.hero && raw.index.hero.img_horizontal), v: avifOf(raw.index.hero && raw.index.hero.img_vertical) };
+  newsletterBg.v = newsletterBg.v || newsletterBg.h;
   // Mapa da página de contactos (iframe), a partir de contactos.yaml › link_google_maps.
   const mapsEmbed = await mapsEmbedUrl(raw.contactos.link_google_maps, raw.contactos.morada, report);
 
@@ -337,7 +347,7 @@ async function main() {
       mural_url: pageUrl('mural', lang),
       contactos_url: pageUrl('contactos', lang),
       // urls.event (links de demonstração do tema) aponta para a agenda: cada evento tem a sua página.
-      urls: { ...Object.fromEntries(NAV_PAGES.map((k) => [k, pageUrl(k, lang)])), event: pageUrl('agenda', lang) },
+      urls: { ...Object.fromEntries(navPages.map((k) => [k, pageUrl(k, lang)])), event: pageUrl('agenda', lang) },
       nav: pageKey ? { [pageKey]: true } : {},
       alternates: pathFor ? langs.map((l) => ({
         codigo: l.codigo, nome: l.nome, href: pathFor(l.codigo), abs_href: abs(pathFor(l.codigo)), current: l.codigo === lang,
@@ -418,8 +428,13 @@ async function main() {
     mural.mural_json = safeJson(mural.mural_items);
 
     /* páginas do tema (sem YAML) */
-    for (const [name, title] of Object.entries(THEME_PAGES)) {
-      const extra = { agenda: { eventos: localized }, mural, contacts: { hero: pageData('contactos').hero, maps_embed: mapsEmbed } }[name] || {};
+    for (const [name, title] of themePages) {
+      const extra = {
+        agenda: { eventos: localized },
+        mural,
+        contacts: { hero: pageData('contactos').hero, maps_embed: mapsEmbed },
+        newsletter: { newsletter_bg: newsletterBg },
+      }[name] || {};
       emit(name, name, makeCtx({
         pageKey: name, pathFor: (l) => pageUrl(name, l), title, extra,
       }));
@@ -462,7 +477,7 @@ async function main() {
   if (siteUrl) {
     const urls = [];
     const add = (pathFor) => urls.push(pathFor);
-    for (const key of [...NAV_PAGES, ...extraNames]) add((l) => pageUrl(key, l));
+    for (const key of [...navPages, ...extraNames]) add((l) => pageUrl(key, l));
     for (const e of events) add((l) => eventUrl(e.slug, l));
     const xml = urls.flatMap((pathFor) => langs.map((l) => {
       const alts = langs.map((x) => `    <xhtml:link rel="alternate" hreflang="${x.codigo}" href="${escapeHtml(abs(pathFor(x.codigo)))}"/>`).join('\n');

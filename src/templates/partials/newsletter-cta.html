@@ -1,0 +1,9 @@
+{{#if site.redes.newsletter}}
+<!-- Chamada para a newsletter (página inicial e contactos); só com content/site.yaml › redes.newsletter preenchido -->
+<div class="newsletter-cta">
+	<p class="newsletter-cta__text">{{#lang pt}}Queres receber a nossa agenda de concertos? Então subscreve a nossa newsletter.{{/lang}}{{#lang en}}Want to get our gig schedule? Then subscribe to our newsletter.{{/lang}}</p>
+	<a class="theme-button-primary wolf-core-button-size-lg" href="{{urls.newsletter}}">
+		<span>{{#lang pt}}SUBSCREVE A NEWSLETTER{{/lang}}{{#lang en}}SUBSCRIBE TO THE NEWSLETTER{{/lang}}</span>
+	</a>
+</div>
+{{/if}}

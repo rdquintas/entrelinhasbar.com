@@ -1,0 +1,60 @@
+/* Newsletter — formulário da Brevo sobre a imagem do hero da página inicial.
+   As imagens de fundo (horizontal/vertical) são definidas no template, a partir de index.yaml › hero. */
+
+.newsletter-band {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 180px 16px 100px;
+  background-color: #0E0E0E;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* A imagem de fundo fica sem máscara; só a caixa do formulário (#sib-container) tem fundo escuro. */
+@media (max-width: 767px) { .newsletter-band { padding-top: 120px; padding-bottom: 60px; } }
+
+/* Formulário (classes da Brevo; sib-styles.css define o resto). */
+.newsletter-band .sib-form-container { width: 100%; max-width: 540px; }
+.newsletter-band .sib-form-message-panel { max-width: 540px; font-size: 16px; text-align: left; border-radius: 3px; }
+#error-message { color: #661d1d; background-color: #ffeded; border-color: #ff4949; }
+#success-message { color: #085229; background-color: #e7faf0; border-color: #13ce66; }
+:where(.sib-form-message-panel) { display: none; }
+:where(.sib-form-message-panel .sib-notification__icon) { width: 20px; height: 20px; }
+
+#sib-container {
+  max-width: 540px;
+  color: #fff;
+  text-align: left;
+  background-color: rgba(0, 0, 0, .5) !important;
+  border: 0 !important;
+  border-radius: 3px;
+  direction: ltr;
+}
+#sib-container .sib-form-block { padding: 8px 0; background: transparent; text-align: left; }
+#sib-container .newsletter-title { margin: 0; font-family: "Juno", Sans-serif; font-size: 48px; font-weight: 400; line-height: 1.05; color: #fff; }
+#sib-container .sib-text-form-block p { margin: 0 0 .6em; font-size: 16px; color: #fff; }
+#sib-container .sib-text-form-block p:last-child { margin-bottom: 0; }
+@media (max-width: 767px) { #sib-container .newsletter-title { font-size: 36px; } }
+
+#sib-container .input { color: #000 !important; font-size: 16px; }
+#sib-container input::placeholder,
+#sib-container textarea::placeholder { text-align: left; color: #8390A4; }
+#sib-container .entry__error { font-size: 16px; text-align: left; color: #661d1d; background-color: #ffeded; border-color: #ff4949; border-radius: 3px; }
+
+#sib-container .sib-form-block__button {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0E0E0E;
+  background-color: #fff;
+  border: 0;
+  border-radius: 3px;
+  transition: background-color .2s ease, color .2s ease;
+}
+#sib-container .sib-form-block__button:hover,
+#sib-container .sib-form-block__button:focus-visible { color: #fff; background-color: #0E0E0E; }
+#sib-container .sib-form-block__button svg { fill: currentColor; }
+
+#sib-container a { color: #fff; text-decoration: underline; }

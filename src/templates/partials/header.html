@@ -27,6 +27,10 @@
 									href="{{urls.mural}}"><span class="menu-item-inner"><span
 											class="menu-item-text-container" itemprop="name">Mural</span></span></a>
 							</li>
+							{{#if site.redes.newsletter}}<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.newsletter}} current-menu-item{{/if}}"><a
+									href="{{urls.newsletter}}"><span class="menu-item-inner"><span
+											class="menu-item-text-container" itemprop="name">Newsletter</span></span></a>
+							</li>{{/if}}
 							<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.contacts}} current-menu-item{{/if}}"><a
 									href="{{urls.contacts}}"><span class="menu-item-inner"><span
 											class="menu-item-text-container" itemprop="name">{{#lang pt}}Contactos{{/lang}}{{#lang en}}Contact{{/lang}}</span></span></a>
@@ -77,6 +81,10 @@
 														class="menu-link" href="{{urls.mural}}" itemprop="url"><span
 															class="menu-item-inner"><span
 																class="menu-item-text-container" itemprop="name">Mural</span></span></a></li>
+												{{#if site.redes.newsletter}}<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.newsletter}} current-menu-item{{/if}}"><a
+														class="menu-link" href="{{urls.newsletter}}" itemprop="url"><span
+															class="menu-item-inner"><span
+																class="menu-item-text-container" itemprop="name">Newsletter</span></span></a></li>{{/if}}
 												<li class="menu-item menu-item-type-post_type menu-item-object-page{{#if nav.contacts}} current-menu-item{{/if}}"><a
 														class="menu-link" href="{{urls.contacts}}" itemprop="url"><span
 															class="menu-item-inner"><span
