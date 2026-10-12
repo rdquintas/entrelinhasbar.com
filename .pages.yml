@@ -240,10 +240,6 @@ content:
           - name: imagem_vertical
             label: Imagem vertical (opcional, para telemóvel)
             component: imagem_opcional
-          - name: resumo
-            label: Resumo curto (opcional)
-            description: Texto curto que aparece no carrossel de destaques. Se ficar vazio, usa-se o início do descritivo.
-            component: texto_longo
           - name: descritivo
             label: Descritivo
             component: texto_longo
@@ -254,13 +250,6 @@ content:
             label: Link para bilhetes (opcional)
             description: Endereço da página de venda de bilhetes. Deixar vazio para não mostrar o botão.
             type: string
-          - name: slug
-            label: Endereço personalizado (opcional)
-            description: Normalmente deixar vazio. Só preencher para fixar o endereço do evento (minúsculas, números e hífens) se mudares o título depois de o partilhar.
-            type: string
-            pattern:
-              regex: "^[a-z0-9]+(-[a-z0-9]+)*$"
-              message: "Usar só minúsculas, números e hífens"
           - name: links
             label: Links (até 5)
             type: object
@@ -272,7 +261,7 @@ content:
             fields:
               - name: nome
                 label: Nome do link
-                component: texto
+                type: string
               - name: url
                 label: Endereço (URL)
                 type: string
@@ -362,7 +351,7 @@ content:
         type: string
       - name: descricao
         label: Descrição do site (partilha nas redes e motores de pesquisa)
-        description: Texto que aparece ao partilhar o link (WhatsApp, Facebook...) nas páginas sem descrição própria. Os eventos usam o seu resumo.
+        description: Texto que aparece ao partilhar o link (WhatsApp, Facebook...) nas páginas sem descrição própria. Os eventos usam o início do seu descritivo.
         type: object
         fields:
           - name: pt

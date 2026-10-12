@@ -17,11 +17,11 @@ eventos:
     link_bilhetes: "https://www.ticketline.pt/"
     youtube: "https://youtube.com/shorts/AcbqJxNbXdg?feature=shared"
     links:
-      - nome: { pt: "Instagram", en: "Instagram" }
+      - nome: "Instagram"
         url: "https://www.instagram.com/theinvisibletuba/"
-      - nome: { pt: "Youtube", en: "Youtube" }
+      - nome: "Youtube"
         url: "https://www.youtube.com/@theinvisibletuba4630"
-      - nome: { pt: "Spotify", en: "Spotify" }
+      - nome: "Spotify"
         url: "https://open.spotify.com/artist/2CqJyOnOEm6hm7QGs2llZ2?si=qKnEiOglRLGIvY5vBNmFNg/"
 
   - titulo: { pt: "Workshop de cozinha", en: "Cooking Workshop" }
@@ -51,9 +51,9 @@ eventos:
     link_bilhetes: ""
     youtube: "https://www.youtube.com/watch?v=9J9YxWNXS4c&list=RD9J9YxWNXS4c&start_radio=1"
     links:
-      - nome: { pt: "Inscrições", en: "Sign up" }
+      - nome: "Inscrições"
         url: "https://exemplo.com/inscricoes"
-      - nome: { pt: "Regulamento", en: "Rules" }
+      - nome: "Regulamento"
         url: "https://exemplo.com/regulamento"
 
   - titulo: { pt: "Tony Marcelino", en: "Tony Marcelino" }
