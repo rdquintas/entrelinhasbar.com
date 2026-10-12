@@ -145,3 +145,5 @@
 .legal-page a{text-decoration:underline}
 .legal-page__table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9em;display:block;overflow-x:auto}
 .legal-page__table th,.legal-page__table td{text-align:left;vertical-align:top;padding:.5rem .75rem;border-bottom:1px solid rgba(0,0,0,.15)}
+/* Página do evento: a morada (2 linhas) usa o efeito .link do tema; inline-block para o sublinhado ficar por baixo do bloco todo */
+.event-location a.link{display:inline-block;white-space:normal}

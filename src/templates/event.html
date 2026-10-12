@@ -63,10 +63,9 @@
 														<div class="event-location event-meta">
 															<h5 class="event-meta-label">{{#lang en}}Address{{/lang}}{{#lang pt}}Morada{{/lang}}</h5>
 															{{#if contactos.link_google_maps}}
-															<a href="{{contactos.link_google_maps}}" target="_blank" rel="noopener">
-																{{linhas contactos.morada}}</a>
+																{{linhas contactos.morada}}
 															<br>
-															<a href="{{contactos.link_google_maps}}" target="_blank" rel="noopener">
+															<a class="link" href="{{contactos.link_google_maps}}" target="_blank" rel="noopener">
 																📍Google Maps</a>
 															{{else}}
 															{{linhas contactos.morada}}
@@ -77,7 +76,7 @@
 															<h5 class="event-meta-label">Links</h5>
 															<ul>
 																{{#each links}}
-																<li><a href="{{url}}" target="_blank" rel="noopener"><span class="elementor-icon-list-text">{{nome}}</span></a></li>
+																<li><a class="link" href="{{url}}" target="_blank" rel="noopener">{{nome}}</a></li>
 																{{/each}}
 															</ul>
 														</div>
@@ -100,7 +99,7 @@
 														<div class="envent-types">
 														</div>
 													</header>
-													{{para descritivo}}
+													{{para_links descritivo}}
 													{{#if youtube_embed}}
 													<div class="event-video">
 														<iframe src="{{youtube_embed}}" title="{{titulo}}" loading="lazy"

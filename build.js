@@ -69,6 +69,30 @@ const write = (rel, data) => {
 };
 
 /** Conteúdo concatenado dos ficheiros de texto (html/css/js) de uma pasta, recursivamente. */
+// Texto -> HTML seguro com emails, URLs (http(s)://… ou www.…) e telefones como links clicáveis.
+function autolink(src) {
+  const RE = /(https?:\/\/[^\s<>"]+|www\.[^\s<>"]+)|([\w.+-]+@[\w-]+(?:\.[\w-]+)+)|((?:\(?\+\d{1,3}\)?[\s.-]?)?\d{3}[\s.-]?\d{3}[\s.-]?\d{3})(?!\d)/g;
+  let out = '';
+  let last = 0;
+  for (const m of src.matchAll(RE)) {
+    let [txt, url, mail, tel] = m;
+    let tail = '';
+    if (url) { // pontuação final ("… em www.x.pt.") fica fora do link
+      const t = url.match(/[.,;:!?)\]]+$/);
+      if (t) { tail = t[0]; txt = url = url.slice(0, -tail.length); }
+    }
+    // Telefone só se não estiver colado a outros dígitos/letras (evita apanhar referências, datas…)
+    if (tel && m.index > 0 && /[\w]/.test(src[m.index - 1])) continue;
+    const href = url ? (url.startsWith('www.') ? `https://${url}` : url)
+      : mail ? `mailto:${mail}` : `tel:${tel.replace(/[^\d+]/g, '')}`;
+    const ext = url ? ' target="_blank" rel="noopener"' : '';
+    out += escapeHtml(src.slice(last, m.index)) + `<a href="${escapeHtml(href)}"${ext}>${escapeHtml(txt)}</a>` + escapeHtml(tail);
+    last = m.index + m[0].length;
+  }
+  out += escapeHtml(src.slice(last));
+  return out;
+}
+
 function readTextTree(dir) {
   if (!fs.existsSync(dir)) return '';
   return fs.readdirSync(dir, { withFileTypes: true }).map((entry) => {
@@ -250,27 +274,15 @@ async function main() {
     },
     // Como "linhas", mas emails, URLs (http(s)://… ou www.…) e telefones passam a links clicáveis.
     linhas_links(e, h) {
-      const src = h.text(h.get(e.pos[0]), e.pos[0]).trim();
-      const RE = /(https?:\/\/[^\s<>"]+|www\.[^\s<>"]+)|([\w.+-]+@[\w-]+(?:\.[\w-]+)+)|((?:\(?\+\d{1,3}\)?[\s.-]?)?\d{3}[\s.-]?\d{3}[\s.-]?\d{3})(?!\d)/g;
-      let out = '';
-      let last = 0;
-      for (const m of src.matchAll(RE)) {
-        let [txt, url, mail, tel] = m;
-        let tail = '';
-        if (url) { // pontuação final ("… em www.x.pt.") fica fora do link
-          const t = url.match(/[.,;:!?)\]]+$/);
-          if (t) { tail = t[0]; txt = url = url.slice(0, -tail.length); }
-        }
-        // Telefone só se não estiver colado a outros dígitos/letras (evita apanhar referências, datas…)
-        if (tel && m.index > 0 && /[\w]/.test(src[m.index - 1])) continue;
-        const href = url ? (url.startsWith('www.') ? `https://${url}` : url)
-          : mail ? `mailto:${mail}` : `tel:${tel.replace(/[^\d+]/g, '')}`;
-        const ext = url ? ' target="_blank" rel="noopener"' : '';
-        out += escapeHtml(src.slice(last, m.index)) + `<a href="${escapeHtml(href)}"${ext}>${escapeHtml(txt)}</a>` + escapeHtml(tail);
-        last = m.index + m[0].length;
-      }
-      out += escapeHtml(src.slice(last));
-      return out.replace(/\r?\n/g, '<br>');
+      return autolink(h.text(h.get(e.pos[0]), e.pos[0]).trim()).replace(/\r?\n/g, '<br>');
+    },
+    // Como "para", mas com links automáticos (ver autolink); os <a> dentro de <p> levam o sublinhado animado do tema.
+    para_links(e, h) {
+      const t = h.text(h.get(e.pos[0]), e.pos[0]).replace(/\r\n?/g, '\n').trim();
+      if (!t) return '';
+      return t.split(/\n\s*\n/)
+        .map((p) => `<p>${autolink(p.trim()).replace(/\n/g, '<br>')}</p>`)
+        .join('\n');
     },
     // Telefone para href (tel:+351219574276): só "+" e dígitos.
     tel_href(e, h) {

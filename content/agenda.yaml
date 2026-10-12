@@ -39,8 +39,14 @@ eventos:
 
   - titulo: { pt: "Música Mariachi", en: "Mariachi Music" }
     descritivo:
-      pt: "Em “El Son de la Negra / Guadalajara” do Mariachi Vargas de Tecalitlán, combinam-se duas peças representativas do mariachi tradicional, destacando a essência cultural do regional mexicano"
-      en: "In “El Son de la Negra / Guadalajara” by Mariachi Vargas de Tecalitlán, two representative pieces of traditional mariachi are combined, highlighting the cultural essence of regional Mexican music."
+      pt: |-
+        Em “El Son de la Negra / Guadalajara” do Mariachi Vargas de Tecalitlán, combinam-se duas peças representativas do mariachi tradicional, 
+        destacando a essência cultural do regional mexicano
+        www.google.com
+      en: |- 
+        "In “El Son de la Negra / Guadalajara” by Mariachi Vargas de Tecalitlán, two representative pieces of traditional mariachi are combined,
+         highlighting the cultural essence of regional Mexican music.
+         www.google.com         
     tipo: concerto
     data: "2026-12-25"
     hora: "21:30"
