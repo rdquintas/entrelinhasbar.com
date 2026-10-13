@@ -315,7 +315,7 @@ content:
         component: texto_longo
       - name: link_google_maps
         label: Link do Google Maps
-        description: Só o link (não é incorporado nenhum mapa).
+        description: "Link do sítio no Google Maps (Partilhar › Copiar link). Usado no mapa incorporado na página de contactos e no link do mapa em cada evento."
         type: string
       - name: faq
         label: Perguntas frequentes

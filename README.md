@@ -12,13 +12,14 @@ Site estático alojado no **Netlify**. O conteúdo editável vive em ficheiros *
 ```
 content/          YAML editáveis (site, index, agenda, mural, contactos)
 src/images/       imagens originais (dos YAML e das usadas diretamente pelos templates/CSS)
-src/templates/    páginas (index, agenda, event, mural, venue, contacts, 404)
-                  + partials/ (head, header, footer, carousel, hero-default)
+src/templates/    páginas (index, agenda, event, mural, venue, newsletter, contacts, privacidade, 404)
+                  + partials/ (head, header, footer, carousel, hero-default, newsletter-cta)
 src/css, src/js, src/fonts   ficheiros do tema, copiados para /css, /js e /fonts
-src/css/site.css, mural.css  estilos próprios do site (por cima do tema)
-src/js/main.js    JS próprio (carrossel, mural…); src/js/vendor e src/js/theme são do tema
+src/css/site.css, mural.css, contacts.css, newsletter.css   estilos próprios do site (por cima do tema)
+src/js/main.js e restantes ficheiros na raiz de src/js   JS próprio (carrossel, mural, FAQ, cookies, analytics…);
+                  src/js/vendor e src/js/theme são do tema
 src/static/       copiado para a raiz do site (favicon)
-lib/              módulos do build (conteúdo, eventos, eventos passados, imagens, templates)
+lib/              módulos do build (conteúdo, eventos, eventos passados, imagens, templates, mapa)
 scripts/          clean-images.js (limpeza) e fetch-placeholders.js (imagens de teste)
 .pages.yml        configuração do Pages CMS
 .github/workflows/limpar-imagens.yml   remove imagens de eventos apagados
@@ -28,16 +29,19 @@ scripts/          clean-images.js (limpeza) e fetch-placeholders.js (imagens de 
 
 | Página | Endereço | De onde vem o conteúdo |
 |---|---|---|
-| Início | `/` | `index.yaml` (hero + "A nossa história") e eventos com `destaque: true` (carrossel) |
+| Início | `/` | `index.yaml` (hero, "A nossa história", vídeo e equipa) e eventos com `destaque: true` (carrossel) |
 | Agenda | `/agenda/` | eventos de `agenda.yaml` |
 | Evento | `/event/<slug>/` | um por evento de `agenda.yaml`; a morada e o link do mapa vêm de `contactos.yaml` |
 | Mural | `/mural/` | `mural.yaml` |
 | Venue | `/venue/` | HTML fixo em `src/templates/venue.html` (ainda com conteúdo de demonstração do tema) |
-| Contactos | `/contacts/` | HTML fixo em `src/templates/contacts.html` |
-| Privacidade | `/privacidade/` | HTML fixo em `src/templates/privacidade.html` (política de privacidade e cookies) |
+| Newsletter | `/newsletter/` | só existe se `site.yaml › redes.newsletter` estiver preenchido; fundo com as imagens do hero da página inicial |
+| Contactos | `/contacts/` | `contactos.yaml` (morada, horário, telefone, email, mapa, FAQ) + redes de `site.yaml` |
+| Privacidade | `/privacidade/` | `src/templates/privacidade.html` (política de privacidade e cookies; email e morada de `contactos.yaml`) |
 | 404 | `/404.html` | só no idioma por defeito |
 
-A versão inglesa de cada página tem o prefixo `/en/`. O menu do cabeçalho está escrito diretamente em `src/templates/partials/header.html`, e os títulos das páginas do tema (Calendário, Venue, Mural, Contact Us) estão em `THEME_PAGES`, no `build.js`.
+A versão inglesa de cada página tem o prefixo `/en/`. O menu do cabeçalho está escrito diretamente em `src/templates/partials/header.html` (Início, Agenda, Mural, Newsletter, Contactos; a Venue não está no menu), e os títulos das páginas do tema (Calendário, Venue, Mural, Newsletter, Contact Us, Privacidade) estão em `THEME_PAGES`, no `build.js`.
+
+Com `redes.newsletter` preenchido, aparece também uma chamada para a newsletter (`partials/newsletter-cta.html`) na página inicial, na agenda e nos contactos, e a entrada Newsletter no menu.
 
 ## Como editar o conteúdo
 
@@ -57,13 +61,14 @@ Os textos fixos dos templates (títulos de secções, etc.) estão no próprio H
 ### Ficheiros
 | Ficheiro | O que controla |
 |---|---|
-| `content/site.yaml` | nome, idiomas, `url_base`, `og_imagem`, redes sociais (rodapé), etiquetas dos tipos de evento (`ui.tipos`) |
-| `content/index.yaml` | hero por defeito (com título), `historia`, `equipa` (sem limite; cada pessoa com imagem, `nome`, `titulo` e `subtitulo`) e `linkvideo` (vídeo do YouTube, Facebook ou Instagram)* |
+| `content/site.yaml` | nome, `descricao` (partilha/SEO), idiomas, `url_base`, `google_analytics`, `og_imagem`, redes sociais e link da newsletter, etiquetas dos tipos de evento (`ui.tipos`) |
+| `content/index.yaml` | hero por defeito (com título), `historia`, `equipa` (sem limite; cada pessoa com imagem, `nome`, `titulo` e `subtitulo`) e `linkvideo` (vídeo do YouTube, Facebook ou Instagram, entre a história e a equipa) |
 | `content/agenda.yaml` | lista de eventos |
 | `content/mural.yaml` | hero e itens (imagens ou vídeos YouTube, sem limite) |
-| `content/contactos.yaml` | telefone, email, morada, horário, link do Google Maps, FAQ* |
+| `content/contactos.yaml` | hero, telefone, email, morada, horário, link do Google Maps, FAQ (página de contactos; morada e mapa também na página de cada evento) |
 
-\* A galeria e o vídeo de `index.yaml` e a maior parte de `contactos.yaml` são validados no build mas **não aparecem no site**: os templates atuais não os usam (a página de contactos é HTML fixo). De `contactos.yaml`, só a `morada` e o `link_google_maps` são usados, na página de cada evento.
+### Mapa
+O `link_google_maps` serve para o link "ver no mapa" e para o mapa incorporado na página de contactos (`lib/maps.js`). Os links curtos (`maps.app.goo.gl`) são resolvidos durante o build para obter as coordenadas; se falhar (ex.: sem rede), o mapa usa a `morada` como pesquisa e o build mostra um aviso.
 
 ### Eventos (`content/agenda.yaml`)
 - Podem estar por **qualquer ordem**: o site ordena-os por data e hora.
@@ -132,7 +137,7 @@ O idioma por defeito (`idioma_padrao`) fica na raiz (`/`, `/agenda/`…); os out
 2. Cria `src/templates/nova.html` (parte de `mural.html`, que já usa `{{> head}}`, `{{> header}}`, `{{> footer}}` e `{{hero}}`; o texto multilinha usa `{{para texto}}`).
 3. Acrescenta o link ao menu em `src/templates/partials/header.html`.
 
-A página fica em `/nova/` e `/en/nova/`. Nomes reservados (o build falha): códigos de idioma, `index`, `agenda`, `venue`, `mural`, `contacts`, `event`, `assets`, `images`, `css`, `js`, `fonts`.
+A página fica em `/nova/` e `/en/nova/`. Nomes reservados (o build falha): códigos de idioma, `index`, `agenda`, `venue`, `mural`, `newsletter`, `contacts`, `privacidade`, `event`, `assets`, `images`, `css`, `js`, `fonts`.
 
 ### Sintaxe dos templates
 `{{campo}}` texto · `{{{html}}}` HTML gerado pelo build · `{{img campo preset=card}}` imagem · `{{hero H V class=… preset=…}}` hero · `{{para campo}}` texto em parágrafos · `{{linhas campo}}` texto com `<br>` · `{{#each lista}}…{{/each}}` · `{{#if x}}…{{else}}…{{/if}}` · `{{#lang pt}}…{{/lang}}` · `{{> partial}}`. Se uma chave não existir no conteúdo, o build falha a indicar qual.
@@ -181,6 +186,6 @@ Para o repositório não acumular imagens inúteis, quando um evento é **removi
 
 ## Notas
 - **Eventos passados** são removidos automaticamente no build (ver [Eventos](#eventos-contentagendayaml)). O build do Netlify não altera o repositório: para o `agenda.yaml` e as imagens ficarem limpos no Git, corre `npm run build` localmente e faz commit.
-- Segurança: cabeçalhos e CSP no `netlify.toml`. Vídeos via `youtube-nocookie.com`; as miniaturas do mural vêm de `i.ytimg.com`. Só são aceites links `https://`, `http://`, `mailto:` e `tel:`.
-- **Pendente:** a CSP tem `style-src 'self'`, que bloqueia atributos `style="…"`, e os templates do tema ainda os usam (sobretudo `contacts.html` e `venue.html`). É preciso passá-los para CSS ou acrescentar `'unsafe-inline'` ao `style-src`.
-- **Pendente:** o `partials/head.html` só define o `<title>`. O build já calcula `seo_description`, `canonical`, `alternates` (hreflang) e `og_image`, mas o template não os usa.
+- Segurança: cabeçalhos e CSP no `netlify.toml`. **Não há scripts inline** (`script-src 'self'`): todo o JS fica em ficheiros. Estilos inline são permitidos (o tema precisa deles para as animações). Vídeos via `youtube-nocookie.com` (e Facebook/Instagram); as miniaturas do mural vêm de `i.ytimg.com`; mapa via `google.com/maps/embed`. Qualquer domínio externo novo tem de ser acrescentado à CSP. Só são aceites links `https://`, `http://`, `mailto:` e `tel:`.
+- SEO: o `partials/head.html` define título, `description`, `canonical`, `hreflang` e as tags Open Graph (`og_image` = imagem do evento, `og_imagem` do `site.yaml` ou o hero da página inicial).
+- **Google Analytics e cookies:** com `site.yaml › google_analytics` preenchido (ID GA4), carrega o GA em Consent Mode v2 (`src/js/analytics.js`), com tudo recusado por defeito. O banner de cookies (`partials/footer.html` + `src/js/cookie-consent.js`) guarda a escolha em `localStorage` e só então ativa a medição. O link "Cookies" no rodapé volta a abrir o banner.
