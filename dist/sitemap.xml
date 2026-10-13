@@ -49,6 +49,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://entrelinhasbar.netlify.app/mural/"/>
   </url>
   <url>
+    <loc>https://entrelinhasbar.netlify.app/newsletter/</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://entrelinhasbar.netlify.app/newsletter/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://entrelinhasbar.netlify.app/en/newsletter/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://entrelinhasbar.netlify.app/newsletter/"/>
+  </url>
+  <url>
+    <loc>https://entrelinhasbar.netlify.app/en/newsletter/</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://entrelinhasbar.netlify.app/newsletter/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://entrelinhasbar.netlify.app/en/newsletter/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://entrelinhasbar.netlify.app/newsletter/"/>
+  </url>
+  <url>
     <loc>https://entrelinhasbar.netlify.app/contacts/</loc>
     <xhtml:link rel="alternate" hreflang="pt" href="https://entrelinhasbar.netlify.app/contacts/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://entrelinhasbar.netlify.app/en/contacts/"/>
