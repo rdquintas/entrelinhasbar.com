@@ -3,6 +3,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: #111; }
+picture { display: contents; } /* fallback AVIF -> WebP do build */
 
 .ai {
   width: 1080px;

@@ -52,6 +52,10 @@
    sized in em so it scales with the text. */
 .logo-text,.poize-big-text-yes .elementor-heading-title{-webkit-mask-image:url(../images/grunge-mask.png);mask-image:url(../images/grunge-mask.png);-webkit-mask-size:5em auto;mask-size:5em auto;text-transform:uppercase}
 
+/* <picture> do fallback AVIF -> WebP (build.js / lib/images.js): não interfere no layout,
+   a <img> comporta-se como se fosse filha direta do elemento onde estava. */
+picture{display:contents}
+
 /* Header logo (src/images/logo.png) in place of the theme's text logo */
 .logo-link img.logo-brand{display:block;width:auto;height:140px;max-width:none}
 @media (max-width:1024px){.logo-link img.logo-brand{height:96px}}

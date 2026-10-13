@@ -7,7 +7,7 @@
  *   3. copia CSS/JS (com hash no nome) e ficheiros estáticos
  *   4. renderiza cada página em cada idioma + uma página por evento
  *   5. gera _redirects, sitemap.xml, robots.txt e 404.html
- *   6. troca as referências a imagens por AVIF
+ *   6. troca as referências a imagens por AVIF (com fallback WebP)
  *   7. tira um screenshot da lista de eventos (imagem da agenda para a newsletter, por idioma)
  */
 const fs = require('fs');
@@ -18,7 +18,7 @@ const {
 } = require('./lib/util');
 const content = require('./lib/content');
 const { prepareEvents, formatDate, formatDateShort, formatMonth, formatWeekday } = require('./lib/events');
-const { createImages, convertDirToAvif } = require('./lib/images');
+const { createImages, convertDirToAvif, webpName } = require('./lib/images');
 const { createEngine } = require('./lib/template');
 const { prunePastEvents } = require('./lib/past-events');
 const { mapsEmbedUrl } = require('./lib/maps');
@@ -155,10 +155,63 @@ function findNonAvifRefs() {
   for (const f of textFiles(DIR.dist)) {
     for (const m of fs.readFileSync(f, 'utf8').match(re) || []) {
       if (/-og-q\d+\.jpg$/.test(m)) continue; // og:image é JPEG de propósito (as redes sociais não lêem AVIF)
+      if (/\.webp$/i.test(m) && fs.existsSync(path.join(DIR.dist, m.replace(/\.webp$/i, '.avif')))) continue; // fallback WebP de um AVIF
       found.add(`${path.relative(DIR.dist, f)}: ${m}`);
     }
   }
   return [...found];
+}
+
+/**
+ * Fallback WebP para browsers sem AVIF, em todo o /dist (cada /images/x.avif tem um x.webp ao lado):
+ *  - <img> com AVIF fora de um <picture> -> <picture><source type="image/avif" …><img … WebP></picture>
+ *    (as imagens dos YAML já saem assim de lib/images.js);
+ *  - CSS "prop: url(x.avif)" -> "prop: url(x.webp); prop: image-set(url(x.avif) type('image/avif'), …)";
+ *  - links diretos (href="x.avif", ex.: lightbox do evento) -> WebP.
+ * Devolve as referências AVIF que ficaram sem fallback (devia ficar vazia).
+ */
+function addWebpFallback() {
+  const AVIF = /\/images\/[\w.%-]+?\.avif(?![\w.-])/g;
+  const hasWebp = (ref) => fs.existsSync(path.join(DIR.dist, 'images', webpName(ref.slice(ref.lastIndexOf('/') + 1))));
+  const toWebp = (s) => s.replace(AVIF, (ref) => (hasWebp(ref) ? webpName(ref) : ref));
+  const allHaveWebp = (s) => (s.match(AVIF) || []).every(hasWebp);
+  const attr = (tag, name) => { const m = tag.match(new RegExp(`\\s${name}="([^"]*)"`)); return m ? m[1] : null; };
+
+  const wrapImg = (tag) => {
+    const srcset = attr(tag, 'srcset') || attr(tag, 'src');
+    if (!srcset || !/\.avif\b/.test(srcset) || !allHaveWebp(tag)) return tag;
+    const sizes = attr(tag, 'sizes');
+    return `<picture><source type="image/avif" srcset="${srcset}"${sizes ? ` sizes="${sizes}"` : ''}>${toWebp(tag)}</picture>`;
+  };
+  const fixCss = (css) => css.replace(
+    /([\w-]+)(\s*:\s*)url\((['"]?)([^'")]*?\.avif)\3\)(\s*!important)?(?=\s*[;}"])/g,
+    (all, prop, sep, q, url, imp = '') => {
+      if (!allHaveWebp(url.replace(/^.*?(\/images\/)/, '$1'))) return all;
+      const webp = webpName(url);
+      return `${prop}${sep}url(${q}${webp}${q})${imp};${prop}${sep}image-set(url(${q}${url}${q}) type('image/avif'),url(${q}${webp}${q}) type('image/webp'))${imp}`;
+    });
+
+  for (const f of textFiles(DIR.dist)) {
+    const ext = path.extname(f).toLowerCase();
+    if (ext !== '.html' && ext !== '.css') continue;
+    const before = fs.readFileSync(f, 'utf8');
+    let after = fixCss(before);
+    if (ext === '.html') {
+      // <picture> já existentes ficam como estão; só se mexe no que está fora deles.
+      after = after.split(/(<picture\b[\s\S]*?<\/picture>)/).map((part, i) => (i % 2 ? part : part
+        .replace(/<img\b[^>]*>/g, wrapImg)
+        .replace(/(\shref=")([^"]*\.avif)(")/g, (all, a, url, b) => (allHaveWebp(url) ? a + toWebp(url) + b : all)))).join('');
+    }
+    if (after !== before) fs.writeFileSync(f, after);
+  }
+
+  // Verificação: AVIF fora de <source type="image/avif"> / image-set(), sem WebP correspondente.
+  const missing = new Set();
+  for (const f of textFiles(DIR.dist)) {
+    const text = fs.readFileSync(f, 'utf8');
+    for (const ref of text.match(AVIF) || []) if (!hasWebp(ref)) missing.add(`${path.relative(DIR.dist, f)}: ${ref}`);
+  }
+  return [...missing];
 }
 
 /** Copia para /dist/assets com hash do conteúdo no nome (cache longa e segura). */
@@ -522,6 +575,10 @@ async function main() {
   const nonAvif = findNonAvifRefs();
   if (nonAvif.length) {
     report.warn(`${nonAvif.length} referência(s) a imagens que não são AVIF em /dist (ficheiro inexistente em src/images/?): ${nonAvif.slice(0, 8).join(', ')}${nonAvif.length > 8 ? ', …' : ''}`);
+  }
+  const semWebp = addWebpFallback();
+  if (semWebp.length) {
+    report.warn(`${semWebp.length} imagem(ns) AVIF sem fallback WebP em /dist: ${semWebp.slice(0, 8).join(', ')}${semWebp.length > 8 ? ', …' : ''}`);
   }
 
   /* ---------- 7. Imagem da agenda ---------- */
