@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- Página só para o build: é fotografada (lib/agenda-imagem.js) para gerar a imagem da agenda
+     usada na newsletter e no botão de download da página agenda. Não é publicada. -->
+<html lang="{{lang}}">
+
+<head>
+	<meta charset="utf-8" />
+	<link href="/css/fonts.css" rel="stylesheet" />
+	<link href="/css/agenda-imagem.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="ai" id="agenda-imagem">
+		<header class="ai-head">
+			<img class="ai-logo" src="/images/logo.png" alt="" />
+			<p class="ai-kicker">{{#lang pt}}Agenda{{/lang}}{{#lang en}}Agenda{{/lang}}</p>
+			<h1 class="ai-title">{{#lang pt}}Próximos eventos{{/lang}}{{#lang en}}Upcoming events{{/lang}}</h1>
+		</header>
+		{{#each meses}}
+		<section class="ai-month">
+			<h2 class="ai-month-title">{{nome}}</h2>
+			{{#each eventos}}
+			<article class="ai-event{{#if cancelado}} is-cancelled{{/if}}">
+				<div class="ai-date">
+					<span class="ai-day">{{dia}}</span>
+					<span class="ai-weekday">{{dia_semana}}</span>
+				</div>
+				<img class="ai-thumb" src="{{thumb_src}}" alt="" />
+				<div class="ai-info">
+					<p class="ai-meta">{{tipo_label}} · {{hora}}</p>
+					<h3 class="ai-event-title">{{titulo}}</h3>
+					{{#if cancelado}}<span class="ai-cancelled">{{ui.cancelado}}</span>{{/if}}
+				</div>
+			</article>
+			{{/each}}
+		</section>
+		{{/each}}
+		<footer class="ai-foot">
+			<span class="ai-site">{{agenda_host}}</span>
+			<span>{{agenda_morada}}</span>
+		</footer>
+	</div>
+</body>
+
+</html>

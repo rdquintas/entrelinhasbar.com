@@ -7,6 +7,8 @@
  *   3. copia CSS/JS (com hash no nome) e ficheiros estáticos
  *   4. renderiza cada página em cada idioma + uma página por evento
  *   5. gera _redirects, sitemap.xml, robots.txt e 404.html
+ *   6. troca as referências a imagens por AVIF
+ *   7. tira um screenshot da lista de eventos (imagem da agenda para a newsletter, por idioma)
  */
 const fs = require('fs');
 const path = require('path');
@@ -15,11 +17,12 @@ const {
   Report, BuildError, escapeHtml, imageName, paragraphs, parseYoutubeId, parseVideo, formatBytes, truncate,
 } = require('./lib/util');
 const content = require('./lib/content');
-const { prepareEvents, formatDate, formatDateShort } = require('./lib/events');
+const { prepareEvents, formatDate, formatDateShort, formatMonth, formatWeekday } = require('./lib/events');
 const { createImages, convertDirToAvif } = require('./lib/images');
 const { createEngine } = require('./lib/template');
 const { prunePastEvents } = require('./lib/past-events');
 const { mapsEmbedUrl } = require('./lib/maps');
+const { captureAgendaImages } = require('./lib/agenda-imagem');
 
 const ROOT = __dirname;
 const DIR = {
@@ -36,6 +39,11 @@ const DIR = {
 };
 const MAX_SLIDES = 10;
 const AGENDA_EXCERPT_MAX = 150;
+/** Imagem da agenda (newsletter): página temporária fotografada no passo 7 e JPEG publicado por idioma. */
+const AGENDA_IMG = {
+  src: (lang) => `_agenda-imagem/${lang}.html`,
+  out: (lang) => `downloads/agenda-${lang}.jpg`,
+};
 /** Páginas do tema sem YAML próprio (src/templates/<nome>.html) e o respetivo título. */
 const THEME_PAGES = {
   agenda: 'Calendário',
@@ -317,6 +325,7 @@ async function main() {
   const eventUrl = (slug, l) => `${langPrefix(l)}/event/${slug}/`;
   const sitemap = []; // [{ paths: {pt, en} }]
   const counts = { pages: 0, events: 0 };
+  const agendaImgs = []; // [{ lang, src, out }] para o passo 7
 
   const ogFor = (name) => {
     const f = name && images.ogFile(name);
@@ -427,10 +436,31 @@ async function main() {
     });
     mural.mural_json = safeJson(mural.mural_items);
 
+    /* imagem da agenda: página temporária com os eventos agrupados por mês (fotografada no passo 7) */
+    const agendaImg = localized.length ? AGENDA_IMG.out(lang) : '';
+    if (agendaImg) {
+      const meses = [];
+      for (const e of localized) {
+        let m = meses[meses.length - 1];
+        if (!m || m.key !== e.data.slice(0, 7)) meses.push(m = { key: e.data.slice(0, 7), nome: formatMonth(e.data, L.locale), eventos: [] });
+        m.eventos.push({ ...e, dia: e.data.slice(8), dia_semana: formatWeekday(e.data, L.locale) });
+      }
+      const ctx = makeCtx({
+        pageKey: null, pathFor: null, title: '', noindex: true,
+        extra: {
+          meses,
+          agenda_host: siteUrl ? new URL(siteUrl).host : '',
+          agenda_morada: T(raw.contactos.morada, 'contactos.yaml › morada').trim().replace(/\s*\r?\n\s*/g, ' · '),
+        },
+      });
+      write(AGENDA_IMG.src(lang), render('agenda-imagem', ctx));
+      agendaImgs.push({ lang, src: AGENDA_IMG.src(lang), out: agendaImg });
+    }
+
     /* páginas do tema (sem YAML) */
     for (const [name, title] of themePages) {
       const extra = {
-        agenda: { eventos: localized },
+        agenda: { eventos: localized, agenda_imagem: agendaImg ? `/${agendaImg}` : '' },
         mural,
         contacts: { hero: pageData('contactos').hero, maps_embed: mapsEmbed },
         newsletter: { newsletter_bg: newsletterBg },
@@ -492,6 +522,25 @@ async function main() {
   const nonAvif = findNonAvifRefs();
   if (nonAvif.length) {
     report.warn(`${nonAvif.length} referência(s) a imagens que não são AVIF em /dist (ficheiro inexistente em src/images/?): ${nonAvif.slice(0, 8).join(', ')}${nonAvif.length > 8 ? ', …' : ''}`);
+  }
+
+  /* ---------- 7. Imagem da agenda ---------- */
+  // Se o Chrome não arrancar (ex.: sem rede para o descarregar), o site publica-se na mesma, sem o botão de download.
+  if (agendaImgs.length) {
+    try {
+      await captureAgendaImages({ distDir: DIR.dist, pages: agendaImgs });
+      console.log(`Imagem da agenda: ${agendaImgs.map((p) => '/' + p.out).join(', ')}`);
+    } catch (e) {
+      report.warn(`Não foi possível gerar a imagem da agenda (o botão de download foi retirado): ${e.message}`);
+      for (const p of agendaImgs) {
+        fs.rmSync(path.join(DIR.dist, p.out), { force: true });
+        const f = path.join(DIR.dist, langDir(p.lang), 'agenda', 'index.html');
+        if (fs.existsSync(f)) {
+          fs.writeFileSync(f, fs.readFileSync(f, 'utf8').replace(/<!-- agenda-imagem -->[\s\S]*?<!-- \/agenda-imagem -->/g, ''));
+        }
+      }
+    }
+    fs.rmSync(path.join(DIR.dist, '_agenda-imagem'), { recursive: true, force: true });
   }
 
   /* ---------- Resumo ---------- */

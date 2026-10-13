@@ -104,6 +104,15 @@
 											<script src="/js/agenda-past-events.js"></script>
 										</div>
 									</div>
+									{{#if agenda_imagem}}<!-- agenda-imagem -->
+									<!-- Imagem da agenda gerada no build (lib/agenda-imagem.js); se falhar, o build retira este bloco -->
+									<div class="agenda-download">
+										<a class="theme-button-primary wolf-core-button-size-lg" href="{{agenda_imagem}}"
+											download="{{#lang pt}}entrelinhas-agenda.jpg{{/lang}}{{#lang en}}entrelinhas-schedule.jpg{{/lang}}">
+											<span>{{#lang pt}}DESCARREGAR A AGENDA (IMAGEM){{/lang}}{{#lang en}}DOWNLOAD THE SCHEDULE (IMAGE){{/lang}}</span>
+										</a>
+									</div>
+									<!-- /agenda-imagem -->{{/if}}
 								</div>
 							</div>
 						</div>

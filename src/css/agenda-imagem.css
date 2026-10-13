@@ -1,0 +1,115 @@
+/* Imagem da agenda (templates/agenda-imagem.html), fotografada no build para a newsletter.
+   Largura fixa de 1080px (o build tira o screenshot a 2x). */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #111; }
+
+.ai {
+  width: 1080px;
+  padding: 72px 80px 56px;
+  color: #f2efe9;
+  background: #111;
+  font-family: "neue-haas-grotesk-text", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Cabeçalho: logo + título em "Juno" (Anton) com a textura escovada do site */
+.ai-head { text-align: center; margin-bottom: 56px; }
+.ai-logo { display: block; width: 260px; height: auto; margin: 0 auto 40px; }
+.ai-kicker {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #b5b0a6;
+}
+.ai-title,
+.ai-month-title,
+.ai-day {
+  font-family: "Juno", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  -webkit-mask-image: url(../images/grunge-mask.png);
+  mask-image: url(../images/grunge-mask.png);
+  -webkit-mask-size: 5em auto;
+  mask-size: 5em auto;
+}
+/* padding-top: a máscara só cobre a caixa do elemento e cortaria os acentos das maiúsculas (PRÓXIMOS) */
+.ai-title { margin: 0; padding-top: .15em; font-size: 104px; line-height: .95; letter-spacing: .01em; }
+
+/* Mês */
+.ai-month + .ai-month { margin-top: 48px; }
+.ai-month-title {
+  margin: 0 0 8px;
+  padding-top: .15em;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #f2efe9;
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: .02em;
+}
+
+/* Evento: data | imagem | info */
+.ai-event {
+  display: grid;
+  grid-template-columns: 110px 210px 1fr;
+  align-items: center;
+  gap: 32px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(242, 239, 233, .18);
+}
+.ai-date { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.ai-day { font-size: 76px; line-height: .9; }
+.ai-weekday {
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #b5b0a6;
+}
+.ai-thumb { display: block; width: 210px; height: 160px; object-fit: cover; }
+.ai-meta {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #b5b0a6;
+}
+.ai-event-title {
+  margin: 0;
+  font-family: "neue-haas-grotesk-display", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.08;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+}
+.ai-cancelled {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 12px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  color: #111;
+  background: #f2efe9;
+}
+.ai-event.is-cancelled .ai-event-title,
+.ai-event.is-cancelled .ai-thumb { opacity: .45; }
+.ai-event.is-cancelled .ai-event-title { text-decoration: line-through; }
+
+/* Rodapé */
+.ai-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 48px;
+  font-size: 20px;
+  text-align: center;
+  color: #b5b0a6;
+}
+.ai-site { font-size: 24px; font-weight: 700; letter-spacing: .08em; color: #f2efe9; }

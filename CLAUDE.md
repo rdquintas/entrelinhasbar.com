@@ -18,7 +18,7 @@ Node 22 (`.nvmrc`, `netlify.toml`). Não há testes nem linter: validar correndo
 
 ## Arquitetura
 
-- **`build.js`** — orquestrador: (0) remove eventos passados do `agenda.yaml` e as imagens que só eles usavam; (1) carrega/valida YAML; (2) prepara eventos e otimiza imagens; (3) copia CSS/JS do tema e gera `assets/` com hash; (4) renderiza cada página × idioma + uma página por evento; (5) gera `_redirects`, `sitemap.xml`, `robots.txt`, `404.html`.
+- **`build.js`** — orquestrador: (0) remove eventos passados do `agenda.yaml` e as imagens que só eles usavam; (1) carrega/valida YAML; (2) prepara eventos e otimiza imagens; (3) copia CSS/JS do tema e gera `assets/` com hash; (4) renderiza cada página × idioma + uma página por evento; (5) gera `_redirects`, `sitemap.xml`, `robots.txt`, `404.html`; (6) reescreve referências para AVIF; (7) tira screenshot da agenda (`/downloads/agenda-<lang>.jpg`, para a newsletter e o botão de download da agenda).
   - `THEME_PAGES` — páginas com template mas sem YAML próprio (agenda, venue, mural, newsletter, contacts, privacidade) e o seu título. `NAV_PAGES` = `index` + estas.
   - `OPTIONAL_PAGES` — `newsletter` só existe se `site.yaml › redes.newsletter` estiver preenchido.
   - `UI` — textos fixos da interface (`{{ui.*}}`) por idioma.
@@ -29,6 +29,7 @@ Node 22 (`.nvmrc`, `netlify.toml`). Não há testes nem linter: validar correndo
   - `past-events.js` — remoção de eventos passados (fuso Lisboa).
   - `images.js` — conversão para **AVIF** com `sharp` (objeto `CONFIG` no topo: larguras, qualidade, presets `og`/`agendaThumb`/`eventBanner`); cache em `.cache/images`.
   - `template.js` — motor de templates próprio, estilo Handlebars: `{{x}}`, `{{{html}}}`, `{{img …}}`, `{{hero …}}`, `{{para x}}`, `{{linhas x}}`, `{{#each}}`, `{{#if}}…{{else}}`, `{{#lang pt}}…{{/lang}}`, `{{> partial}}`. Chave inexistente → build falha.
+  - `agenda-imagem.js` — Puppeteer (chrome-headless-shell em `node_modules/.cache`, ver `.puppeteerrc.cjs`) fotografa `templates/agenda-imagem.html` (+ `src/css/agenda-imagem.css`), servida a partir de `dist/` num servidor local. Se falhar, só avisa e o build retira o botão (`<!-- agenda-imagem -->`).
   - `maps.js` — converte `contactos.yaml › link_google_maps` num URL de embed para o iframe.
   - `util.js` — `BuildError`, `Report`, escape HTML, parsing de YouTube/vídeos, etc.
 - **`content/*.yaml`** — `site` (nome, idiomas, `url_base`, GA, redes, `ui.tipos`), `index` (hero, história, equipa, vídeo), `agenda` (eventos), `mural`, `contactos` (telefone, email, morada, horário, mapa, FAQ).

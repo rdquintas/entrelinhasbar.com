@@ -109,6 +109,8 @@
 /* Chamada para a newsletter (partials/newsletter-cta.html): página inicial, agenda e contactos */
 .newsletter-cta{display:flex;flex-direction:column;align-items:center;gap:24px;padding:60px 20px;text-align:center}
 .newsletter-cta__text{margin:0;max-width:700px;font-size:clamp(1.25rem,2.5vw,1.75rem);line-height:1.35}
+/* Agenda: botão para descarregar a imagem da agenda (gerada no build, lib/agenda-imagem.js) */
+.agenda-download{display:flex;justify-content:center;width:100%;padding:60px 20px 20px;text-align:center}
 /* Página inicial: vídeo (YouTube/Facebook/Instagram) entre "A nossa história" e "The Team" */
 .home-video{padding:60px 20px;background-color:#f3f3f3}
 .home-video-frame{margin:0 auto;max-width:1000px;aspect-ratio:16/9}
