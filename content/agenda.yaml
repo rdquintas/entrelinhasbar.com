@@ -1,78 +1,158 @@
-# Os eventos podem estar por qualquer ordem: o site ordena-os por data e hora.
-# Os eventos com data anterior a hoje são removidos desta lista no build (e as suas imagens também).
-# Apagar o evento desta lista remove-o e remove também as suas imagens do repositório.
-# O endereço da página do evento (ex.: /event/tuba-ao-vivo/ ou /en/event/tuba-ao-vivo/) é gerado a partir do título.
 eventos:
-  - titulo: { pt: "The Invisible Tuba", en: "The Invisible Tuba" }
-    descritivo:
-      pt: "Nascidos no coração da cena musical de Lisboa por volta de 2017, os THE INVISIBLE TUBA têm conquistado o público de forma consistente, estabelecendo-se como uma referência vibrante no panorama musical de Lisboa. Unindo músicos de Portugal, Venezuela, EUA, Reino Unido e Itália, a banda tem atraído uma base diversificada de seguidores, desde aficionados do jazz tradicional a entusiastas da cultura vintage, através de uma musicalidade irrepreensível e de uma abordagem contagiante ao repertório do swing clássico."
-      en: "Formed around 2017 in the heart of Lisbon’s music scene, THE INVISIBLE TUBA has steadily grown in popularity, establishing themselves as a vibrant fixture in Lisbon’s music scene. Bringing together musicians from Portugal, Venezuela, the United Kingdom, USA, and Italy, they’ve attracted a wide variety of fans, from traditional jazz aficionados to vintage dance enthusiasts, with the strength of their musicianship and their infectious approach to the classic swing catalog."
+  - titulo:
+      pt: The Invisible Tuba
+      en: The Invisible Tuba
     tipo: concerto
-    data: "2027-03-20"
-    hora: "18:00"
-    imagem_horizontal: { ficheiro: tuba_h.png }
-    imagem_vertical: { ficheiro: tuba_v.png }
+    data: 2027-03-20
+    hora: 18:00
     destaque: true
     cancelado: false
-    link_bilhetes: "https://www.ticketline.pt/"
-    youtube: "https://youtube.com/shorts/AcbqJxNbXdg?feature=shared"
-    links:
-      - nome: "Instagram"
-        url: "https://www.instagram.com/theinvisibletuba/"
-      - nome: "Youtube"
-        url: "https://www.youtube.com/@theinvisibletuba4630"
-      - nome: "Spotify"
-        url: "https://open.spotify.com/artist/2CqJyOnOEm6hm7QGs2llZ2?si=qKnEiOglRLGIvY5vBNmFNg/"
-
-  - titulo: { pt: "Workshop de cozinha", en: "Cooking Workshop" }
+    imagem_horizontal:
+      ficheiro: tuba_h.png
+    imagem_vertical:
+      ficheiro: tuba_v.png
     descritivo:
-      pt: "Vem aprender a fazer bolos."
-      en: ""
+      pt: Nascidos no coração da cena musical de Lisboa por volta de 2017, os THE
+        INVISIBLE TUBA têm conquistado o público de forma consistente,
+        estabelecendo-se como uma referência vibrante no panorama musical de
+        Lisboa. Unindo músicos de Portugal, Venezuela, EUA, Reino Unido e
+        Itália, a banda tem atraído uma base diversificada de seguidores, desde
+        aficionados do jazz tradicional a entusiastas da cultura vintage,
+        através de uma musicalidade irrepreensível e de uma abordagem
+        contagiante ao repertório do swing clássico.
+      en: Formed around 2017 in the heart of Lisbon’s music scene, THE INVISIBLE TUBA
+        has steadily grown in popularity, establishing themselves as a vibrant
+        fixture in Lisbon’s music scene. Bringing together musicians from
+        Portugal, Venezuela, the United Kingdom, USA, and Italy, they’ve
+        attracted a wide variety of fans, from traditional jazz aficionados to
+        vintage dance enthusiasts, with the strength of their musicianship and
+        their infectious approach to the classic swing catalog.
+    youtube: https://youtube.com/shorts/AcbqJxNbXdg?feature=shared
+    link_bilhetes: https://www.ticketline.pt/
+    links:
+      - nome: Instagram
+        url: https://www.instagram.com/theinvisibletuba/
+      - nome: Youtube
+        url: https://www.youtube.com/@theinvisibletuba4630
+      - nome: Spotify
+        url: https://open.spotify.com/artist/2CqJyOnOEm6hm7QGs2llZ2?si=qKnEiOglRLGIvY5vBNmFNg/
+  - titulo:
+      pt: Workshop de cozinha
+      en: Cooking Workshop
     tipo: workshop
-    data: "2026-12-12"
-    hora: "22:00"
-    imagem_horizontal: { ficheiro: workshop_h.png }
+    data: 2026-12-12
+    hora: 22:00
     destaque: false
     cancelado: false
-    link_bilhetes: ""
-    links: []
-
-  - titulo: { pt: "Música Mariachi", en: "Mariachi Music" }
+    imagem_horizontal:
+      ficheiro: workshop_h.png
     descritivo:
-      pt: |-
-        Em “El Son de la Negra / Guadalajara” do Mariachi Vargas de Tecalitlán, combinam-se duas peças representativas do mariachi tradicional, 
+      pt: Vem aprender a fazer bolos.
+  - titulo:
+      pt: Música Mariachi
+      en: Mariachi Music
+    tipo: concerto
+    data: 2026-12-25
+    hora: 21:30
+    destaque: true
+    cancelado: false
+    imagem_horizontal:
+      ficheiro: mariachi_h.png
+    imagem_vertical:
+      ficheiro: mariachi_v.png
+    descritivo:
+      pt: >-
+        Em “El Son de la Negra / Guadalajara” do Mariachi Vargas de Tecalitlán,
+        combinam-se duas peças representativas do mariachi tradicional, 
+
         destacando a essência cultural do regional mexicano
+
         www.google.com
-      en: |- 
-        "In “El Son de la Negra / Guadalajara” by Mariachi Vargas de Tecalitlán, two representative pieces of traditional mariachi are combined,
+      en: >-
+        "In “El Son de la Negra / Guadalajara” by Mariachi Vargas de Tecalitlán,
+        two representative pieces of traditional mariachi are combined,
          highlighting the cultural essence of regional Mexican music.
          www.google.com         
-    tipo: concerto
-    data: "2026-12-25"
-    hora: "21:30"
-    imagem_horizontal: { ficheiro: mariachi_h.png }
-    imagem_vertical: { ficheiro: mariachi_v.png }
-    destaque: true
-    cancelado: false
-    link_bilhetes: ""
-    youtube: "https://www.youtube.com/watch?v=9J9YxWNXS4c&list=RD9J9YxWNXS4c&start_radio=1"
+    youtube: https://www.youtube.com/watch?v=9J9YxWNXS4c&list=RD9J9YxWNXS4c&start_radio=1
     links:
-      - nome: "Inscrições"
-        url: "https://exemplo.com/inscricoes"
-      - nome: "Regulamento"
-        url: "https://exemplo.com/regulamento"
-
-  - titulo: { pt: "Tony Marcelino", en: "Tony Marcelino" }
-    descritivo:
-      pt: "Tony Marcelino e os Afinados estrearam-se ontem no café central. O baterista perdeu as baquetas, o baixista tocou de olhos fechados para não ver a plateia e o Tony cantou tudo em playback... desafinado. Valia 5 euros o bilhete, mas o público pagou 10 só para eles pararem. Um sucesso!"
-      en: "Tony Marcelino & The Tuned-Ups debuted yesterday at the local pub. The drummer lost his sticks, the bassist played with eyes shut to avoid the crowd, and Tony lip-synced completely off-key. Tickets were €5, but people paid €10 just to make them stop. An absolute hit!"
+      - nome: Inscrições
+        url: https://exemplo.com/inscricoes
+      - nome: Regulamento
+        url: https://exemplo.com/regulamento
+  - titulo:
+      pt: Tony Marcelino
+      en: Tony Marcelino
     tipo: concerto
-    data: "2026-11-02"
-    hora: "22:00"
-    imagem_horizontal: { ficheiro: barrigas_h.png }
-    imagem_vertical: { ficheiro: barrigas_v.png }
+    data: 2026-11-02
+    hora: 22:00
     destaque: false
     cancelado: true
-    link_bilhetes: ""
-    youtube: "https://www.youtube.com/watch?v=HohwjP_XCnk&list=RDHohwjP_XCnk&start_radio=1&pp=ygUSbmF0YWxpYSBkZSBhbmRyYWRloAcB"
-    links:      
+    imagem_horizontal:
+      ficheiro: barrigas_h.png
+    imagem_vertical:
+      ficheiro: barrigas_v.png
+    descritivo:
+      pt: Tony Marcelino e os Afinados estrearam-se ontem no café central. O baterista
+        perdeu as baquetas, o baixista tocou de olhos fechados para não ver a
+        plateia e o Tony cantou tudo em playback... desafinado. Valia 5 euros o
+        bilhete, mas o público pagou 10 só para eles pararem. Um sucesso!
+      en: Tony Marcelino & The Tuned-Ups debuted yesterday at the local pub. The
+        drummer lost his sticks, the bassist played with eyes shut to avoid the
+        crowd, and Tony lip-synced completely off-key. Tickets were €5, but
+        people paid €10 just to make them stop. An absolute hit!
+    youtube: https://www.youtube.com/watch?v=HohwjP_XCnk&list=RDHohwjP_XCnk&start_radio=1&pp=ygUSbmF0YWxpYSBkZSBhbmRyYWRloAcB
+  - titulo:
+      pt: Gringos Washboard
+      en: Gringos Washboard
+    tipo: concerto
+    data: 2026-11-04
+    hora: 21:30
+    destaque: true
+    cancelado: false
+    imagem_horizontal:
+      ficheiro: /images/gutoh.jpg
+    imagem_vertical:
+      ficheiro: /images/gutov-1.jpg
+    descritivo:
+      pt: >-
+        O washboard destaca-se como um instrumento musical fascinante,
+        transformando um humilde utensílio doméstico numa obra de arte de pura
+        elegância acústica. A sua beleza visual reside nas suas texturas
+        marcantes—as ranhuras rítmicas do zinco ou metal ondulado emolduradas
+        por madeira calorosa e artesanal. Tocado com dedais de prata ou palhetas
+        metálicas, ostenta uma estética vintage encantadora que evoca
+        imediatamente a alma do jazz tradicional, provando que a verdadeira
+        beleza habita na simplicidade rústica.
+
+
+        Para além da sua forte presença física, o washboard cativa pela forma
+        expressiva e hipnotizante como ganha vida em palco. Cada movimento sobre
+        a sua superfície metálica produz uma dinâmica percussiva vibrante, tão
+        envolvente de ver como emocionante de ouvir. A sua capacidade de
+        converter um objeto do quotidiano num ritmo pulsante e cheio de alma
+        torna-o num testemunho genial da criatividade humana, afirmando-se como
+        o instrumento mais genuíno e bonito do mundo.
+      en: >-
+        The washboard stands out as a breathtaking musical instrument,
+        transforming a humble household tool into an artifact of raw acoustic
+        elegance. Its visual appeal lies in its striking textures—the stark,
+        rhythmic ridges of corrugated zinc or tin framed by warm, handcrafted
+        wood. Played with silver thimbles or metallic picks, it possesses a
+        captivating vintage aesthetic that immediately evokes the soul of early
+        American jazz and roots music, proving that true beauty often resides in
+        rustic simplicity.
+
+
+        Beyond its striking physical presence, the washboard captures the
+        imagination through its mesmerizing and expressive performance. Every
+        movement across its metal surface produces a shimmering, percussive
+        dynamic that is as visually engaging to watch as it is thrilling to
+        hear. Its ability to turn everyday utility into a vibrant,
+        heartbeat-like rhythm makes it a brilliant testament to human
+        creativity, cementing its place as the most uniquely charming instrument
+        in the world
+    youtube: https://www.youtube.com/watch?v=yKZkDl6_LzY&source_ve_path=OTY3MTQ&embeds_referring_euri=https%3A%2F%2Fgringoswashboard.com.br%2F
+    link_bilhetes: www.seetickets.com
+    links:
+      - nome: spotify
+        url: https://www.spotify.com
